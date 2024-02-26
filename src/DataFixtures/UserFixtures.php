@@ -19,6 +19,7 @@ class UserFixtures extends Fixture
             $user->setEmail($faker->email);
             $user->setFirstname($faker->firstName);
             $user->setlastname($faker->lastName);
+            $user->setNickname($faker->userName);
             $user->setPassword('toto');
             $user->setPhoneNumber($faker->phoneNumber);
             $user->setActive(true);
