@@ -1,19 +1,50 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}{{ parent() }} Register{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+    <script src="{{ asset('javascript/validateEmail.js') }}" defer></script>
+    <div class="flex flex-col items-center justify-center my-8">
+        <h2 class="font-bold text-2xl">Register</h2>
 
-    {{ form_errors(registrationForm) }}
+        <div>
+            {{ form_errors(registrationForm) }}
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+            {{ form_start(registrationForm) }}
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+            <div class="my-4">
+                {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+
+            <div class="my-4">
+                {{ form_label(registrationForm.lastname, 'Lastname', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(registrationForm.lastname, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
+                {{ form_errors(registrationForm.lastname) }}
+            </div>
+
+            <div class="my-4">
+                {{ form_label(registrationForm.firstname, 'Firstname', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(registrationForm.firstname, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
+                {{ form_errors(registrationForm.firstname) }}
+            </div>
+
+            <div class="my-4">
+                {{ form_label(registrationForm.nickname, 'Nickname', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(registrationForm.nickname, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
+                {{ form_errors(registrationForm.nickname) }}
+            </div>
+
+            <div class="my-4">
+                {{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
+                {{ form_errors(registrationForm.plainPassword) }}
+            </div>
+
+            <button type="submit" class="btn bg-blue-500 hover:bg-blue-700 text-white
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" onclick="return validateEmail();">Register</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
 {% endblock %}
