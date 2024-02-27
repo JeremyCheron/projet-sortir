@@ -6,20 +6,26 @@ use App\Entity\Event;
 use App\Form\EventType;
 use App\Repository\CityRepository;
 use App\Repository\EventRepository;
+use App\Services\CityService;
 use App\Services\EventService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+
 #[Route('/event', name: 'event_')]
 class EventController extends AbstractController
 {
+    public function __construct(private EventService $eventService, private CityService $cityService)
+    {
+    }
+
     #[Route('/add', name: 'add')]
-    public function add(Request $request, EventService $eventService, EntityManagerInterface $entityManager, CityRepository $cityRepository ): Response
+    public function add(Request $request, EventService $eventService ): Response
     {
         $newEvent = new Event();
-        $cities = $cityRepository->findAll();
+        $cities = $this->cityService->getAllCities();
         $newEventForm =$this->createForm(EventType::class,$newEvent);
         $newEventForm->handleRequest($request);
 
@@ -38,15 +44,22 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/2', name: 'details')]
+    #[Route('/1', name: 'details')]
 
-    public function showDetails(EventRepository $eventRepository):Response{
-        $event= $eventRepository->find(2);
-        $attendants= $this->getUser();
+    public function showDetails():Response{
+        $event= $this->eventService->getEventById(1);
         return $this->render('event/details.html.twig', [
             'event'=>$event,
-            'attendants'=>$attendants
         ]);
 
+    }
+
+    #[Route('/allEvents', name: 'list')]
+    public function list(){
+        $events=$this->eventService->getAllEvents();
+
+        return $this->render('main/home.html.twig', [
+            'events'=>$events,
+        ]);
     }
 }
