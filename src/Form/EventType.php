@@ -34,11 +34,6 @@ class EventType extends AbstractType
             ->add('maxRegistrations',IntegerType::class)
             ->add('duration', ChoiceType::class,['choices'=>$duration])
             ->add('description', TextareaType::class)
-            ->add('campus', EntityType::class, [
-                'class' => Campus::class,
-                'choice_label' => 'name',
-            ])
-//            ->add('city', EntityType::class,['class'=>Place::class,'choice_label'=>'name'])
             ->add('place', EntityType::class, [
                 'class' => Place::class,
                 'choice_label' => 'name',

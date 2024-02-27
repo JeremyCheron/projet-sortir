@@ -1,7 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <div class="font-bold">
+        <p>Date of the day: {{ "now" | date('d/m/Y') }}</p>
+        <p>User : {{ app.user.firstname |capitalize }} {{ app.user.lastname | split('')[0] |upper}}.  </p>
+    </div>
 
+    <div>
+
+    </div>
+    <div>
+
+    </div>
+    <a href="{{ path('event_add') }}"><input type="button" value="Create an event" ></a>
 {% endblock %}
 
 {% block title %}
