@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Event;
 use App\Form\EventType;
+use App\Repository\EventRepository;
 use App\Services\EventService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -13,8 +14,8 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/event', name: 'event_')]
 class EventController extends AbstractController
 {
-    #[Route('/newEvent', name: 'createEvent')]
-    public function createEvent(Request $request, EventService $eventService ): Response
+    #[Route('/add', name: 'add')]
+    public function add(Request $request, EventService $eventService ): Response
     {
         $newEvent = new Event();
         $newEventForm =$this->createForm(EventType::class,$newEvent);
@@ -25,12 +26,21 @@ class EventController extends AbstractController
 
             $this->addFlash('success',"Event created successfully");
             //TODO : modifier route (renvoie sur le detail de l'event)
-            return $this->redirectToRoute('main_home');
+            return $this->redirectToRoute('event_details');
         }
 
-
-        return $this->render('event/newEvent.html.twig', [
+        return $this->render('event/addEvent.html.twig', [
             'newEventForm'=>$newEventForm->createView()
         ]);
+    }
+
+    #[Route('/details/2', name: 'details')]
+
+    public function showDetails(EventRepository $ep):Response{
+        $event= $ep->find(2);
+        return $this->render('event/details.html.twig', [
+            'event'=>$event
+        ]);
+
     }
 }

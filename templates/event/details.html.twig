@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+    <h1 class="text-2xl md:text-4xl text-center justify-center items-center mx-auto my-20">Event's details</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 w-3/4 mx-auto md:gap-16">
+        <div >
+            <div class="flex">
+                <p class ="mr-8 font-bold">Event name : </p>
+                <p>{{ event.name }}</p>
+            </div>
+            <div class="flex">
+                <p  class ="mr-8 font-bold">Date and time of the event : </p>
+                <p>{{ event.startDate | date ('d/m/Y H:i')}}</p>
+            </div>
+            <div class="flex">
+                <p  class ="mr-8 font-bold" >Registration deadline : </p>
+                <p>{{ event.registrationDeadline | date ('d/m/Y H:i') }}</p>
+            </div>
+            <div class="flex">
+                <p  class ="mr-8 font-bold">Attendants : </p>
+                <p>{{ event.maxRegistrations }}</p>
+            </div>
+            <div class="flex">
+                <p  class ="mr-8 font-bold">Duration : </p>
+                <p>{{ event.duration }} minutes</p>
+            </div>
+            <div class="flex">
+                <p  class ="mr-8 font-bold">Description :</p>
+                <p>{{ event.description }}</p>
+            </div>
+        </div>
+        <div>
+            <div class="flex">
+                <p  class ="mr-8 font-bold">Campus : </p>
+                <p>{{ event.campus.name}}</p>
+            </div>
+            <div class="flex">
+                <p  class ="mr-8 font-bold">Place :</p>
+                <p>{{ event.place.name}}</p>
+            </div>
+            <div class="flex">
+                <p class ="mr-8 font-bold">Street :</p>
+                <p>{{ event.place.street }}</p>
+            </div>
+            <div class="flex">
+                <p class ="mr-8 font-bold">Zip code : </p>
+                <p>{{ event.place.city.zipCode}}</p>
+            </div>
+            <div class="flex">
+                <p  class ="mr-8 font-bold">Latitude : </p>
+                <p>{{ event.place.latitude }}</p>
+            </div>
+            <div class="flex">
+                <p class ="mr-8 font-bold">Longitude :  </p>
+                <p>{{ event.place.longitude }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="text-center justify-center items-center mx-auto my-10">
+        <h2> List of registrated attendants : </h2>
+    </div>
+{% endblock %}
+
+

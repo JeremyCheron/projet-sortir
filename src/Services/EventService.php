@@ -12,7 +12,6 @@ class EventService
     }
         public function create(Event $newEvent): Event
         {
-
         $this->em->persist($newEvent);
         $this->em->flush();
         return $newEvent;
