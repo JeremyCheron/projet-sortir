@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}City{% endblock %}
+
+{% block body %}
+<div class="flex flex-col items-center justify-center my-8 w-3/4 mx-auto">
+    <h2 class="text-2xl font-bold">City : {{ city.name }}</h2>
+
+    <table class="table text-center my-8">
+        <tbody class="table-auto border border-gray-200">
+            <tr>
+                <th class="w-1/4 h-12 text-left">Name</th>
+                <td class="w-3/4">{{ city.name }}</td>
+            </tr>
+            <tr>
+                <th class="w-1/4 h-12 text-left">ZipCode</th>
+                <td class="w-3/4">{{ city.zipCode }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="flex items-center justify-evenly text-center my-8 font-bold">
+
+        <a href="{{ path('app_city_index') }}" class="mx-12">
+            <i class="fa-solid fa-list"></i>
+            <br>
+            Back
+        </a>
+
+        <a href="{{ path('app_city_edit', {'id': city.id}) }}" class="mx-12">
+            <i class="fa-solid fa-pen-to-square"></i>
+            <br>
+            Edit
+        </a>
+
+    </div>
+
+    {{ include('city/_delete_form.html.twig') }}
+
+</div>
+
+    {% endblock %}

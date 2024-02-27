@@ -18,7 +18,6 @@ class PlaceController extends AbstractController
 
     public function __construct(private PlaceService $placeService)
     {
-        $this->placeService = $placeService;
     }
 
     #[Route('/', name: 'app_place_index', methods: ['GET'])]
@@ -67,7 +66,7 @@ class PlaceController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_place_delete', methods: ['POST'])]
-    public function delete(Request $request, Place $place, EntityManagerInterface $entityManager): Response
+    public function delete(Request $request, Place $place): Response
     {
         $token = $request->request->get('_token');
 
@@ -75,7 +74,7 @@ class PlaceController extends AbstractController
             return $this->redirectToRoute('app_place_index');
         }
 
-        throw $this->createAccessDeniedException('Invalide CSRD token.');
+        throw $this->createAccessDeniedException('Invalide CSRF token.');
 
     }
 }

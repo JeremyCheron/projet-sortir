@@ -22,7 +22,7 @@
             {{ form_errors(form.street) }}
         </div>
         <div class="my-4">
-            {{ form_label(form.latitude, 'Latitue', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            {{ form_label(form.latitude, 'Latitude', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
             {{ form_widget(form.latitude, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
             {{ form_errors(form.latitude) }}
         </div>
@@ -35,3 +35,4 @@
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">{{ button_label|default('Save') }}</button>
         {{ form_end(form) }}
     </div>
+</div>

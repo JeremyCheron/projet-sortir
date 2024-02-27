@@ -4,6 +4,7 @@
         <a href="">Events</a>
         {% if app.user %}
             <a href="{{ path('app_place_index') }}">Places</a>
+            <a href="{{ path('app_city_index') }}">Cities</a>
             <a href="">MyProfile</a>
             <a href="{{ path('app_logout') }}">Logout</a>
         {% else %}
