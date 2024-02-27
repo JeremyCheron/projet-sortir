@@ -34,12 +34,14 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/details/2', name: 'details')]
+    #[Route('/2', name: 'details')]
 
     public function showDetails(EventRepository $ep):Response{
         $event= $ep->find(2);
+        $attendants= $this->getUser();
         return $this->render('event/details.html.twig', [
-            'event'=>$event
+            'event'=>$event,
+            'attendants'=>$attendants
         ]);
 
     }
