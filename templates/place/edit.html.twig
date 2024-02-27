@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} Edit Place{% endblock %}
+
+{% block body %}
+
+    {{ include('place/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <div class="flex items-center justify-center text-center font-bold my-8">
+        <a href="{{ path('app_place_index') }}" class="mx-12">
+            <i class="fa-solid fa-list"></i>
+            <br>
+            Back
+        </a>
+    </div>
+    {{ include('place/_delete_form.html.twig') }}
+{% endblock %}
