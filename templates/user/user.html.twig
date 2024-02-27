@@ -32,11 +32,11 @@
                 <div class="block text-gray-700 font-bold mb-2">Campus:</div>
                 <div class="block text-black-700 mb-2" > {{ app.user.campus.name }} </div>
             </div>
+            <a href="{{ path('user_modify_profile') }}">
+            <input type="button" class="btn bg-blue-500 hover:bg-blue-700 text-white my-8
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value=" {{ button_label|default('Modify') }}">
+            </a>
 
-            <button class="btn bg-blue-500 hover:bg-blue-700 text-white my-8
-                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
-                <a href="{{ path('user_modify_profile') }}">{{ button_label|default('Modify') }}</a>
-            </button>
 
 
         </div>
