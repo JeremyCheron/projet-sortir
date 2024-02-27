@@ -1,22 +1,49 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="">Mon profil</h1>
+    <h3 class="text-center text-3xl font-bold text-gray-700">{{ app.user.nickname }}</h3>
 
-    <div>Image</div>
-    <div class="info-text-profil">
 
-        Nickname: {{ user.nickname }}
-        First Name : {{ user.firstname }}
-        Last Name : {{ user.lastname }}
-        Phone : {{ user.firstname }}
-        Mail : {{ user.email }}
-        Password : {{ user.password }}
-        Confirm your password : {{ user.password }}
-        Campus : Requête à déterminer
-        Picture : Télécharger une photo vers le serveur
+    <div class="grid md:grid-cols-2 w-1/2 mx-auto md:gap-16 justify-center place-content-evenly p-4">
+
+        <div >
+            <img src="" alt="User image">
+        </div>
+
+        <div>
+            <div class="my-4">
+                <div class="block text-gray-700 font-bold mb-2">Name:</div>
+                <div class="block text-black-700 mb-2" > {{ app.user.firstname }} {{ app.user.lastname }}</div>
+            </div>
+            <div class="my-4">
+                <div class="block text-gray-700 font-bold mb-2">Phone:</div>
+                {% if app.user.phoneNumber %}
+                    <div class="block text-black-700 mb-2" >{{ app.user.phoneNumber }} </div>
+                {%  else %}
+                    <div class="block text-black-700 mb-2" > Phone Number not provided </div>
+                {%  endif %}
+
+            </div>
+            <div class="my-4">
+                <div class="block text-gray-700 font-bold mb-2">Mail:</div>
+                <div class="block text-black-700 mb-2" > {{ app.user.email }} </div>
+            </div>
+            <div class="my-4">
+                <div class="block text-gray-700 font-bold mb-2">Campus:</div>
+                <div class="block text-black-700 mb-2" > //Votre campus// </div>
+            </div>
+
+            <button class="btn bg-blue-500 hover:bg-blue-700 text-white my-8
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
+                <a href="{{ path('user_modify_profile') }}">{{ button_label|default('Modify') }}</a>
+            </button>
+
+
+        </div>
 
     </div>
+
+
 {% endblock %}
 
 {% block title %}
