@@ -21,7 +21,7 @@
             </div>
             <div class="flex">
                 <p  class ="mr-8 font-bold">Attendants : </p>
-                <p>{{ event.maxRegistrations }}</p>
+                <p>{{ event.attendants.count }}/{{ event.maxRegistrations }}</p>
             </div>
             <div class="flex">
                 <p  class ="mr-8 font-bold">Duration : </p>
@@ -59,8 +59,28 @@
             </div>
         </div>
     </div>
-    <div class="text-center justify-center items-center mx-auto my-10">
-        <h2> List of registrated attendants : </h2>
+    <div class="justify-center items-center m-10">
+        <h2 class="font-bold"> List of registrated attendants : </h2>
+        {% if (event.attendants.count == 0) %}
+        <p> There are no attendants registrated for that event...</p>
+        {% else %}
+        <table class="table-auto border border-gray-200 my-8">
+            <thead class="bg-gray-100 ">
+            <tr>
+                <th class="border-collapse border border-black w-auto px-8">Nickname</th>
+                <th class="border-collapse border border-black w-3/4">Full name</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for attendant in attendants %}
+                <tr class="h-20 md:h-12 text-center {{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }}">
+                    <td class="border-collapse border border-black">{{ attendant.nickname | upper }}</td>
+                    <td class="border-collapse border border-black">{{ attendant. firstname | capitalize}} {{ attendant.lastname | upper }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
     </div>
 {% endblock %}
 

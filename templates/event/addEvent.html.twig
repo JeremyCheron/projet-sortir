@@ -61,6 +61,7 @@
                 {{ form_label(newEventForm.place, 'Place', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
                 {{ form_widget(newEventForm.place, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(newEventForm.place) }}
+                <a href="{{ path('app_place_new') }}"><i class="fa-solid fa-plus bg-blue-500 border border-blue-500 rounded-full p-1 text-white font-bold mx-2"></i></a>
             </div>
             <div class="my-4">
 
