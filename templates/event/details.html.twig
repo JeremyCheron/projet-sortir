@@ -72,7 +72,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for attendant in attendants %}
+            {% for attendant in event.attendants %}
                 <tr class="h-20 md:h-12 text-center {{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }}">
                     <td class="border-collapse border border-black">{{ attendant.nickname | upper }}</td>
                     <td class="border-collapse border border-black">{{ attendant. firstname | capitalize}} {{ attendant.lastname | upper }}</td>

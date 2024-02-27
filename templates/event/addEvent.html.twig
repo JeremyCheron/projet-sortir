@@ -48,7 +48,7 @@
             <div class="">
                 <div class="my-4">
                     <label for="city" class="block text-gray-700 font-bold mb-2">Campus</label>
-                    <p>Nantes</p>
+                    <p>{{ app.user.campus.name }}</p>
                     {#                    <p>{{ user.campus.name }}</p> #}
                 </div>
                 <div class="my-4">
@@ -72,19 +72,23 @@
                 <div class="my-4">
 
                     <label for="street" class="block text-gray-700 font-bold mb-2">Street</label>
-                    <input type="text" class="form-input rounded-md shadow-sm" name="street" id="street">
+                    {# TODO : auto-remplissage #}
+                    <p> Street </p>
                 </div>
                 <div class="my-4">
                     <label for="zipCode" class="block text-gray-700 font-bold mb-2">Zip Code</label>
-                    <input type="text" class="form-input rounded-md shadow-sm" name="zipCode" id="zipCode">
+                    {# TODO : auto-remplissage #}
+                    <p> Zip Code </p>
                 </div>
                 <div class="my-4">
                     <label for="latitude" class="block text-gray-700 font-bold mb-2">Latitude</label>
-                    <input type="text" class="form-input rounded-md shadow-sm" name="latitude" id="latitude">
+                    {# TODO : auto-remplissage #}
+                    <p> Latitude </p>
                 </div>
                 <div class="my-4">
                     <label for="longitude" class="block text-gray-700 font-bold mb-2">Longitude</label>
-                    <input type="text" class="form-input rounded-md shadow-sm" name="longitude" id="longitude">
+                    {# TODO : auto-remplissage #}
+                    <p> Longitude </p>
                 </div>
             </div>
         </div>
