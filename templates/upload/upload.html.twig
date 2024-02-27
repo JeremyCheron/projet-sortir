@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Profile Picture{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center text-3xl font-bold text-gray-700 my-1">Download a new profile picture</h1>
+
+    {{ form_start(form) }}
+
+    <div class="flex justify-center my-3">
+        {{ form_label(form.image, 'Image', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2 px-5'}}) }}
+        {{ form_widget(form.image, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+        {{ form_errors(form.image) }}
+    </div>
+
+
+    <div class="flex justify-center">
+        <div class="w-1/5 px-3">
+            <button type="submit" class="btn bg-green-600 hover:bg-blue-700 text-white my-8
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
+                Submit
+            </button>
+        </div>
+        <div class="w-1/5 px-3">
+            <a href="{{ path('user_modify_profile') }}">
+                <input type="button" class="btn bg-red-700 hover:bg-blue-700 text-white my-8
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="Cancel">
+            </a>
+        </div>
+
+
+
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

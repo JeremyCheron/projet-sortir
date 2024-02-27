@@ -11,7 +11,14 @@
     <div class="grid md:grid-cols-3 w-1/2 mx-auto md:gap-16 justify-center place-content-evenly p-4">
 
         <div >
-            <img src="" alt="User image">
+            <img src="{{ asset('imgs/pp/' ~ app.user.profilePic) }}" alt="User image">
+            <div class="my-4">
+                <div class="block text-gray-700 font-bold mb-2">New Profile Picture:</div>
+                <a href="{{ path('app_upload') }}">
+                    <input type="button" class="btn bg-blue-500 hover:bg-blue-700 text-white
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="Download">
+                </a>
+            </div>
         </div>
 
         <div>
@@ -56,19 +63,40 @@
 
             </div>
 
-            <div class="my-4">
-                {{ form_label(userForm.profilePic, 'Profile Picture', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                {{ form_widget(userForm.profilePic, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
-                {{ form_errors(userForm.profilePic) }}
-            </div>
         </div>
 
 </div>
 
-    <button type="submit" class="btn bg-blue-500 hover:bg-blue-700 text-white my-8
+    <div class="flex justify-center">
+        <div class="my-4">
+            {{ form_label(userForm.password, 'Password', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            {{ form_widget(userForm.password, {'attr': {'class': 'form-input rounded-md shadow-sm', 'name': 'password'}}) }}
+            {{ form_errors(userForm.password) }}
+
+        </div>
+
+
+    </div>
+
+    <div class="flex justify-center">
+        <div class="w-1/5 px-3">
+            <button type="submit" class="btn bg-green-600 hover:bg-blue-700 text-white my-8
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
-        Submit
-    </button>
+                Submit
+            </button>
+        </div>
+        <div class="w-1/5 px-3">
+            <a href="{{ path('user_my_profile') }}">
+                <input type="button" class="btn bg-red-700 hover:bg-blue-700 text-white my-8
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="Cancel">
+            </a>
+        </div>
+
+
+
+    </div>
+
+
 
         {{ form_end(userForm) }}
 

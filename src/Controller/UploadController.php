@@ -38,6 +38,6 @@ class UploadController extends AbstractController
             return $this->redirectToRoute('user_modify_profile');
         }
 
-        return $this->render('upload/index.html.twig', ['form'=>$form->createView()]);
+        return $this->render('upload/upload.html.twig', ['form'=>$form->createView()]);
     }
 }

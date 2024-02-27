@@ -4,11 +4,11 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/user', name: 'user_')]
@@ -26,7 +26,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/modify', name: 'modify_profile')]
-    public function modify(Request $request, EntityManagerInterface $entityManager): Response
+    public function modify(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
 
         $user = $this->getUser();
@@ -35,6 +35,20 @@ class UserController extends AbstractController
 
         if($userForm->isSubmitted() && $userForm->isValid())
         {
+            //todo:il faut récupérer les mots de passe, vérifier qu'ils matchent (fait par UserType?)
+            //todo: puis il faut le hasher avant de flash
+
+            if($user instanceof User)
+            {
+
+                $data = $userForm->getData();
+                $password = $data->getPassword();
+
+                $hashedPassword = $passwordHasher->hashPassword($user, $password);
+                $user->setPassword($hashedPassword);
+            }
+
+
             $entityManager->flush();
 
             //on affiche un message à l'utilisateur pour lui indiquer que l'entité a été ajouté
