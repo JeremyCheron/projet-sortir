@@ -6,88 +6,100 @@
 
 {% block body %}
     <main>
-    <h1 class="text-2xl md:text-4xl text-center justify-center items-center mx-auto my-20">Create a new event</h1>
+        <h1 class="text-2xl md:text-4xl text-center justify-center items-center mx-auto my-20">Create a new event</h1>
 
-    {{ form_errors(newEventForm) }}
+        {{ form_errors(newEventForm) }}
 
-    {{ form_start(newEventForm) }}
-    <div class="grid md:grid-cols-2 w-3/4 mx-auto md:gap-16 justify-center place-content-evenly p-4">
-        <div class="">
-            <div class="my-4">
-                {{ form_label(newEventForm.name, 'Name of the event', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                {{ form_widget(newEventForm.name, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
-                {{ form_errors(newEventForm.name) }}
+        {{ form_start(newEventForm) }}
+        <div class="grid md:grid-cols-2 w-3/4 mx-auto md:gap-16 justify-center place-content-evenly p-4">
+            <div class="">
+                <div class="my-4">
+                    {{ form_label(newEventForm.name,'Name of the event', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(newEventForm.name, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                    {{ form_errors(newEventForm.name) }}
+                </div>
+                <div class="my-4">
+                    {{ form_label(newEventForm.startDate, 'Date and time of the event', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(newEventForm.startDate, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                    {{ form_errors(newEventForm.startDate) }}
+                </div>
+                <div class="my-4">
+                    {{ form_label(newEventForm.registrationDeadline, 'Registration deadline', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(newEventForm.registrationDeadline, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                    {{ form_errors(newEventForm.registrationDeadline) }}
+                </div>
+                <div class="my-4">
+                    {{ form_label(newEventForm.maxRegistrations, 'Maximum number of attendants', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(newEventForm.maxRegistrations, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                    {{ form_errors(newEventForm.maxRegistrations) }}
+                </div>
+                <div class="my-4">
+                    {{ form_label(newEventForm.duration, 'Duration', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(newEventForm.duration, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                    minutes
+                    {{ form_errors(newEventForm.duration) }}
+                </div>
+                <div class="my-4">
+                    {{ form_label(newEventForm.description, 'Description', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(newEventForm.description, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                    {{ form_errors(newEventForm.description) }}
+                </div>
             </div>
-            <div class="my-4">
-                {{ form_label(newEventForm.startDate, 'Date and time of the event', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                {{ form_widget(newEventForm.startDate, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
-                {{ form_errors(newEventForm.startDate) }}
-            </div>
-            <div class="my-4">
-                {{ form_label(newEventForm.registrationDeadline, 'Registration deadline', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                {{ form_widget(newEventForm.registrationDeadline, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
-                {{ form_errors(newEventForm.registrationDeadline) }}
-            </div>
-            <div class="my-4">
-                {{ form_label(newEventForm.maxRegistrations, 'Maximum number of attendants', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                {{ form_widget(newEventForm.maxRegistrations, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
-                {{ form_errors(newEventForm.maxRegistrations) }}
-            </div>
-            <div class="my-4">
-                {{ form_label(newEventForm.duration, 'Duration', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                {{ form_widget(newEventForm.duration, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }} minutes
-                {{ form_errors(newEventForm.duration) }}
-            </div>
-            <div class="my-4">
-                {{ form_label(newEventForm.description, 'Description', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                {{ form_widget(newEventForm.description, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
-                {{ form_errors(newEventForm.description) }}
+            <div class="">
+                <div class="my-4">
+                    <label for="city" class="block text-gray-700 font-bold mb-2">Campus</label>
+                    <p>Nantes</p>
+                    {#                    <p>{{ user.campus.name }}</p> #}
+                </div>
+                <div class="my-4">
+
+                    <label for="city" class="block text-gray-700 font-bold mb-2">City</label>
+                    <select class="form-input rounded-md shadow-sm" name="city" id="city">
+                        {% for city in cities %}
+                            <option value="{{ city.id }}">
+                                {{ city.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="my-4">
+                    {{ form_label(newEventForm.place, 'Place', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                    {{ form_widget(newEventForm.place, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                    {{ form_errors(newEventForm.place) }}
+                    <a href="{{ path('app_place_new') }}"><i
+                                class="fa-solid fa-plus bg-blue-500 border border-blue-500 rounded-full p-1 text-white font-bold mx-2"></i></a>
+                </div>
+                <div class="my-4">
+
+                    <label for="street" class="block text-gray-700 font-bold mb-2">Street</label>
+                    <input type="text" class="form-input rounded-md shadow-sm" name="street" id="street">
+                </div>
+                <div class="my-4">
+                    <label for="zipCode" class="block text-gray-700 font-bold mb-2">Zip Code</label>
+                    <input type="text" class="form-input rounded-md shadow-sm" name="zipCode" id="zipCode">
+                </div>
+                <div class="my-4">
+                    <label for="latitude" class="block text-gray-700 font-bold mb-2">Latitude</label>
+                    <input type="text" class="form-input rounded-md shadow-sm" name="latitude" id="latitude">
+                </div>
+                <div class="my-4">
+                    <label for="longitude" class="block text-gray-700 font-bold mb-2">Longitude</label>
+                    <input type="text" class="form-input rounded-md shadow-sm" name="longitude" id="longitude">
+                </div>
             </div>
         </div>
-        <div class="">
-            <div class="my-4">
-                {{ form_label(newEventForm.campus, 'Campus', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                {{ form_widget(newEventForm.campus, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
-                {{ form_errors(newEventForm.campus) }}
+        <div class="md:flex text-center justify-evenly items-center mx-auto my-1 w-1/2">
+            <div class='w-1/3'>
+            <a href=""><input type="submit" name="save" class="w-48 bg-green-600 text-white border rounded-lg" value="Save"></a>
             </div>
-            <div class="my-4">
-                {#                {{ form_label(newEventForm.campus, 'Campus', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }} #}
-                {#                {{ form_widget(newEventForm.campus, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }} #}
-                {#                {{ form_errors(newEventForm.campus) }} #}
-                <label for="city" class="block text-gray-700 font-bold mb-2">City</label>
-                <input type="text" class="form-input rounded-md shadow-sm" name="city" id="city">
+            <div class="w-1/3">
+            <a href=""><input type="submit" name="publish" class="w-48 bg-blue-500 text-white border rounded-lg" value="Publish the event"></a>
             </div>
-            <div class="my-4">
-                {{ form_label(newEventForm.place, 'Place', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                {{ form_widget(newEventForm.place, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
-                {{ form_errors(newEventForm.place) }}
-                <a href="{{ path('app_place_new') }}"><i class="fa-solid fa-plus bg-blue-500 border border-blue-500 rounded-full p-1 text-white font-bold mx-2"></i></a>
-            </div>
-            <div class="my-4">
-
-                <label for="street" class="block text-gray-700 font-bold mb-2">Street</label>
-                <input type="text" class="form-input rounded-md shadow-sm" name="street" id="street">
-            </div>
-            <div class="my-4">
-                <label for="zipCode" class="block text-gray-700 font-bold mb-2">Zip Code</label>
-                <input type="text" class="form-input rounded-md shadow-sm" name="zipCode" id="zipCode">
-            </div>
-            <div class="my-4">
-                <label for="latitude" class="block text-gray-700 font-bold mb-2">Latitude</label>
-                <input type="text" class="form-input rounded-md shadow-sm" name="latitude" id="latitude">
-            </div>
-            <div class="my-4">
-                <label for="longitude" class="block text-gray-700 font-bold mb-2">Longitude</label>
-                <input type="text" class="form-input rounded-md shadow-sm" name="longitude" id="longitude">
+            <div class="w-1/3">
+                <a href=""><input type="button" class="w-48 bg-red-700 text-white border rounded-lg" value="Cancel"></a>
             </div>
         </div>
-    </div>
-    <div class="text-center justify-center items-center mx-auto my-10">
-        <button class="mx-5 px-4 py-1 bg-green-600 text-white border rounded-lg">Save</button>
-        <button class="mx-5 px-4 py-1 bg-blue-500 text-white border rounded-lg">Publish the event</button>
-        <button class="mx-5 px-4 py-1 bg-red-700 text-white border rounded-lg">Cancel</button>
-    </div>
-    {{ form_end(newEventForm) }}
+        {{ form_end(newEventForm) }}
     </main>
 
 {% endblock %}
