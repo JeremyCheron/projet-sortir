@@ -11,14 +11,18 @@
         {% endblock %}
 
         {% block javascripts %}
+            <script src="https://kit.fontawesome.com/dfcb81c047.js" crossorigin="anonymous"></script>
             {{ encore_entry_script_tags('app') }}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
+    <body class="min-h-screen">
+
+        {{ include('includes/header.html.twig') }}
+
         {% block body %}{% endblock %}
 
-        <footer class="relative bottom-0 w-full p-1 md:p-2">
+        <footer class="absolute border-t border-neutral-400 flex items-center justify-center bottom-0 w-full p-1 md:p-2">
             <span class="text-xs md:text-base">
                 &copy; {{ "now" | date('Y') }} | My name is JEF
             </span>
