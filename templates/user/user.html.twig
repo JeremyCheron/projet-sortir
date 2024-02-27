@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1 class="">Mon profil</h1>
+
+    <div>Image</div>
+    <div class="info-text-profil">
+
+        Nickname: {{ user.nickname }}
+        First Name : {{ user.firstname }}
+        Last Name : {{ user.lastname }}
+        Phone : {{ user.firstname }}
+        Mail : {{ user.email }}
+        Password : {{ user.password }}
+        Confirm your password : {{ user.password }}
+        Campus : Requête à déterminer
+        Picture : Télécharger une photo vers le serveur
+
+    </div>
+{% endblock %}
+
+{% block title %}
+My profile {{ parent() }}
+{% endblock %}
+
