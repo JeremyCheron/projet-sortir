@@ -45,8 +45,8 @@ class EventType extends AbstractType
             ])
 //            ->add('street', EntityType::class,['class'=>Place::class,'choice_label'=>'Street'])
 //            ->add('zipCode', EntityType::class,['class'=>City::class,'label'=>'Zip Code'])
-//            ->add('latitude', EntityType::class,['class'=>Place::class,'label'=>'Latidude'])
-//            ->add('latitude', EntityType::class,['class'=>Place::class,'label'=>'Longidude'])
+//            ->add('latitude', EntityType::class,['class'=>Place::class,'label'=>'Latitude'])
+//            ->add('latitude', EntityType::class,['class'=>Place::class,'label'=>'Longitude'])
         ;
     }
 
