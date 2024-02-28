@@ -19,8 +19,7 @@
                 <tbody>
                 {% for event in events%}
                     <tr class="h-20 md:h-12 text-center {{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }}">
-{#                        TODO: remplacer l'id en dur par un {id} dans la route#}
-                        <td class="border-collapse border border-black"><a href='/event/1' class="hover:text-blue-500">{{ event.name }}</a></td>
+                        <td class="border-collapse border border-black"><a href="{{ path('event_details', {'id':event.id}) }}" class="hover:text-blue-500">{{ event.name }}</a></td>
                         <td class="border-collapse border border-black">{{ event.startDate |date('d/m/Y')}}</td>
                         <td class="border-collapse border border-black">{{ event.registrationDeadline |date('d/m/Y')}}</td>
                         <td class="border-collapse border border-black">{{ event.attendants.count}}/{{ event.maxRegistrations }}</td>
