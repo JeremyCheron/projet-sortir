@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Entity\EventStatus;
 use App\Form\EventType;
 use App\Repository\CityRepository;
 use App\Repository\EventRepository;
+use App\Repository\EventStatusRepository;
 use App\Services\CityService;
 use App\Services\EventService;
+use Composer\XdebugHandler\Status;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,6 +37,8 @@ class EventController extends AbstractController
     {
         $newEvent = new Event();
         $cities = $this->cityService->getAllCities();
+//        TODO:créer serviceStatus
+//        $newEvent->setStatus();
         $newEventForm =$this->createForm(EventType::class,$newEvent);
         $newEventForm->handleRequest($request);
 
