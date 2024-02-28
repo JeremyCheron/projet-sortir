@@ -1,53 +1,25 @@
 {% extends 'base.html.twig' %}
 
+
 {% block body %}
-    <div class="font-bold m-10">
-        <p>Date of the day : {{ "now" | date('d/m/Y') }}</p>
-        <p>User : {{ app.user.firstname |capitalize }} {{ app.user.lastname | split('')[0] |upper}}.  </p>
-    </div>
+    {% if (app.user) %}
+        <div class="font-bold m-10">
+            <p>Date of the day : {{ "now" | date('d/m/Y') }}</p>
+            <p>User : {{ app.user.firstname |capitalize }} {{ app.user.lastname | split('')[0] |upper }}. </p>
+        </div>
+    {% endif %}
 
     <div class="mx-10 flex">
         <p class="font-bold">Find some events</p>
         <form action=""></form>
 
-        <a href="{{ path('event_add') }}"><input type="button" value="Search" class="border-blue-500 bg-blue-500 text-white rounded-lg p-2" ></a>
+        <a href="{{ path('event_add') }}"><input type="button" value="Search"
+                                                     class="border-blue-500 bg-blue-500 text-white rounded-lg p-2"></a>
 
     </div>
-    <div>
-        {% if (events|length != 0) %}
-        <table class="table-auto border border-gray-200 m-8">
-            <thead class="bg-gray-100 ">
-            <tr>
-                <th class="border-collapse border border-black w-auto px-8">Event's name</th>
-                <th class="border-collapse border border-black w-auto px-8">Event's date</th>
-                <th class="border-collapse border border-black w-auto px-8">Registration ending</th>
-                <th class="border-collapse border border-black w-auto px-8">Attendants</th>
-                <th class="border-collapse border border-black w-auto px-8">Status</th>
-                <th class="border-collapse border border-black w-auto px-8">Participation</th>
-                <th class="border-collapse border border-black w-auto px-8">Event's planner</th>
-                <th class="border-collapse border border-black w-auto px-8">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for event in events%}
-                <tr class="h-20 md:h-12 text-center {{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }}">
-                    <td class="border-collapse border border-black">{{ event.name }}</td>
-                    <td class="border-collapse border border-black">{{ event.startDate |date('d/m/Y')}}</td>
-                    <td class="border-collapse border border-black">{{ event.registrationDeadline |date('d/m/Y')}}</td>
-                    <td class="border-collapse border border-black">{{ event.attendants.count}}/{{ event.maxRegistrations }}</td>
-                    <td class="border-collapse border border-black">{{ event.status.name}}</td>
-                    <td class="border-collapse border border-black">x</td>
-                    <td class="border-collapse border border-black">{{ app.user.firstname |capitalize }} {{ app.user.lastname | split('')[0] |upper}}.</td>
-                    <td class="border-collapse border border-black">Afficher</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {% else %}
-            There are no events planned for now !
-        {% endif %}
-    </div>
-    <a href="{{ path('event_add') }}"><input type="button" value="Create an event" class="border-blue-500 bg-blue-500 text-white rounded-lg p-2 mx-10" ></a>
+
+    <a href="{{ path('event_add') }}"><input type="button" value="Create an event"
+                                                 class="border-blue-500 bg-blue-500 text-white rounded-lg p-2 mx-10"></a>
 {% endblock %}
 
 {% block title %}
