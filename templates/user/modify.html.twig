@@ -83,7 +83,7 @@
             </button>
         </div>
         <div class="w-1/5 px-3">
-            <a href="{{ path('user_my_profile') }}">
+            <a href="{{  path('user_details', {'id':user.id})  }}">
                 <input type="button" class="btn bg-red-700 hover:bg-red-800 text-white my-2
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" value="Cancel">
             </a>
