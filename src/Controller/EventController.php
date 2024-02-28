@@ -20,6 +20,14 @@ class EventController extends AbstractController
     public function __construct(private EventService $eventService, private CityService $cityService)
     {
     }
+    #[Route('', name: 'list')]
+    public function list(EventRepository $eventRepository){
+//        $events=$this->eventService->getAllEvents();
+        $events = $eventRepository->findAll();
+        return $this->render('event/list.html.twig', [
+            'events'=>$events,
+        ]);
+    }
 
     #[Route('/add', name: 'add')]
     public function add(Request $request, EventService $eventService ): Response
@@ -34,8 +42,7 @@ class EventController extends AbstractController
 
 
             $this->addFlash('success',"Event created successfully");
-            //TODO : modifier route (renvoie sur le detail de l'event)
-            return $this->redirectToRoute('event_details');
+            return $this->redirectToRoute('event_details', ['id'=>$newEvent->getId()]);
         }
 
         return $this->render('event/addEvent.html.twig', [
@@ -44,22 +51,14 @@ class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/1', name: 'details')]
 
-    public function showDetails():Response{
-        $event= $this->eventService->getEventById(1);
+    #[Route('/{id}', name: 'details', methods:['GET'])]
+    public function showDetails(Event $event):Response{
         return $this->render('event/details.html.twig', [
             'event'=>$event,
         ]);
 
     }
 
-    #[Route('/allEvents', name: 'list')]
-    public function list(){
-        $events=$this->eventService->getAllEvents();
 
-        return $this->render('event/list.html.twig', [
-            'events'=>$events,
-        ]);
-    }
 }

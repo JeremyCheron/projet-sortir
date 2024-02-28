@@ -21,7 +21,7 @@ class CityController extends AbstractController
     }
 
     #[Route('/', name: 'app_city_index', methods: ['GET'])]
-    public function index(CityRepository $cityRepository): Response
+    public function index(): Response
     {
         return $this->render('city/index.html.twig', [
             'cities' => $this->cityService->getAllCities(),
