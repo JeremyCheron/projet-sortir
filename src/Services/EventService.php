@@ -26,7 +26,7 @@ class EventService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $event->setStatus($this->eventStatusService->getStatusById(15));
+            $event->setStatus($this->eventStatusService->getStatusById(1));
             $event->setCampus($user->getCampus());
             $event->setEventPlanner($user);
             $this->em->persist($event);
@@ -48,5 +48,20 @@ class EventService
     public function getEventById(int $id)
     {
         return $this->eventRepository->find($id);
+    }
+
+    public function updateEvent(Request $request, Event $event, User $user)
+    {
+        $form = $this->formFactory->create(EventType::class, $event);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $event->setStatus($this->eventStatusService->getStatusById(1));
+            $this->em->flush();
+            return true;
+        }
+
+        return $form;
+
     }
 }
