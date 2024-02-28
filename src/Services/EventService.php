@@ -26,7 +26,7 @@ class EventService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $event->setStatus($this->eventStatusService->getStatusById(1));
+            $event->setStatus($this->eventStatusService->getStatusById(14));
             $event->setCampus($user->getCampus());
             $event->setEventPlanner($user);
             $this->em->persist($event);
@@ -63,6 +63,28 @@ class EventService
 
         return $form;
 
+    }
+
+    public function subscribe(Event $event, User $user)
+    {
+        if ($event->getAttendants()->count() < $event->getMaxRegistrations())
+        {
+            $event->addAttendant($user);
+            $this->em->flush();
+            return true;
+        }
+        return false;
+    }
+
+    public function unsubscribe(Event $event, User $user)
+    {
+        if ($event->getAttendants()->contains($user))
+        {
+            $event->removeAttendant($user);
+            $this->em->flush();
+            return true;
+        }
+        return false;
     }
 
 }
