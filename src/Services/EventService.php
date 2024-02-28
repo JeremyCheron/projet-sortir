@@ -26,7 +26,7 @@ class EventService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $event->setStatus($this->eventStatusService->getStatusById(1));
+            $event->setStatus($this->eventStatusService->getStatusById(14));
             $event->setCampus($user->getCampus());
             $event->setEventPlanner($user);
             $this->em->persist($event);
@@ -64,5 +64,6 @@ class EventService
         return $form;
 
     }
+
 
 }

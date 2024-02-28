@@ -28,11 +28,11 @@ class EventController extends AbstractController
     {
     }
     #[Route('', name: 'list')]
-    public function list(Event $event){
+    public function list(){
         $events=$this->eventService->getAllEvents();
+
         return $this->render('event/list.html.twig', [
             'events'=>$events,
-            'attendants'=>$event->getAttendants()
         ]);
     }
 
