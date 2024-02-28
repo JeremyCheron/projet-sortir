@@ -58,7 +58,7 @@ class EventController extends AbstractController
     public function list(){
         $events=$this->eventService->getAllEvents();
 
-        return $this->render('main/home.html.twig', [
+        return $this->render('event/list.html.twig', [
             'events'=>$events,
         ]);
     }
