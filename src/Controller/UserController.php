@@ -80,7 +80,7 @@ class UserController extends AbstractController
             $this->addFlash('success', 'Your profile has been modified !');
 
             //puis on redirige vers la page des idées
-            return $this->redirectToRoute('user_my_profile');
+            return $this->redirectToRoute('user_modify_profile');
         }
 
         return $this->render('user/changepassword.html.twig', ['user' => $user,'passwordForm' => $passwordForm->createView()]);
