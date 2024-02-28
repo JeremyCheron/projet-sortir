@@ -63,40 +63,32 @@
 
             </div>
 
+            <div  class="my-4">
+                <a href="{{ path('user_change_password') }}">
+                    <input type="button" class="btn bg-blue-500 hover:bg-blue-700 text-white mt-8
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="Change your password">
+                </a>
+            </div>
+
         </div>
 
 </div>
 
-    <div class="flex justify-center">
-        <div class="my-4">
-            {{ form_label(userForm.password, 'Password', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-            {{ form_widget(userForm.password, {'attr': {'class': 'form-input rounded-md shadow-sm', 'name': 'password'}}) }}
-            {{ form_errors(userForm.password) }}
 
-        </div>
-
-
-    </div>
-
-    <div class="flex justify-center">
+    <div class="md:flex text-center justify-center items-center mx-auto my-1 w-full">
         <div class="w-1/5 px-3">
-            <button type="submit" class="btn bg-green-600 hover:bg-blue-700 text-white my-8
-                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
+            <button type="submit" class="btn bg-green-600 hover:bg-green-700 text-white my-2
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 Submit
             </button>
         </div>
         <div class="w-1/5 px-3">
             <a href="{{ path('user_my_profile') }}">
-                <input type="button" class="btn bg-red-700 hover:bg-blue-700 text-white my-8
-                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="Cancel">
+                <input type="button" class="btn bg-red-700 hover:bg-red-800 text-white my-2
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" value="Cancel">
             </a>
         </div>
-
-
-
     </div>
-
-
 
         {{ form_end(userForm) }}
 
