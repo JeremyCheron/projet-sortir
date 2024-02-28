@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="flex flex-col items-center justify-center my-8">
+        <h2 class="font-bold text-2xl">Filter Events</h2>
+            {{ form_errors(form) }}
+
+        {{ form_start(form) }}
+        <div class="flex  items-center justify-center w-full">
+
+            <div class="m-4">
+                {{ form_label(form.campus, 'Campus', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(form.campus, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
+                {{ form_errors(form.campus) }}
+                {{ form_label(form.name, 'City Name', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(form.name, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
+                {{ form_errors(form.name) }}
+            </div>
+            <div class="m-4">
+                {{ form_label(form.startDateMin, 'Between', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(form.startDateMin, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
+                {{ form_errors(form.startDateMin) }}
+                {{ form_label(form.startDateMax, 'And', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(form.startDateMax, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
+                {{ form_errors(form.startDateMax) }}
+            </div>
+            <div class="m-4">
+                {{ form_row(form.planner, {
+                    'label': 'Events I\'m planning',
+                    'label_attr': {'class': 'block text-gray-700 font-bold mb-2'},
+                    'attr': {'class': 'form-input rounded-md shadow-sm'}
+                }) }}
+                {{ form_errors(form) }}
+
+                {{ form_row(form.attendant, {
+                    'label': 'Events I\'m attending',
+                    'label_attr': {'class': 'block text-gray-700 font-bold mb-2'},
+                    'attr': {'class': 'form-input rounded-md shadow-sm'}
+                }) }}
+                {{ form_errors(form) }}
+
+                {{ form_row(form.pastEvents, {
+                    'label': 'Past Events',
+                    'label_attr': {'class': 'block text-gray-700 font-bold mb-2'},
+                    'attr': {'class': 'form-input rounded-md shadow-sm'}
+                }) }}
+                {{ form_errors(form) }}
+            </div>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}
