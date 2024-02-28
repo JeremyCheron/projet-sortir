@@ -1,24 +1,24 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h3 class="text-center text-3xl font-bold text-gray-700">{{ app.user.nickname }}</h3>
+    <h3 class="text-center text-3xl font-bold text-gray-700">{{ user.nickname }}</h3>
 
 
     <div class="grid md:grid-cols-2 w-1/2 mx-auto md:gap-16 justify-center place-content-evenly p-4">
 
         <div >
-            <img src="{{ asset('imgs/pp/' ~ app.user.profilePic) }}" alt="User image">
+            <img src="{{ asset('imgs/pp/' ~ user.profilePic) }}" alt="User image">
         </div>
 
         <div>
             <div class="my-4">
                 <div class="block text-gray-700 font-bold mb-2">Name:</div>
-                <div class="block text-black-700 mb-2" > {{ app.user.firstname }} {{ app.user.lastname }}</div>
+                <div class="block text-black-700 mb-2" > {{ user.firstname }} {{ user.lastname }}</div>
             </div>
             <div class="my-4">
                 <div class="block text-gray-700 font-bold mb-2">Phone:</div>
-                {% if app.user.phoneNumber %}
-                    <div class="block text-black-700 mb-2" >{{ app.user.phoneNumber }} </div>
+                {% if user.phoneNumber %}
+                    <div class="block text-black-700 mb-2" >{{ user.phoneNumber }} </div>
                 {%  else %}
                     <div class="block text-black-700 mb-2" > Phone Number not provided </div>
                 {%  endif %}
@@ -26,21 +26,23 @@
             </div>
             <div class="my-4">
                 <div class="block text-gray-700 font-bold mb-2">Mail:</div>
-                <div class="block text-black-700 mb-2" > {{ app.user.email }} </div>
+                <div class="block text-black-700 mb-2" > {{ user.email }} </div>
             </div>
             <div class="my-4">
                 <div class="block text-gray-700 font-bold mb-2">Campus:</div>
-                <div class="block text-black-700 mb-2" > {{ app.user.campus.name }} </div>
+                <div class="block text-black-700 mb-2" > {{ user.campus.name }} </div>
             </div>
+
+
+            {% if  user.id == app.user.id %}
             <a href="{{ path('user_modify_profile') }}">
             <input type="button" class="btn bg-blue-500 hover:bg-blue-700 text-white my-8
-                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value=" {{ button_label|default('Modify') }}">
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="Modify my profile">
             </a>
-
+            {% endif %}
 
 
         </div>
-
     </div>
 
 
