@@ -26,7 +26,13 @@
                         <td class="border-collapse border border-black">{{ event.status.name}}</td>
                         <td class="border-collapse border border-black">x</td>
                         <td class="border-collapse border border-black">{{ app.user.firstname |capitalize }} {{ app.user.lastname | split('')[0] |upper}}.</td>
-                        <td class="border-collapse border border-black">Afficher</td>
+                        <td class="border-collapse border border-black">
+                            <div class="font-bold text-center">
+                                <a href="{{ path('event_details', {'id':event.id}) }}"><i class="fa-solid fa-eye"></i></a>
+                                <br>
+                                Show
+                            </div>
+                        </td>
                     </tr>
                 {% endfor %}
                 </tbody>

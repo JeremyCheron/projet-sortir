@@ -3,20 +3,41 @@
 namespace App\Services;
 
 use App\Entity\Event;
+use App\Entity\User;
+use App\Form\EventType;
 use App\Repository\EventRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 class EventService
 {
-    public function __construct(private EntityManagerInterface $em, private EventRepository $eventRepository)
+    public function __construct(private EntityManagerInterface $em,
+                                private EventRepository $eventRepository,
+                                private FormFactoryInterface $formFactory,
+                                private EventStatusService $eventStatusService)
     {
     }
 
-    public function create(Event $newEvent): Event
+    public function create(Request $request,User $user)
     {
-        $this->em->persist($newEvent);
-        $this->em->flush();
-        return $newEvent;
+        $event = new Event();
+        $form = $this->formFactory->create(EventType::class, $event);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $event->setStatus($this->eventStatusService->getStatusById(15));
+            $event->setCampus($user->getCampus());
+            $event->setEventPlanner($user);
+            $this->em->persist($event);
+            $this->em->flush();
+
+            return true;
+
+        }
+
+        return $form;
+
     }
 
     public function getAllEvents()
