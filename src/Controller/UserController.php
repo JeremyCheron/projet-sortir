@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ChangePasswordType;
 use App\Form\UserType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,46 +19,68 @@ class UserController extends AbstractController
     public function user(EntityManagerInterface $entityManager): Response
     {
 
-        $r=$entityManager->getRepository(User::class);
+        $r = $entityManager->getRepository(User::class);
 
         //le faire dans un service
-        $user=$r->find(1);
-        return $this->render('user/user.html.twig',['user'=>$user]);
+
+        return $this->render('user/user.html.twig');
     }
 
     #[Route('/modify', name: 'modify_profile')]
-    public function modify(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
+    public function modify(Request $request, EntityManagerInterface $entityManager): Response
     {
 
         $user = $this->getUser();
         $userForm = $this->createForm(UserType::class, $user);
         $userForm->handleRequest($request);
 
-        if($userForm->isSubmitted() && $userForm->isValid())
-        {
-            //todo:il faut récupérer les mots de passe, vérifier qu'ils matchent (fait par UserType?)
-            //todo: puis il faut le hasher avant de flash
 
-            if($user instanceof User)
-            {
 
-                $data = $userForm->getData();
-                $password = $data->getPassword();
-
-                $hashedPassword = $passwordHasher->hashPassword($user, $password);
-                $user->setPassword($hashedPassword);
-            }
-
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
 
             $entityManager->flush();
 
             //on affiche un message à l'utilisateur pour lui indiquer que l'entité a été ajouté
-            $this->addFlash('success','Your profile has been modified !');
+            $this->addFlash('success', 'Your profile has been modified !');
 
             //puis on redirige vers la page des idées
             return $this->redirectToRoute('user_my_profile');
         }
 
-        return $this->render('user/modify.html.twig',['user'=>$user, 'userForm'=>$userForm->createView()]);
+        return $this->render('user/modify.html.twig', ['user' => $user, 'userForm' => $userForm->createView()]);
     }
+
+
+    #[Route('/modify/password', name: 'change_password')]
+    public function changePassword(Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
+    {
+
+        $user = $this->getUser();
+
+        $passwordForm = $this->createForm(ChangePasswordType::class, $user);
+        $passwordForm->handleRequest($request);
+
+        if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
+            if ($user instanceof User) {
+
+                $data = $passwordForm->getData();
+                $password = $data->getPassword();
+
+                $hashedPassword = $passwordHasher->hashPassword($user, $password);
+                $user->setPassword($hashedPassword);
+
+            }
+
+            $entityManager->flush();
+
+            //on affiche un message à l'utilisateur pour lui indiquer que l'entité a été ajouté
+            $this->addFlash('success', 'Your profile has been modified !');
+
+            //puis on redirige vers la page des idées
+            return $this->redirectToRoute('user_my_profile');
+        }
+
+        return $this->render('user/changepassword.html.twig', ['user' => $user,'passwordForm' => $passwordForm->createView()]);
+    }
+
 }
