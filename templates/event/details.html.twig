@@ -6,82 +6,101 @@
 {% block body %}
     <h1 class="text-2xl md:text-4xl text-center justify-center items-center mx-auto my-20">Event's details</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 w-3/4 mx-auto md:gap-16">
-        <div >
+        <div>
             <div class="flex">
-                <p class ="mr-8 font-bold">Event name : </p>
+                <p class="mr-8 font-bold">Event name : </p>
                 <p>{{ event.name }}</p>
             </div>
             <div class="flex">
-                <p  class ="mr-8 font-bold">Date and time of the event : </p>
-                <p>{{ event.startDate | date ('d/m/Y H:i')}}</p>
+                <p class="mr-8 font-bold">Date and time of the event : </p>
+                <p>{{ event.startDate | date ('d/m/Y H:i') }}</p>
             </div>
             <div class="flex">
-                <p  class ="mr-8 font-bold" >Registration deadline : </p>
+                <p class="mr-8 font-bold">Registration deadline : </p>
                 <p>{{ event.registrationDeadline | date ('d/m/Y H:i') }}</p>
             </div>
             <div class="flex">
-                <p  class ="mr-8 font-bold">Attendants : </p>
+                <p class="mr-8 font-bold">Attendants : </p>
                 <p>{{ event.attendants.count }}/{{ event.maxRegistrations }}</p>
             </div>
             <div class="flex">
-                <p  class ="mr-8 font-bold">Duration : </p>
+                <p class="mr-8 font-bold">Duration : </p>
                 <p>{{ event.duration }} minutes</p>
             </div>
             <div class="flex">
-                <p  class ="mr-8 font-bold">Description :</p>
+                <p class="mr-8 font-bold">Description :</p>
                 <p>{{ event.description }}</p>
             </div>
         </div>
         <div>
             <div class="flex">
-                <p  class ="mr-8 font-bold">Campus : </p>
-                <p>{{ event.campus.name}}</p>
+                <p class="mr-8 font-bold">Campus : </p>
+                <p>{{ event.campus.name }}</p>
             </div>
             <div class="flex">
-                <p  class ="mr-8 font-bold">Place :</p>
-                <p>{{ event.place.name}}</p>
+                <p class="mr-8 font-bold">Place :</p>
+                <p>{{ event.place.name }}</p>
             </div>
             <div class="flex">
-                <p class ="mr-8 font-bold">Street :</p>
+                <p class="mr-8 font-bold">Street :</p>
                 <p>{{ event.place.street }}</p>
             </div>
             <div class="flex">
-                <p class ="mr-8 font-bold">Zip code : </p>
-                <p>{{ event.place.city.zipCode}}</p>
+                <p class="mr-8 font-bold">Zip code : </p>
+                <p>{{ event.place.city.zipCode }}</p>
             </div>
             <div class="flex">
-                <p  class ="mr-8 font-bold">Latitude : </p>
+                <p class="mr-8 font-bold">Latitude : </p>
                 <p>{{ event.place.latitude }}</p>
             </div>
             <div class="flex">
-                <p class ="mr-8 font-bold">Longitude :  </p>
+                <p class="mr-8 font-bold">Longitude : </p>
                 <p>{{ event.place.longitude }}</p>
             </div>
         </div>
     </div>
-    <div class="justify-center items-center m-10">
-        <h2 class="font-bold"> List of registrated attendants : </h2>
-        {% if (event.attendants.count == 0) %}
-        <p> There are no attendants registrated for that event...</p>
-        {% else %}
-        <table class="table-auto border border-gray-200 my-8">
-            <thead class="bg-gray-100 ">
-            <tr>
-                <th class="border-collapse border border-black w-auto px-8">Nickname</th>
-                <th class="border-collapse border border-black w-3/4">Full name</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for attendant in event.attendants %}
-                <tr class="h-20 md:h-12 text-center {{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }}">
-                    <td class="border-collapse border border-black">{{ attendant.nickname | upper }}</td>
-                    <td class="border-collapse border border-black">{{ attendant. firstname | capitalize}} {{ attendant.lastname | upper }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
+    <div class="grid grid-cols-1 md:grid-cols-2">
+
+        <div class="justify-center items-center m-10">
+            <h2 class="font-bold"> List of registrated attendants : </h2>
+            {% if (event.attendants.count == 0) %}
+                <p> There are no attendants registrated for that event...</p>
+            {% else %}
+                <table class="table-auto border border-gray-200 my-8">
+                    <thead class="bg-gray-100 ">
+                    <tr>
+                        <th class="border-collapse border border-black w-auto px-8">Nickname</th>
+                        <th class="border-collapse border border-black w-1/3">Full name</th>
+                        <th class="border-collapse border border-black w-1/3">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for attendant in event.attendants %}
+                        <tr class="h-20 md:h-12 text-center {{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }}">
+                            <td class="border-collapse border border-black">{{ attendant.nickname | upper }}</td>
+                            <td class="border-collapse border border-black">{{ attendant. firstname | capitalize }} {{ attendant.lastname | upper }}</td>
+                            <td class="border-collapse border border-black">
+                                <div class="font-bold text-center px-2">
+                                    <a href="{{ path('user_details', {'id':attendant.id}) }}">
+                                        <i class="fa-solid fa-eye"></i></a>
+                                    <br>
+                                    Show
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+        <div>
+            {% if (event.status.name == 'canceled') %}
+                <p class="text-2xl font-bold text-red-600 mt-28"> ! Event canceled !</p>
+                <p> {{ event.cancelJustification }}</p>
+            {% else %}
+                <input type="button" value="Attend the event"
+                       class="border-blue-500 bg-blue-500 text-white rounded-lg p-10 mt-28 text-xl">
+            {% endif %}
+        </div>
     </div>
 {% endblock %}
-
-

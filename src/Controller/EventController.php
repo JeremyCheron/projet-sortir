@@ -28,10 +28,11 @@ class EventController extends AbstractController
     {
     }
     #[Route('', name: 'list')]
-    public function list(){
+    public function list(Event $event){
         $events=$this->eventService->getAllEvents();
         return $this->render('event/list.html.twig', [
             'events'=>$events,
+            'attendants'=>$event->getAttendants()
         ]);
     }
 
@@ -57,6 +58,7 @@ class EventController extends AbstractController
     {
         $formOrSuccess = $this->eventService->updateEvent($request, $event, $user);
         $cities = $this->cityService->getAllCities();
+
 
         if ($formOrSuccess === true) {
             return $this->redirectToRoute('event_list');
