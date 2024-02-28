@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\City;
 use App\Entity\Event;
 use App\Entity\EventStatus;
+use App\Entity\User;
 use App\Form\EventType;
 use App\Repository\CityRepository;
 use App\Repository\EventRepository;
@@ -34,7 +36,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/add', name: 'add')]
-    public function add(Request $request, EventService $eventService ): Response
+    public function add(Request $request): Response
     {
         $user = $this->getUser();
         $formOrSuccess = $this->eventService->create($request, $user);
@@ -50,6 +52,22 @@ class EventController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Event $event, User $user): Response
+    {
+        $formOrSuccess = $this->eventService->updateEvent($request, $event, $user);
+        $cities = $this->cityService->getAllCities();
+
+        if ($formOrSuccess === true) {
+            return $this->redirectToRoute('event_list');
+        }
+
+        return $this->render('event/edit.html.twig', [
+            'event' => $event,
+            'form' => $formOrSuccess->createView(),
+            'cities'=>$cities
+        ]);
+    }
 
     #[Route('/{id}', name: 'details', methods:['GET'])]
     public function showDetails(Event $event):Response{

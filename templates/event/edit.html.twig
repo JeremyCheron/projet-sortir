@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Event{% endblock %}
+
+{% block body %}
+
+    {{ include('event/_eventForm.html.twig', {'button_label': 'Update'}) }}
+
+    <div class="flex items-center justify-center text-center font-bold my-8">
+
+        <a href="{{ path('event_list') }}">
+            <i class="fa-solid fa-list"></i>
+            <br>
+            Back
+        </a>
+
+    </div>
+
+
+{% endblock %}

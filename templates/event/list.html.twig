@@ -1,6 +1,7 @@
-{% extends 'base.html.twig' %}
 
 {% block body %}
+    <a href="{{ path('event_add') }}"><input type="button" value="Create an event"
+                                             class="border-blue-500 bg-blue-500 text-white rounded-lg p-2 mx-10"></a>
     <div>
         {% if (events|length != 0) %}
             <table class="table-auto border border-gray-200 m-8">
@@ -19,19 +20,26 @@
                 <tbody>
                 {% for event in events%}
                     <tr class="h-20 md:h-12 text-center {{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }}">
-                        <td class="border-collapse border border-black"><a href="{{ path('event_details', {'id':event.id}) }}" class="hover:text-blue-500">{{ event.name }}</a></td>
-                        <td class="border-collapse border border-black">{{ event.startDate |date('d/m/Y')}}</td>
-                        <td class="border-collapse border border-black">{{ event.registrationDeadline |date('d/m/Y')}}</td>
-                        <td class="border-collapse border border-black">{{ event.attendants.count}}/{{ event.maxRegistrations }}</td>
-                        <td class="border-collapse border border-black">{{ event.status.name}}</td>
-                        <td class="border-collapse border border-black">x</td>
-                        <td class="border-collapse border border-black">{{ app.user.firstname |capitalize }} {{ app.user.lastname | split('')[0] |upper}}.</td>
-                        <td class="border-collapse border border-black">
-                            <div class="font-bold text-center">
+                        <td class="border-collapse border-x border-black"><a href="{{ path('event_details', {'id':event.id}) }}" class="hover:text-blue-500">{{ event.name }}</a></td>
+                        <td class="border-collapse border-x border-black">{{ event.startDate |date('d/m/Y')}}</td>
+                        <td class="border-collapse border-x border-black">{{ event.registrationDeadline |date('d/m/Y')}}</td>
+                        <td class="border-collapse border-x border-black">{{ event.attendants.count}}/{{ event.maxRegistrations }}</td>
+                        <td class="border-collapse border-x border-black">{{ event.status.name}}</td>
+                        <td class="border-collapse border-x border-black">x</td>
+                        <td class="border-collapse border-x border-black">{{ event.eventPlanner.firstname |capitalize }} {{ event.eventPlanner.lastname | split('')[0] |upper}}.</td>
+                        <td class="border-collapse border-black flex items-center text-center">
+                            <div class="font-bold text-center px-2">
                                 <a href="{{ path('event_details', {'id':event.id}) }}"><i class="fa-solid fa-eye"></i></a>
                                 <br>
                                 Show
                             </div>
+                            {% if (app.user.id == event.eventPlanner.id) %}
+                            <div class="font-bold text-center px-2">
+                                <a href="{{ path('event_edit', {'id':event.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <br>
+                                Edit
+                            </div>
+                            {% endif %}
                         </td>
                     </tr>
                 {% endfor %}
@@ -44,6 +52,6 @@
 {% endblock %}
 
 {% block title %}
-    {{ parent() }} All events
+All events
 {% endblock %}
 
