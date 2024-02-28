@@ -3,9 +3,11 @@
         <a href="{{ path('main_home') }}">Home</a>
         <a href="{{ path('event_list') }}">Events</a>
         {% if app.user %}
-            <a href="{{ path('app_place_index') }}">Places</a>
-            <a href="{{ path('app_city_index') }}">Cities</a>
-{#            <a href="{{ path('user_my_profile') }}">{{ app.user.nickname }}</a>#}
+            {% if 'ROLE_ADMIN' in app.user.roles %}
+                <a href="{{ path('app_place_index') }}">Places</a>
+                <a href="{{ path('app_city_index') }}">Cities</a>
+            {% endif %}
+            <a href="{{ path('user_details', {'id': app.user.id }) }}">{{ app.user.nickname }}</a>
             <a href="{{ path('app_logout') }}">Logout</a>
         {% else %}
             <a href="{{ path('app_register') }}">Register</a>

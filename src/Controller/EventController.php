@@ -80,7 +80,9 @@ class EventController extends AbstractController
         $this->eventService->subscribe($event, $activeUser);
         }
 
-        return $this->redirectToRoute('event_list');
+        return $this->redirectToRoute('event_details', [
+            'id' => $event->getId()
+        ]);
     }
 
     #[Route('/{id}/unsubscribe', name:'unsubscribe', methods: ['GET'])]
@@ -91,7 +93,9 @@ class EventController extends AbstractController
         {
             $this->eventService->unsubscribe($event, $activeUser);
         }
-        return $this->redirectToRoute('event_list');
+        return $this->redirectToRoute('event_details', [
+            'id' => $event->getId()
+        ]);
     }
 
     #[Route('/{id}', name: 'details', methods:['GET'])]
