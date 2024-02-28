@@ -71,6 +71,29 @@ class EventController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/subscribe', name:'subscribe', methods: ['GET'])]
+    public function subscribe (Event $event):Response
+    {
+        $activeUser = $this->getUser();
+        if($activeUser instanceof User)
+        {
+        $this->eventService->subscribe($event, $activeUser);
+        }
+
+        return $this->redirectToRoute('event_list');
+    }
+
+    #[Route('/{id}/unsubscribe', name:'unsubscribe', methods: ['GET'])]
+    public function unsubscribe(Event $event):Response
+    {
+        $activeUser = $this->getUser();
+        if($activeUser instanceof User)
+        {
+            $this->eventService->unsubscribe($event, $activeUser);
+        }
+        return $this->redirectToRoute('event_list');
+    }
+
     #[Route('/{id}', name: 'details', methods:['GET'])]
     public function showDetails(Event $event):Response{
         return $this->render('event/details.html.twig', [
@@ -78,6 +101,10 @@ class EventController extends AbstractController
         ]);
 
     }
+
+
+
+
 
 
 }

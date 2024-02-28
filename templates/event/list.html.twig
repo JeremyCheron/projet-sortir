@@ -57,7 +57,7 @@
                                         Show
                                     </div>
                                 {% endif %}
-                                {% if event | display_edit_publish_buttons (app.user)%}
+                                {% if event | display_edit_publish_buttons(app.user)%}
                                     <div class="font-bold text-center px-2">
                                         <a href="{{ path('event_details', {'id':event.id}) }}">
                                             <i class="fa-solid fa-pen-to-square"></i></a>
@@ -71,7 +71,7 @@
                                     Publish
                                 </div>
                                 {% endif%}
-                                {% if event | display_cancel_button (app.user) %}
+                                {% if event | display_cancel_button(app.user) %}
                                     <div class="font-bold text-center px-2">
                                         <a href="{{ path('event_details', {'id':event.id}) }}">
                                             <i class="fa-solid fa-ban"></i></a>
@@ -79,17 +79,17 @@
                                         Cancel
                                     </div>
                                 {% endif %}
-                                {% if event | display_unsub_button (app.user)  %}
+                                {% if event | display_unsub_button(app.user)  %}
                                     <div class="font-bold text-center px-2">
-                                        <a href="{{ path('event_details', {'id':event.id}) }}">
+                                        <a href="{{ path('event_unsubscribe', {'id':event.id}) }}">
                                             <i class="fa-solid fa-user-minus"></i></a>
                                         <br>
                                         Unsubscribe
                                     </div>
                                 {% endif %}
-                                {% if event | display_sub_button (app.user)  %}
+                                {% if event | display_sub_button(app.user)  %}
                                     <div class="font-bold text-center px-2">
-                                        <a href="{{ path('event_details', {'id':event.id}) }}">
+                                        <a href="{{ path('event_subscribe', {'id':event.id}) }}">
                                             <i class="fa-solid fa-user-plus"></i></a>
                                         <br>
                                         Subscribe
