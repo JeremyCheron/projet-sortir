@@ -3,9 +3,15 @@
 {% block title %}New City{% endblock %}
 
 {% block body %}
-    <h1>Create new City</h1>
 
     {{ include('city/_form.html.twig') }}
 
-    <a href="{{ path('app_city_index') }}">back to list</a>
+<div class="flex items-center justify-evenly text-center my-8 font-bold">
+
+    <a href="{{ path('app_city_index') }}" class="mx-12">
+        <i class="fa-solid fa-list"></i>
+        <br>
+        Back
+    </a>
+</div>
 {% endblock %}

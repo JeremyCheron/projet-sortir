@@ -5,6 +5,13 @@
 {% block body %}
 
     {{ include('place/_form.html.twig') }}
+<div class="flex items-center justify-evenly text-center my-8 font-bold">
 
-    <a href="{{ path('app_place_index') }}">back to list</a>
+    <a href="{{ path('app_place_index') }}" class="mx-12">
+        <i class="fa-solid fa-list"></i>
+        <br>
+        Back
+    </a>
+</div>
+
 {% endblock %}
