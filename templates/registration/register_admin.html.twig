@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{{ form_start(registrationForm) }}
+
+    <h1 class="text-center text-3xl font-bold text-gray-700">Add a new user</h1>
+
+
+    <div class="grid md:grid-cols-2 w-1/2 mx-auto md:gap-16 justify-center place-content-evenly p-4">
+
+        <div>
+            <div class="my-4">
+                {{ form_label(registrationForm.firstname, 'First Name', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(registrationForm.firstname, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                {{ form_errors(registrationForm.firstname) }}
+            </div>
+
+            <div class="my-4">
+                {{ form_label(registrationForm.lastname, 'Last Name', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(registrationForm.lastname, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                {{ form_errors(registrationForm.lastname) }}
+            </div>
+
+            <div class="my-4">
+                {{ form_label(registrationForm.email, 'Mail', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(registrationForm.email, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+
+        </div>
+
+
+        <div>
+            <div class="my-4">
+                {{ form_label(registrationForm.roles, 'Is Admin', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(registrationForm.roles, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                {{ form_errors(registrationForm.roles) }}
+            </div>
+
+            <div class="my-4">
+                {{ form_label(registrationForm.campus, 'Campus', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(registrationForm.campus, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                {{ form_errors(registrationForm.campus) }}
+            </div>
+
+        </div>
+    </div>
+
+    <div class="md:flex text-center justify-center items-center mx-auto my-1 w-full">
+        <div class="w-1/5 px-3">
+            <button type="submit" class="btn bg-green-600 hover:bg-green-700 text-white my-2
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                Submit
+            </button>
+        </div>
+    </div>
+
+
+
+{{ form_end(registrationForm) }}
+{% endblock %}
+
+{% block title %}
+Admin Registration
+{% endblock %}
+

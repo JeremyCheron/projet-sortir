@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\RegistrationAdminFormType;
 use App\Form\RegistrationFormType;
+use App\Services\RegistrationService;
+use App\Services\UserService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +17,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
+    public function __construct(private RegistrationService $registrationService)
+    {
+    }
+
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
@@ -43,4 +50,21 @@ class RegistrationController extends AbstractController
             'registrationForm' => $form,
         ]);
     }
+
+    //todo : route accessible uniquement pour les ROLE_ADMIN
+    #[Route('/register/admin', name: 'app_register_admin')]
+    public function registerAdmin(Request $request): Response
+    {
+            $formOrSuccess = $this->registrationService->registerAsAdmin($request);
+            if($formOrSuccess === true)
+            {
+                return $this->redirectToRoute('main_home');
+            }
+
+        return $this->render('registration/register_admin.html.twig', [
+            'registrationForm' => $formOrSuccess->createView(),
+        ]);
+    }
+
 }
+
