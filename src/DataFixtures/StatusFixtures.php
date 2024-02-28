@@ -8,7 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 
 class StatusFixtures extends Fixture
 {
-    private array $status = ['créée', 'ouverte', 'cloturée', 'en cours', 'passée', 'archivée', 'annulée'];
+    private array $status = ['created', 'open', 'closed', 'ongoing', 'finished', 'archived', 'canceled'];
     public function load(ObjectManager $manager): void
     {
         foreach ($this->status as $statusToAdd) {
