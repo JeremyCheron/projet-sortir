@@ -4,6 +4,7 @@ namespace App\Twig;
 
 use App\Entity\Event;
 use App\Entity\User;
+use DateTime;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 
@@ -45,9 +46,12 @@ class CustomFiltersExtension extends AbstractExtension
 
     public function displaySubButton (Event $event, User $user)
     {
+        $dateTime = new DateTime();
         return ($event->getEventPlanner() !== $user
             && $event->getStatus()->getName()=='open'
-            && !$event->getAttendants()->contains($user));
+            && !$event->getAttendants()->contains($user))
+            && $dateTime < $event->getRegistrationDeadline()
+            && count($event->getAttendants()) != $event->getMaxRegistrations();
     }
 
 }

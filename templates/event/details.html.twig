@@ -97,18 +97,22 @@
             {% if (event.status.name == 'canceled') %}
                 <p class="text-2xl font-bold text-red-600 mt-28"> ! Event canceled !</p>
                 <p> {{ event.cancelJustification }}</p>
-            {% else %}
-                {% if event | display_sub_button(app.user)%}
+            {% elseif event | display_sub_button(app.user)%}
                 <a href="{{ path('event_subscribe', {'id':event.id}) }}">
                     <input type="button" value="Subscribe"
                            class=" bg-blue-500 text-white rounded-lg p-10 mt-28 text-xl">
                 </a>
-                 {% elseif event | display_unsub_button(app.user)%}
-                     <a href="{{ path('event_unsubscribe', {'id':event.id}) }}">
-                         <input type="button" value="Unsubscribe"
-                                class=" bg-orange-600 text-white rounded-lg p-10 mt-28 text-xl">
-                     </a>
-                 {% endif%}
+            {% elseif event | display_unsub_button(app.user)%}
+                 <a href="{{ path('event_unsubscribe', {'id':event.id}) }}">
+                     <input type="button" value="Unsubscribe"
+                            class=" bg-orange-600 text-white rounded-lg p-10 mt-28 text-xl">
+                 </a>
+            {% elseif event.attendants.count == event.maxRegistrations %}
+                <p class="text-2xl font-bold text-red-600 mt-28"> ! Too bad... Maximum attendants already reached ...  </p>
+                <p class="text-2xl font-bold text-red-600"> but keep an eye on the event, someone could change their mind... !</p>
+
+            {% elseif event.registrationDeadline > 'now' %}
+                 <p class="text-2xl font-bold text-red-600 mt-28"> ! Too late... Registrations are closed !</p>
             {% endif %}
         </div>
     </div>
