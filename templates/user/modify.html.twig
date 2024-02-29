@@ -5,39 +5,39 @@
     {{ form_start(userForm) }}
 
 
-    <h1 class="text-center text-3xl font-bold text-gray-700">My profile</h1>
+    <h1 class="text-center text-3xl font-bold text-gray-700">{{ 'My profile' | trans }}</h1>
 
 
     <div class="grid md:grid-cols-3 w-1/2 mx-auto md:gap-16 justify-center place-content-evenly p-4">
 
         <div >
-            <img src="{{ asset('imgs/pp/' ~ app.user.profilePic) }}" alt="User image">
+            <img src="{{ asset('imgs/pp/' ~ app.user.profilePic) }}" alt="{{ 'User image' | trans }}">
             <div class="my-4">
-                <div class="block text-gray-700 font-bold mb-2">New Profile Picture:</div>
+                <div class="block text-gray-700 font-bold mb-2">{{ 'New Profile Picture' | trans }}:</div>
                 <a href="{{ path('app_upload') }}">
                     <input type="button" class="btn bg-blue-500 hover:bg-blue-700 text-white
-                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="Download">
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="{{ 'Download' | trans }}">
                 </a>
             </div>
         </div>
 
         <div>
             <div class="my-4">
-                {{ form_label(userForm.nickname, 'Nickname', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_label(userForm.nickname, 'Nickname' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
                 {{ form_widget(userForm.nickname, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.nickname) }}
 
             </div>
 
             <div class="my-4">
-                {{ form_label(userForm.firstname, 'First Name', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_label(userForm.firstname, 'First Name' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
                 {{ form_widget(userForm.firstname, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.firstname) }}
 
             </div>
 
             <div class="my-4">
-                {{ form_label(userForm.lastname, 'Last Name', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_label(userForm.lastname, 'First Name' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
                 {{ form_widget(userForm.lastname, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.lastname) }}
 
@@ -50,14 +50,14 @@
         <div>
 
             <div class="my-4">
-                {{ form_label(userForm.email, 'Mail', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_label(userForm.email, 'Mail' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
                 {{ form_widget(userForm.email, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.email) }}
 
             </div>
 
             <div class="my-4">
-                {{ form_label(userForm.phoneNumber, 'Phone Number', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_label(userForm.phoneNumber, 'Phone Number' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
                 {{ form_widget(userForm.phoneNumber, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.phoneNumber) }}
 
@@ -66,7 +66,7 @@
             <div  class="my-4">
                 <a href="{{ path('user_change_password') }}">
                     <input type="button" class="btn bg-blue-500 hover:bg-blue-700 text-white mt-8
-                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="Change your password">
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="{{ 'Change your password' | trans  }}">
                 </a>
             </div>
 
@@ -79,13 +79,13 @@
         <div class="w-1/5 px-3">
             <button type="submit" class="btn bg-green-600 hover:bg-green-700 text-white my-2
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Submit
+                {{ 'Submit' | trans  }}
             </button>
         </div>
         <div class="w-1/5 px-3">
             <a href="{{  path('user_details', {'id':user.id})  }}">
                 <input type="button" class="btn bg-red-700 hover:bg-red-800 text-white my-2
-                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" value="Cancel">
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" value="{{ 'Cancel' | trans  }}">
             </a>
         </div>
     </div>
@@ -95,5 +95,5 @@
 {% endblock %}
 
 {% block title %}
-    My profile {{ parent() }}
+    {{ 'My profile' | trans }}
 {% endblock %}
