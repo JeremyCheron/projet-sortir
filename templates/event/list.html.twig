@@ -59,13 +59,13 @@
                                 {% endif %}
                                 {% if event | display_edit_publish_buttons(app.user)%}
                                     <div class="font-bold text-center px-2">
-                                        <a href="{{ path('event_details', {'id':event.id}) }}">
+                                        <a href="{{ path('event_edit', {'id':event.id}) }}">
                                             <i class="fa-solid fa-pen-to-square"></i></a>
                                         <br>
                                         Edit
                                     </div>
                                 <div class="font-bold text-center px-2">
-                                    <a href="{{ path('event_details', {'id':event.id}) }}">
+                                    <a href="{{ path('event_open', {'id':event.id}) }}">
                                         <i class="fa-solid fa-share"></i></a>
                                     <br>
                                     Publish
@@ -73,7 +73,7 @@
                                 {% endif%}
                                 {% if event | display_cancel_button(app.user) %}
                                     <div class="font-bold text-center px-2">
-                                        <a href="{{ path('event_details', {'id':event.id}) }}">
+                                        <a href="{{ path('event_cancel', {'id':event.id}) }}">
                                             <i class="fa-solid fa-ban"></i></a>
                                         <br>
                                         Cancel

@@ -8,6 +8,7 @@ use App\Form\EventType;
 use App\Repository\EventRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -27,9 +28,15 @@ class EventService
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $event->setStatus($this->eventStatusService->getStatusById(14));
+
+            $event->setStatus($this->eventStatusService->getStatusByName('created'));
             $event->setCampus($user->getCampus());
             $event->setEventPlanner($user);
+
+        if ($form->getClickedButton() === $form->get('saveAndPublish'))
+        {
+            $event->setStatus($this->eventStatusService->getStatusByName('open'));
+        }
             $this->em->persist($event);
             $this->em->flush();
 
@@ -41,6 +48,8 @@ class EventService
 
     }
 
+
+
     public function getAllEvents()
     {
         return $this->eventRepository->findAll();
@@ -51,13 +60,16 @@ class EventService
         return $this->eventRepository->find($id);
     }
 
-    public function updateEvent(Request $request, Event $event, User $user)
+    public function updateEvent(Request $request, Event $event)
     {
         $form = $this->formFactory->create(EventType::class, $event);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $event->setStatus($this->eventStatusService->getStatusById(1));
+            if ($form->getClickedButton() === $form->get('saveAndPublish'))
+            {
+                $event->setStatus($this->eventStatusService->getStatusByName('open'));
+            }
             $this->em->flush();
             return true;
         }
@@ -87,6 +99,20 @@ class EventService
             return true;
         }
         return false;
+    }
+
+    public function cancelEvent (Event $event )
+    {
+        $canceledEvent = $this->eventStatusService->getStatusByName('canceled');
+        $event->setStatus($canceledEvent);
+        $this->em->flush();
+    }
+
+    public function openEvent (Event $event )
+    {
+        $openedEvent = $this->eventStatusService->getStatusByName('open');
+        $event->setStatus($openedEvent);
+        $this->em->flush();
     }
 
 }

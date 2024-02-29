@@ -3,18 +3,8 @@
 {% block title %}Edit Event{% endblock %}
 
 {% block body %}
+    <h1 class="text-2xl md:text-4xl text-center justify-center items-center mx-auto my-20">Edition : {{ event.name }}</h1>
 
-    {{ include('event/_eventForm.html.twig', {'button_label': 'Update'}) }}
-
-    <div class="flex items-center justify-center text-center font-bold my-8">
-
-        <a href="{{ path('event_list') }}">
-            <i class="fa-solid fa-list"></i>
-            <br>
-            Back
-        </a>
-
-    </div>
-
+    {{ include('event/_eventForm.html.twig') }}
 
 {% endblock %}

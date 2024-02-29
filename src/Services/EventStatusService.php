@@ -16,4 +16,9 @@ class EventStatusService
         return $this->eventStatusRepository->find($id);
     }
 
+    public function getStatusByName(string $name)
+    {
+        return $this->eventStatusRepository->findOneBy(['name'=>$name]);
+    }
+
 }
