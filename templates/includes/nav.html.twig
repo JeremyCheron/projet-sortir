@@ -3,7 +3,8 @@
         <a href="{{ path('main_home') }}">Home</a>
         <a href="{{ path('event_list') }}">Events</a>
         {% if app.user %}
-            {% if 'ROLE_ADMIN' in app.user.roles %}
+            {% if app.user.isAdmin %}
+                <a href="{{ path('admin_manage_users') }}">Manage Users</a>
                 <a href="{{ path('app_place_index') }}">Places</a>
                 <a href="{{ path('app_city_index') }}">Cities</a>
             {% endif %}
