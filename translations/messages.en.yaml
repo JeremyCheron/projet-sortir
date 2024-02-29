@@ -1,7 +1,91 @@
-dateday: Date of the day
-gm: Good Morning
-ga: Good Afternoon
-ge: Good Evening
-nn: Night night
+Date of the day: Date of the day
+Good Morning: Good Morning
+Good Afternoon: Good Afternoon
+Good Evening: Good Evening
+Night night: Night night
 
+#user.html.twig translation
 
+User image: User image
+Name: Name
+Phone: Phone
+Phone Number not provided: Phone Number not provided
+Mail: Mail
+Campus: Campus
+Modify my profile: Modify my profile
+My profile: My profile
+
+#modify.html.twig translation
+
+New Profile Picture: New Profile Picture
+Download: Download
+Nickname: Nickname
+First Name: First Name
+Last Name: Last Name
+Phone Number: Phone Number
+Change your password: Change your password
+Cancel: Cancel
+Submit : Submit
+
+#changepassword.html.twig translation
+
+Change Password: Change Password
+Change my profile: Change my profile
+Password: Password
+New Password: New Password
+Repeat Password: Repeat Password
+
+#nav.html.twig translation
+
+Home: Home
+Events : Events
+Manage Users : Manage Users
+Places: Places
+Cities: Cities
+Logout : Logout
+Login : Login
+
+#upload.html.twig translation
+
+Download a new profile picture: Download a new profile picture
+Image : Image
+
+#search.html.twig translation
+
+Filter Events: Filter Events
+City Name: City Name
+Between: Between
+And: And
+Events I'm planning: Events I'm planning
+Events I'm attending: Events I'm attending
+Past Events: Past Events
+
+#event/list.html.twig translation
+
+Create an event: Create an event
+Event's name: Event's name
+Event's date: Event's date
+Registration deadline: Registration deadline
+Attendants: Attendants
+Status: Status
+Participation: Participation
+Event's planner: Event's planner
+Actions: Actions
+Edit: Edit
+There are no events planned for now !: There are no events planned for now !
+
+#manage_user/list.html.twig translation
+
+Manage the users: Manage the users
+Create a new User: Create a new User
+active : active
+inactive: inactive
+Make inactive: Make inactive
+Go back to active: Go back to active
+Delete: Delete
+
+#register_admin/list.html.twig translation
+
+Add a new user: Add a new user
+Is Admin: Is Admin
+Admin Registration: Admin Registration
