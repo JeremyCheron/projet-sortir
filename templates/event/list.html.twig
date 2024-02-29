@@ -1,9 +1,11 @@
 {% block body %}
-    <a href="{{ path('event_add') }}"><input type="button" value="Create an event"
-                                             class="border-blue-500 bg-blue-500 text-white rounded-lg p-2 mx-10"></a>
+    <div class="flex items-center justify-center my-8">
+        <a href="{{ path('event_add') }}"><input type="button" value="Create an event"
+                                             class="border-blue-500 bg-blue-500 text-white rounded-lg p-4 mx-10 font-bold text-xl"></a>
+    </div>
     <div>
         {% if events|length != 0 %}
-            <table class="table-auto border border-gray-200 m-8">
+            <table class="table-auto border border-gray-200 m-auto">
                 <thead class="bg-gray-100 ">
                 <tr>
                     <th class="border-collapse border border-black w-auto px-8">Event's name</th>
@@ -108,6 +110,10 @@
         {% else %}
             There are no events planned for now !
         {% endif %}
+    </div>
+    <div class="flex items-center justify-center my-8">
+        <a href="{{ path('event_add') }}"><input type="button" value="Create an event"
+                                                 class="border-blue-500 bg-blue-500 text-white rounded-lg p-4 mx-10 font-bold text-xl"></a>
     </div>
 {% endblock %}
 
