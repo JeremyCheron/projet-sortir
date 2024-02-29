@@ -1,27 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Place{% endblock %}
+{% block title %}{{ 'Place' | trans }}{% endblock %}
 
 {% block body %}
 <div class="flex flex-col items-center justify-center my-8 w-3/4 mx-auto">
-    <h2 class="text-2xl font-bold">Place : {{ place.name }}</h2>
+    <h2 class="text-2xl font-bold">{{ 'Place' | trans }} : {{ place.name }}</h2>
 
     <table class="table text-center my-8">
         <tbody class="table-auto border border-gray-200">
             <tr>
-                <th class="w-1/4 h-12 text-left">City</th>
+                <th class="w-1/4 h-12 text-left">{{ 'City' | trans }}</th>
                 <td class="w-3/4">{{ place.city.name }}</td>
             </tr>
             <tr>
-                <th class="w-1/4 h-12 text-left">Street</th>
+                <th class="w-1/4 h-12 text-left">{{ 'Street' | trans }}</th>
                 <td class="w-3/4">{{ place.street }}</td>
             </tr>
             <tr>
-                <th class="w-1/4 h-12 text-left">Latitude</th>
+                <th class="w-1/4 h-12 text-left">{{ 'Latitude' | trans }}</th>
                 <td class="w-3/4">{{ place.latitude }}</td>
             </tr>
             <tr>
-                <th class="w-1/4 h-12 text-left">Longitude</th>
+                <th class="w-1/4 h-12 text-left">{{ 'Longitude' | trans }}</th>
                 <td class="w-3/4">{{ place.longitude }}</td>
             </tr>
         </tbody>
@@ -32,13 +32,13 @@
     <a href="{{ path('app_place_index') }}" class="mx-12">
         <i class="fa-solid fa-list"></i>
         <br>
-        Back
+        {{ 'Back' | trans }}
     </a>
 
     <a href="{{ path('app_place_edit', {'id': place.id}) }}" class="mx-12">
         <i class="fa-solid fa-pen-to-square"></i>
         <br>
-        Edit
+        {{ 'Edit' | trans }}
     </a>
     </div>
     {{ include('place/_delete_form.html.twig') }}

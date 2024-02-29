@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit City{% endblock %}
+{% block title %}{{ 'Edit City' | trans}}{% endblock %}
 
 {% block body %}
 
-    {{ include('city/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('city/_form.html.twig', {'button_label': 'Update' | trans}) }}
 
     <div class="flex items-center justify-center text-center font-bold my-8">
 
         <a href="{{ path('app_city_index') }}">
             <i class="fa-solid fa-list"></i>
             <br>
-            Back
+            {{ 'Back' | trans}}
         </a>
 
     </div>

@@ -1,10 +1,74 @@
-dateday: Date du jour
-gm: Bonne Matinée
-ga: Bon Après Midi
-ge: Bonne Soirée
-nn: VA DODO
+#_eventForm twig
+Name of the event : Nom de la sortie
+Date and time of the event : Date et heure de la sortie
+Registration deadline : Date limite d'inscription
+Maximum number of attendants : Nombre de places
+Duration : Durée
+Description: Description et infos
+Campus : Campus
+City: Ville
+Place : Lieu
+Street : Rue
+Zip Code : Code Postal
+Latitude : Latitude
+Longitude : Longitude
+Save: Enregistrer
+Publish the event : Publier la sortie
 
+#AddEvent twig
+Create a new Event: Créer une sortie
+New event : Nouvelle sortie
+Cancel : Annuler
 
+#EventDetails twig
+Event's details : Détails de la sortie
+Attendants: Participants
+minutes : minutes
+List of registrated attendants : Liste des participants
+There are no attendants registrated for that event : Il n'y a pas de participant inscrit pour le moment...
+Full name : Nom
+Action : Action
+Show : Voir le détail
+Event canceled : Sortie annulée
+Subscribe : S'inscrire
+Unsubscribe : Se désinscrire
+Too bad... Maximum attendants already reached : Dommage... Le nombre maximum de participants est atteint
+but keep an eye on the event, someone could change their mind : mais surveille la sortie, quelqu'un pourrait libérer une place
+Too late... Registrations are closed : Trop tard... Les inscriptions sont closes
 
+#EditEvent Twig
+Edit Event : Modification de la sortie
+Edition : Modification
 
+#DeleteFormPlace Twig
+Are you sure you want to delete this item : Êtes-vous sûr de vouloir supprimer cet objet
+Delete : Supprimer
 
+#FormPlace Twig
+Place Name : Nom du lieu
+
+#EditForm Twig
+Edit Place : Modification du lieu
+Back : Retour
+Update : Mettre à jour
+
+#IndexPlace Twig
+Place index : Liste des lieux
+Actions : Actions
+no records found : Pas d'enregistrement trouvé
+Create New : Créer
+
+#NewPlaceForm Twig
+New Place : Nouveau lieu
+
+#CityForm Twig
+City Name : Nom de la ville
+
+#EditCity Twig
+Edit City : Edition de la ville
+
+#CityIndex Twig
+City index : Liste des villes
+
+#CityNew Twig
+New City : Nouvelle ville

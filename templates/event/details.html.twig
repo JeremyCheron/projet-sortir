@@ -4,57 +4,57 @@
 {% endblock %}
 
 {% block body %}
-    <h1 class="text-2xl md:text-4xl text-center justify-center items-center mx-auto my-20">Event's details</h1>
+    <h1 class="text-2xl md:text-4xl text-center justify-center items-center mx-auto my-20">{{ "Event's details" | trans }}</h1>
     <div class="grid grid-cols-1 md:grid-cols-2 w-3/4 mx-auto md:gap-16">
         <div>
             <div class="flex">
-                <p class="mr-8 font-bold">Event name : </p>
+                <p class="mr-8 font-bold">{{ 'Name of the event' | trans }} : </p>
                 <p>{{ event.name }}</p>
             </div>
             <div class="flex">
-                <p class="mr-8 font-bold">Date and time of the event : </p>
+                <p class="mr-8 font-bold">{{ 'Date and time of the event' | trans }} : </p>
                 <p>{{ event.startDate | date ('d/m/Y H:i') }}</p>
             </div>
             <div class="flex">
-                <p class="mr-8 font-bold">Registration deadline : </p>
+                <p class="mr-8 font-bold">{{ 'Registration deadline' | trans }} : </p>
                 <p>{{ event.registrationDeadline | date ('d/m/Y H:i') }}</p>
             </div>
             <div class="flex">
-                <p class="mr-8 font-bold">Attendants : </p>
+                <p class="mr-8 font-bold">{{ 'Attendants' | trans }} : </p>
                 <p>{{ event.attendants.count }}/{{ event.maxRegistrations }}</p>
             </div>
             <div class="flex">
-                <p class="mr-8 font-bold">Duration : </p>
-                <p>{{ event.duration }} minutes</p>
+                <p class="mr-8 font-bold">{{ 'Duration' | trans }} : </p>
+                <p>{{ event.duration }} {{ 'minutes' | trans }} </p>
             </div>
             <div class="flex">
-                <p class="mr-8 font-bold">Description :</p>
+                <p class="mr-8 font-bold">{{ 'Description' | trans }} :</p>
                 <p>{{ event.description }}</p>
             </div>
         </div>
         <div>
             <div class="flex">
-                <p class="mr-8 font-bold">Campus : </p>
+                <p class="mr-8 font-bold">{{ 'Campus' | trans }} : </p>
                 <p>{{ event.campus.name }}</p>
             </div>
             <div class="flex">
-                <p class="mr-8 font-bold">Place :</p>
+                <p class="mr-8 font-bold">{{ 'Place' | trans }} :</p>
                 <p>{{ event.place.name }}</p>
             </div>
             <div class="flex">
-                <p class="mr-8 font-bold">Street :</p>
+                <p class="mr-8 font-bold">{{ 'Street' | trans }} :</p>
                 <p>{{ event.place.street }}</p>
             </div>
             <div class="flex">
-                <p class="mr-8 font-bold">Zip code : </p>
+                <p class="mr-8 font-bold">{{ 'Zip Code' | trans }} : </p>
                 <p>{{ event.place.city.zipCode }}</p>
             </div>
             <div class="flex">
-                <p class="mr-8 font-bold">Latitude : </p>
+                <p class="mr-8 font-bold">{{ 'Latitude' | trans }} : </p>
                 <p>{{ event.place.latitude }}</p>
             </div>
             <div class="flex">
-                <p class="mr-8 font-bold">Longitude : </p>
+                <p class="mr-8 font-bold">{{ 'Longitude' | trans }} : </p>
                 <p>{{ event.place.longitude }}</p>
             </div>
         </div>
@@ -62,16 +62,16 @@
     <div class="grid grid-cols-1 md:grid-cols-2">
 
         <div class="justify-center items-center m-10">
-            <h2 class="font-bold"> List of registrated attendants : </h2>
+            <h2 class="font-bold"> {{ 'List of registrated attendants' | trans }} : </h2>
             {% if (event.attendants.count == 0) %}
-                <p> There are no attendants registrated for that event...</p>
+                <p> {{ 'There are no attendants registrated for that event' | trans }} </p>
             {% else %}
                 <table class="table-auto border border-gray-200 my-8">
                     <thead class="bg-gray-100 ">
                     <tr>
-                        <th class="border-collapse border border-black w-auto px-8">Nickname</th>
-                        <th class="border-collapse border border-black w-1/3">Full name</th>
-                        <th class="border-collapse border border-black w-1/3">Action</th>
+                        <th class="border-collapse border border-black w-auto px-8">{{ 'Nickname' | trans  }}</th>
+                        <th class="border-collapse border border-black w-1/3">{{ 'Full name' | trans  }}</th>
+                        <th class="border-collapse border border-black w-1/3">{{ 'Action' | trans  }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -84,7 +84,7 @@
                                     <a href="{{ path('user_details', {'id':attendant.id}) }}">
                                         <i class="fa-solid fa-eye"></i></a>
                                     <br>
-                                    Show
+                                    {{ 'Show' | trans  }}
                                 </div>
                             </td>
                         </tr>
@@ -95,24 +95,24 @@
         </div>
         <div>
             {% if (event.status.name == 'canceled') %}
-                <p class="text-2xl font-bold text-red-600 mt-28"> ! Event canceled !</p>
+                <p class="text-2xl font-bold text-red-600 mt-28"> ! {{ 'Event canceled' | trans  }}  !</p>
                 <p> {{ event.cancelJustification }}</p>
             {% elseif event | display_sub_button(app.user)%}
                 <a href="{{ path('event_subscribe', {'id':event.id}) }}">
-                    <input type="button" value="Subscribe"
+                    <input type="button" value="{{ 'Subscribe' | trans  }}"
                            class=" bg-blue-500 text-white rounded-lg p-10 mt-28 text-xl">
                 </a>
             {% elseif event | display_unsub_button(app.user)%}
                  <a href="{{ path('event_unsubscribe', {'id':event.id}) }}">
-                     <input type="button" value="Unsubscribe"
+                     <input type="button" value="{{ 'Unsubscribe' | trans  }}"
                             class=" bg-orange-600 text-white rounded-lg p-10 mt-28 text-xl">
                  </a>
             {% elseif event.attendants.count == event.maxRegistrations %}
-                <p class="text-2xl font-bold text-red-600 mt-28"> ! Too bad... Maximum attendants already reached ...  </p>
-                <p class="text-2xl font-bold text-red-600"> but keep an eye on the event, someone could change their mind... !</p>
+                <p class="text-2xl font-bold text-red-600 mt-28"> ! {{ 'Too bad... Maximum attendants already reached' | trans  }}  ...  </p>
+                <p class="text-2xl font-bold text-red-600"> {{ 'but keep an eye on the event, someone could change their mind' | trans  }}</p>
 
             {% elseif event.registrationDeadline > 'now' %}
-                 <p class="text-2xl font-bold text-red-600 mt-28"> ! Too late... Registrations are closed !</p>
+                 <p class="text-2xl font-bold text-red-600 mt-28"> ! {{ 'Too late... Registrations are closed' | trans  }} !</p>
             {% endif %}
         </div>
     </div>
