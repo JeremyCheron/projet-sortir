@@ -1,0 +1,38 @@
+<div class="flex flex-col items-center justify-center my-8">
+
+    <h2 class="font-bold text-2xl">Group</h2>
+
+    <div>
+
+        {{ form_errors(form) }}
+
+        {{ form_start(form) }}
+
+        <div class="my-4">
+            {{ form_label(form.name, 'Group Name', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            {{ form_widget(form.name, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
+            {{ form_errors(form.name) }}
+        </div>
+
+        <div class="my-4">
+            {{ form_label(form.members, 'Members : ', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            <div class="checkbox-list">
+                {%  for choice in form.members %}
+                    <div class="checkbox-item">
+                        {{ form_widget(choice) }}
+                        {{ form_label(choice) }}
+                    </div>
+                {% endfor %}
+            </div>
+            {{ form_errors(form.members) }}
+        </div>
+
+        <button class="btn bg-blue-500 hover:bg-blue-700 text-white my-8
+                    font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">{{ button_label|default('Save') }}</button>
+
+
+        {{ form_end(form) }}
+
+    </div>
+
+</div>

@@ -1,0 +1,11 @@
+.checkbox-list {
+    border: 1px solid black;
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.checkbox-item {
+    margin-bottom: 0.5rem;
+}

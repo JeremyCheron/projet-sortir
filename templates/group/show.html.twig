@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Group{% endblock %}
+
+{% block body %}
+
+
+<div class="flex flex-col items-center justify-center my-8 w-3/4 mx-auto">
+    <h2 class="text-2xl font-bold">Group : {{ group.name }}</h2>
+    <a href="{{ path('user_details', {'id': group.owner.id}) }}"><h3 class="text-xl">by {{ group.owner.nickname }}</h3></a>
+
+    <table class="table-auto border border-gray-200 my-8">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="w-48">Nickname</th>
+                <th class="w-48">Full Name</th>
+                <th class="w-48">Email</th>
+                <th class="w-48">Phone</th>
+                <th class="w-48">actions</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for member in group.members %}
+                <tr class="h-20 md:h-12 text-center {{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }}">
+                    <td>{{ member.nickname }}</td>
+                    <td>{{ member.firstname }} {{ member.lastname }}</td>
+                    <td>{{ member.email }}</td>
+                    <td>{{ member.phonenumber }}</td>
+                    <td class="flex items-center justify-evenly h-full">
+                        <div class="font-bold text-center">
+                            <a href="{{ path('user_details', {'id': member.id}) }}"><i class="fa-solid fa-eye"></i></a>
+                            <br>
+                            Show
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+    <a href="{{ path('app_group_index') }}">back to list</a>
+
+    <a href="{{ path('app_group_edit', {'id': group.id}) }}">edit</a>
+
+    {{ include('group/_delete_form.html.twig') }}
+
+</div>
+
+{% endblock %}

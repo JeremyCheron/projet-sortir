@@ -62,9 +62,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\JoinColumn(nullable: false)]
     private ?Campus $campus = null;
 
+    #[ORM\OneToMany(targetEntity: Group::class, mappedBy: 'owner')]
+    private Collection $ownedGroups;
+
+    #[ORM\ManyToMany(targetEntity: Group::class, mappedBy: 'members')]
+    private Collection $userGroupMemberships;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
+        $this->ownedGroups = new ArrayCollection();
+        $this->userGroupMemberships = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -251,6 +259,63 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCampus(?Campus $campus): static
     {
         $this->campus = $campus;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Group>
+     */
+    public function getOwnedGroups(): Collection
+    {
+        return $this->ownedGroups;
+    }
+
+    public function addOwnedGroup(Group $ownedGroup): static
+    {
+        if (!$this->ownedGroups->contains($ownedGroup)) {
+            $this->ownedGroups->add($ownedGroup);
+            $ownedGroup->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOwnedGroup(Group $ownedGroup): static
+    {
+        if ($this->ownedGroups->removeElement($ownedGroup)) {
+            // set the owning side to null (unless already changed)
+            if ($ownedGroup->getOwner() === $this) {
+                $ownedGroup->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Group>
+     */
+    public function getUserGroupMemberships(): Collection
+    {
+        return $this->userGroupMemberships;
+    }
+
+    public function addUserGroupMembership(Group $userGroupMembership): static
+    {
+        if (!$this->userGroupMemberships->contains($userGroupMembership)) {
+            $this->userGroupMemberships->add($userGroupMembership);
+            $userGroupMembership->addMember($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserGroupMembership(Group $userGroupMembership): static
+    {
+        if ($this->userGroupMemberships->removeElement($userGroupMembership)) {
+            $userGroupMembership->removeMember($this);
+        }
 
         return $this;
     }
