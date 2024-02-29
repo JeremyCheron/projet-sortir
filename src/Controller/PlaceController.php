@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Place;
 use App\Form\PlaceType;
 use App\Repository\PlaceRepository;
+use App\Services\CustomQueriesService;
 use App\Services\PlaceService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +17,8 @@ use Symfony\Component\Routing\Attribute\Route;
 class PlaceController extends AbstractController
 {
 
-    public function __construct(private PlaceService $placeService)
+    public function __construct(private PlaceService $placeService,
+                                private CustomQueriesService $queriesService)
     {
     }
 
@@ -24,7 +26,7 @@ class PlaceController extends AbstractController
     public function index(): Response
     {
         return $this->render('place/index.html.twig', [
-            'places' => $this->placeService->getAllPlaces(),
+            'places' => $this->queriesService->getAllPlaces(),
         ]);
     }
 
@@ -43,10 +45,10 @@ class PlaceController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_place_show', methods: ['GET'])]
-    public function show(Place $place): Response
+    public function show(Place $place, CustomQueriesService $queriesService): Response
     {
         return $this->render('place/show.html.twig', [
-            'place' => $place,
+            'place' => $queriesService->getPlace($place),
         ]);
     }
 
