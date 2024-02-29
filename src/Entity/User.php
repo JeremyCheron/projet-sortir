@@ -267,9 +267,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function isAdmin():Boolean
     {
-        return \in_array('ROLE_ADMIN',$this->getRoles(),true);
+        return \in_array('ROLE_ADMIN', $this->getRoles(), true);
 
-
+    }
     /**
      * @return Collection<int, Group>
      */
