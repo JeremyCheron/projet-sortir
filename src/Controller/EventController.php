@@ -31,25 +31,22 @@ class EventController extends AbstractController
     }
     #[Route('', name: 'list')]
     public function list(){
-        $events=$this->eventService->getAllEvents();
 
-        return $this->render('event/list.html.twig', [
-            'events' => $events,
-        ]);
+       return $this->redirectToRoute('main_home');
+
     }
 
     #[Route('/add', name: 'add')]
     public function add(Request $request): Response
     {
         $user = $this->getUser();
-        if ($user instanceof User)
+        if($user instanceof User)
         {
-            $formOrSuccess = $this->eventService->create($request, $user);
-            $cities = $this->cityService->getAllCities();
-         }
-
+        $formOrSuccess = $this->eventService->create($request, $user);
+        $cities = $this->cityService->getAllCities();
+        }
         if ($formOrSuccess === true) {
-            return $this->redirectToRoute('main_home');
+            return $this->redirectToRoute('event_list');
         }
 
         return $this->render('event/addEvent.html.twig', [
@@ -57,8 +54,6 @@ class EventController extends AbstractController
             'cities' => $cities
         ]);
     }
-
-
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Event $event): Response
@@ -103,20 +98,6 @@ class EventController extends AbstractController
         return $this->redirectToRoute('event_details', [
             'id' => $event->getId()
         ]);
-    }
-
-    #[Route('/{id}/cancel', name :'cancel', methods:['GET'])]
-    public function cancelEvent(Event $event):Response
-    {
-        $this->eventService->cancelEvent($event);
-        return $this->redirectToRoute('main_home');
-    }
-
-    #[Route('/{id}/open', name :'open', methods:['GET'])]
-    public function openEvent(Event $event):Response
-    {
-        $this->eventService->openEvent($event);
-        return $this->redirectToRoute('main_home');
     }
 
     #[Route('/{id}', name: 'details', methods:['GET'])]

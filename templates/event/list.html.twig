@@ -66,20 +66,23 @@
                                         <br>
                                         {{ 'Edit' | trans }}
                                     </div>
-                                <div class="font-bold text-center px-2">
-                                    <a href="{{ path('event_open', {'id':event.id}) }}">
-                                        <i class="fa-solid fa-share"></i></a>
-                                    <br>
-                                    {{ 'Publish' | trans }}
-                                </div>
-                                {% endif%}
-                                {% if event | display_cancel_button(app.user) %}
-                                    <div class="font-bold text-center px-2">
-                                        <a href="{{ path('event_cancel', {'id':event.id}) }}">
-                                            <i class="fa-solid fa-ban"></i></a>
-                                        <br>
-                                        {{ 'Cancel' | trans }}
-                                    </div>
+
+{#                                    TODO : gérer les routes !#}
+{#                                <div class="font-bold text-center px-2">#}
+{#                                    <a href="{{ path('event_open', {'id':event.id}) }}">#}
+{#                                        <i class="fa-solid fa-share"></i></a>#}
+{#                                    <br>#}
+{#                                    Publish#}
+{#                                </div>#}
+{#                                {% endif%}#}
+{#                                {% if event | display_cancel_button(app.user) %}#}
+{#                                    <div class="font-bold text-center px-2">#}
+{#                                        <a href="{{ path('event_cancel', {'id':event.id}) }}">#}
+{#                                            <i class="fa-solid fa-ban"></i></a>#}
+{#                                        <br>#}
+{#                                        Cancel#}
+{#                                    </div>#}
+
                                 {% endif %}
                                 {% if event | display_unsub_button(app.user)  %}
                                     <div class="font-bold text-center px-2">

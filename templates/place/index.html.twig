@@ -1,20 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Place index{% endblock %}
+{% block title %}{{ 'Place index' | trans }}{% endblock %}
 
 {% block body %}
     <div class="flex flex-col items-center justify-center my-8 w-3/4 mx-auto">
-    <h2 class="text-2xl font-bold">Place index</h2>
+    <h2 class="text-2xl font-bold">{{ 'Place index' | trans }}</h2>
 
         <table class="table-auto border border-gray-200 my-8">
             <thead class="bg-gray-100">
                 <tr>
-                    <th class="w-48">Name</th>
-                    <th class="w-32">City</th>
-                    <th class="w-64">Street</th>
-                    <th class="w-32">Latitude</th>
-                    <th class="w-32">Longitude</th>
-                    <th class="w-32">actions</th>
+                    <th class="w-48">{{ 'Name' | trans }}</th>
+                    <th class="w-32">{{ 'City'| trans }}</th>
+                    <th class="w-64">{{ 'Street'| trans }}</th>
+                    <th class="w-32">{{ 'Latitude'| trans }}</th>
+                    <th class="w-32">{{ 'Longitude' | trans }}</th>
+                    <th class="w-32">{{ 'Actions' | trans }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +32,7 @@
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="6">no records found</td>
+                    <td colspan="6">{{ 'no records found' | trans }}</td>
                 </tr>
             {% endfor %}
             </tbody>
@@ -40,7 +40,7 @@
         <div>
             <a href="{{ path('app_place_new') }}">
                 <button class="btn bg-blue-500 hover:bg-blue-700 text-white
-                            font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">Create New</button>
+                            font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">{{ 'Create New' | trans }}</button>
             </a>
         </div>
     </div>
