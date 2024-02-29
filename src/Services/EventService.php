@@ -6,6 +6,7 @@ use App\Entity\Event;
 use App\Entity\User;
 use App\Form\EventType;
 use App\Repository\EventRepository;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,7 +68,8 @@ class EventService
 
     public function subscribe(Event $event, User $user)
     {
-        if ($event->getAttendants()->count() < $event->getMaxRegistrations())
+        $dateTime = new DateTime();
+        if ($event->getAttendants()->count() < $event->getMaxRegistrations() && $dateTime < $event->getRegistrationDeadline())
         {
             $event->addAttendant($user);
             $this->em->flush();
