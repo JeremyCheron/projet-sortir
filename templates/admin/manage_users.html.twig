@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <h1 class="text-center text-3xl font-bold text-gray-700">Manage the users</h1>
+
+    <div class="flex-col">
+        {% for user in users %}
+            <div class="flex items-center justify-evenly text-gray-700 font-bold mb-2 border-4 my-3 py-4 ">
+
+                <a href="{{  path('user_details', {'id':user.id})  }}">
+                    <input type="button" class="btn text-gray-700 hover:bg-amber-50 my-2
+                        font-bold py-2 px-4 rounded border-2  w-full focus:shadow-outline" value="{{ user.firstname}} {{ user.lastname }} {{ user.active==1?'- active':'- inactive'}}">
+                </a>
+
+
+                {% if user.active %}
+                    <a href="{{  path('admin_switch_active', {'id':user.id})  }}">
+                        <input class="btn bg-orange-400 hover:bg-orange-500 text-white text-center my-2
+                            font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  w-full" value="Make inactive">
+                    </a>
+                {% else %}
+                    <a href="{{  path('admin_switch_active', {'id':user.id})  }}">
+                        <input class="btn bg-green-500 hover:bg-green-600 text-white text-center my-2
+                        font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  w-full" value="Go back to active">
+                    </a>
+                {% endif %}
+
+
+
+                <a href="{{  path('admin_delete_user', {'id':user.id})  }}">
+                    <input class="btn bg-red-600 hover:bg-red-700 text-white text-center my-2
+                        font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="Delete">
+                </a>
+
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block title %}
+    Manage Users
+{% endblock %}
+

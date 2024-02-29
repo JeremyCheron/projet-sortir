@@ -52,7 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $profilePic = null;
 
-    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'eventPlanner')]
+    #[ORM\OneToMany(targetEntity: Event::class, mappedBy: 'eventPlanner', cascade: ['remove'])]
     private Collection $events;
 
     #[ORM\Column(length: 255, unique: true)]
