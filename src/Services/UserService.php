@@ -43,10 +43,4 @@ class UserService
         $this->em->flush();
     }
 
-
-    public function isAdmin(User $user):Boolean
-    {
-        return \in_array('ROLE_ADMIN',$user->getRoles(),true);
-
-    }
 }

@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use http\Message;
+use phpDocumentor\Reflection\Types\Boolean;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -253,5 +254,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->campus = $campus;
 
         return $this;
+    }
+
+    public function isAdmin():Boolean
+    {
+        return \in_array('ROLE_ADMIN',$this->getRoles(),true);
+
     }
 }
