@@ -32,7 +32,7 @@
                             <td class="border-collapse border-x border-black">{{ event.status.name }}</td>
                             <td class="border-collapse border-x border-black">
                                 {% for attendant in event.attendants %}
-                                    {{ attendant.id == app.user.id ? 'x' : '' }}
+                                    {{ (attendant.id == app.user.id) ? '<i class="fa-solid fa-circle-check"></i>' : '' }}
                                 {% endfor %}
                             </td>
 
