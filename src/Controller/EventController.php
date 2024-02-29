@@ -41,11 +41,14 @@ class EventController extends AbstractController
     public function add(Request $request): Response
     {
         $user = $this->getUser();
-        $formOrSuccess = $this->eventService->create($request, $user);
-        $cities = $this->cityService->getAllCities();
+        if ($user instanceof User)
+        {
+            $formOrSuccess = $this->eventService->create($request, $user);
+            $cities = $this->cityService->getAllCities();
+         }
 
         if ($formOrSuccess === true) {
-            return $this->redirectToRoute('event_list');
+            return $this->redirectToRoute('main_home');
         }
 
         return $this->render('event/addEvent.html.twig', [
@@ -54,15 +57,17 @@ class EventController extends AbstractController
         ]);
     }
 
+
+
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Event $event, User $user): Response
+    public function edit(Request $request, Event $event): Response
     {
-        $formOrSuccess = $this->eventService->updateEvent($request, $event, $user);
+        $formOrSuccess = $this->eventService->updateEvent($request, $event);
         $cities = $this->cityService->getAllCities();
 
 
         if ($formOrSuccess === true) {
-            return $this->redirectToRoute('event_list');
+            return $this->redirectToRoute('main_home');
         }
 
         return $this->render('event/edit.html.twig', [
@@ -97,6 +102,20 @@ class EventController extends AbstractController
         return $this->redirectToRoute('event_details', [
             'id' => $event->getId()
         ]);
+    }
+
+    #[Route('/{id}/cancel', name :'cancel', methods:['GET'])]
+    public function cancelEvent(Event $event):Response
+    {
+        $this->eventService->cancelEvent($event);
+        return $this->redirectToRoute('main_home');
+    }
+
+    #[Route('/{id}/open', name :'open', methods:['GET'])]
+    public function openEvent(Event $event):Response
+    {
+        $this->eventService->openEvent($event);
+        return $this->redirectToRoute('main_home');
     }
 
     #[Route('/{id}', name: 'details', methods:['GET'])]

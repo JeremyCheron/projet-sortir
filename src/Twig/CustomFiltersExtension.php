@@ -34,7 +34,8 @@ class CustomFiltersExtension extends AbstractExtension
 
     public function displayCancelButton(Event $event, User $user)
     {
-        return ($event->getEventPlanner() === $user && $event->getStatus()->getName()=='open');
+        return ($event->getEventPlanner() === $user && $event->getStatus()->getName()=='open'
+                || $user->isAdmin() === true);
     }
 
     public function displayUnsubButton(Event $event, User $user)

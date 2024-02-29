@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\RangeType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -38,10 +39,8 @@ class EventType extends AbstractType
                 'class' => Place::class,
                 'choice_label' => 'name',
             ])
-//            ->add('street', EntityType::class,['class'=>Place::class,'choice_label'=>'Street'])
-//            ->add('zipCode', EntityType::class,['class'=>City::class,'label'=>'Zip Code'])
-//            ->add('latitude', EntityType::class,['class'=>Place::class,'label'=>'Latitude'])
-//            ->add('latitude', EntityType::class,['class'=>Place::class,'label'=>'Longitude'])
+            ->add('save', SubmitType::class,['label'=>'Save'])
+            ->add('saveAndPublish', SubmitType::class,['label'=>'Publish the event'])
         ;
     }
 
