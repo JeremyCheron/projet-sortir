@@ -12,6 +12,7 @@ use App\Repository\EventRepository;
 use App\Repository\EventStatusRepository;
 use App\Services\CampusService;
 use App\Services\CityService;
+use App\Services\CustomQueriesService;
 use App\Services\EventService;
 use Composer\XdebugHandler\Status;
 use DateTime;
@@ -30,7 +31,9 @@ class EventController extends AbstractController
     }
     #[Route('', name: 'list')]
     public function list(){
+
        return $this->redirectToRoute('main_home');
+
     }
 
     #[Route('/add', name: 'add')]
@@ -48,7 +51,7 @@ class EventController extends AbstractController
 
         return $this->render('event/addEvent.html.twig', [
             'form' => $formOrSuccess->createView(),
-            'cities'=>$cities
+            'cities' => $cities
         ]);
     }
 
@@ -66,12 +69,12 @@ class EventController extends AbstractController
         return $this->render('event/edit.html.twig', [
             'event' => $event,
             'form' => $formOrSuccess->createView(),
-            'cities'=>$cities
+            'cities' => $cities
         ]);
     }
 
     #[Route('/{id}/subscribe', name:'subscribe', methods: ['GET'])]
-    public function subscribe (Event $event):Response
+    public function subscribe(Event $event):Response
     {
         $activeUser = $this->getUser();
         if($activeUser instanceof User)
@@ -98,9 +101,9 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}', name: 'details', methods:['GET'])]
-    public function showDetails(Event $event):Response{
+    public function showDetails(Event $event, CustomQueriesService $queriesService):Response{
         return $this->render('event/details.html.twig', [
-            'event'=>$event,
+            'event' => $queriesService->getOneEvent($event),
         ]);
 
     }

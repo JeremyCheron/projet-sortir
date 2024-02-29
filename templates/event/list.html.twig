@@ -1,6 +1,6 @@
 {% block body %}
     <div class="flex items-center justify-center my-8">
-        <a href="{{ path('event_add') }}"><input type="button" value="Create an event"
+        <a href="{{ path('event_add') }}"><input type="button" value="{{ 'Create an event' | trans }}"
                                              class="border-blue-500 bg-blue-500 text-white rounded-lg p-4 mx-10 font-bold text-xl"></a>
     </div>
     <div>
@@ -8,14 +8,14 @@
             <table class="table-auto border border-gray-200 m-auto">
                 <thead class="bg-gray-100 ">
                 <tr>
-                    <th class="border-collapse border border-black w-auto px-8">Event's name</th>
-                    <th class="border-collapse border border-black w-auto px-8">Event's date</th>
-                    <th class="border-collapse border border-black w-auto px-8">Registration deadline</th>
-                    <th class="border-collapse border border-black w-auto px-8">Attendants</th>
-                    <th class="border-collapse border border-black w-auto px-8">Status</th>
-                    <th class="border-collapse border border-black w-auto px-8">Participation</th>
-                    <th class="border-collapse border border-black w-auto px-8">Event's planner</th>
-                    <th class="border-collapse border border-black w-auto px-8">Actions</th>
+                    <th class="border-collapse border border-black w-auto px-8">{{ 'Event\'s name' | trans }}</th>
+                    <th class="border-collapse border border-black w-auto px-8">{{ 'Event\'s date' | trans }}</th>
+                    <th class="border-collapse border border-black w-auto px-8">{{ 'Registration deadline' | trans }}</th>
+                    <th class="border-collapse border border-black w-auto px-8">{{ 'Attendants' | trans }}</th>
+                    <th class="border-collapse border border-black w-auto px-8">{{ 'Status' | trans }}</th>
+                    <th class="border-collapse border border-black w-auto px-8">{{ 'Participation' | trans }}</th>
+                    <th class="border-collapse border border-black w-auto px-8">{{ 'Event\'s planner' | trans }}</th>
+                    <th class="border-collapse border border-black w-auto px-8">{{ 'Actions' | trans }}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -56,7 +56,7 @@
                                         <a href="{{ path('event_details', {'id':event.id}) }}"><i
                                                     class="fa-solid fa-eye"></i></a>
                                         <br>
-                                        Show
+                                        {{ 'Show' | trans }}
                                     </div>
                                 {% endif %}
                                 {% if event | display_edit_publish_buttons(app.user)%}
@@ -64,8 +64,9 @@
                                         <a href="{{ path('event_edit', {'id':event.id}) }}">
                                             <i class="fa-solid fa-pen-to-square"></i></a>
                                         <br>
-                                        Edit
+                                        {{ 'Edit' | trans }}
                                     </div>
+
 {#                                    TODO : gérer les routes !#}
 {#                                <div class="font-bold text-center px-2">#}
 {#                                    <a href="{{ path('event_open', {'id':event.id}) }}">#}
@@ -81,13 +82,14 @@
 {#                                        <br>#}
 {#                                        Cancel#}
 {#                                    </div>#}
+
                                 {% endif %}
                                 {% if event | display_unsub_button(app.user)  %}
                                     <div class="font-bold text-center px-2">
                                         <a href="{{ path('event_unsubscribe', {'id':event.id}) }}">
                                             <i class="fa-solid fa-user-minus"></i></a>
                                         <br>
-                                        Unsubscribe
+                                        {{ 'Unsubscribe' | trans }}
                                     </div>
                                 {% endif %}
                                 {% if event | display_sub_button(app.user)  %}
@@ -95,7 +97,7 @@
                                         <a href="{{ path('event_subscribe', {'id':event.id}) }}">
                                             <i class="fa-solid fa-user-plus"></i></a>
                                         <br>
-                                        Subscribe
+                                        {{ 'Subscribe' | trans }}
                                     </div>
                                 {% endif %}
                             </td>
@@ -109,11 +111,11 @@
                 </tbody>
             </table>
         {% else %}
-            There are no events planned for now !
+            {{ 'There are no events planned for now !' | trans }}
         {% endif %}
     </div>
     <div class="flex items-center justify-center my-8">
-        <a href="{{ path('event_add') }}"><input type="button" value="Create an event"
+        <a href="{{ path('event_add') }}"><input type="button" value="{{ 'Create an event' | trans }}"
                                                  class="border-blue-500 bg-blue-500 text-white rounded-lg p-4 mx-10 font-bold text-xl"></a>
     </div>
 {% endblock %}

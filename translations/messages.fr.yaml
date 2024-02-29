@@ -1,3 +1,4 @@
+
 #_eventForm twig
 Name of the event : Nom de la sortie
 Date and time of the event : Date et heure de la sortie
@@ -72,3 +73,96 @@ City index : Liste des villes
 
 #CityNew Twig
 New City : Nouvelle ville
+
+Date of the day: Date du jour
+Good Morning: Bonne Matinée
+Good Afternoon: Bon Après Midi
+Good Evening: Bonne Soirée
+Night night: VA DODO
+
+#traduction user.html.twig
+
+User image: Photo de Profil
+Name: Nom
+Phone: Téléphone
+Phone Number not provided: Pas de n° de téléphone renseigné
+Mail: Email
+Campus: Campus
+Modify my profile: Modifier mon profil
+My profile: Mon profil
+
+#traduction modify.html.twig
+
+New Profile Picture: Nouvelle photo de profil
+Download: Télécharger
+Nickname: Pseudo
+First Name: Prénom
+Last Name: Nom
+Phone Number: N° de Téléphone
+Change your password: Modifier votre mot de passe
+Cancel: Annuler
+Submit : Confirmer
+
+#traduction changepassword.html.twig
+
+Change Password: Modifier votre mot de Passe
+Change my profile: Modifier votre profil
+Password: Mot de passe
+New Password: Nouveau mot de passe
+Repeat Password: Répéter votre mot de passe
+
+#traduction nav.html.twig
+
+Home: Accueil
+Events : Sorties
+Manage Users: Gérer les utilisateurs
+Places: Lieux
+Cities: Villes
+Logout: Se déconnecter
+Login: Se connecter
+
+#traduction upload.html.twig
+
+Download a new profile picture: Télécharger votre nouvelle photo de profil
+Image: Image
+
+#traduction search.html.twig
+
+Filter Events: Filtrer les sorties
+City Name: Ville
+Between: Entre le
+And: Et le
+Events I'm planning: Les sorties que j'organise
+Events I'm attending: Les sorties auquelles je suis inscrit·e
+Past Events: Les sorties passées
+
+#traduction event/list.html.twig
+
+Create an event: Créer une sortie
+Event's name: Nom de la sortie
+Event's date: Date de la sortie
+Registration deadline: Date butoir inscription
+Attendants: Participants
+Status: Statut
+Participation: Participe
+Event's planner: Organisateur
+Actions: Actions
+Edit: Modifier
+There are no events planned for now !: Aucune sortie prévue pour le moment !
+
+#traduction manage_user/list.html.twig
+
+Manage the users: Gérer les utilisateurs
+Create a new User: Créer un nouvel utilisateur
+active : actif
+inactive: inactif
+Make inactive: Rendre inactif
+Go back to active: Rendre actif
+Delete: Supprimer
+
+#traduction register_admin/list.html.twig
+
+Add a new user: Ajouter un nouvel utilisateur
+Is Admin: Est Admin
+Admin Registration: Inscription Administrateur
+
