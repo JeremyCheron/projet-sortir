@@ -8,6 +8,7 @@ use App\Entity\Event;
 use App\Entity\EventStatus;
 use App\Entity\Place;
 use App\Entity\User;
+use DateTime;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -28,10 +29,18 @@ class EventType extends AbstractType
         for($i=30; $i<=2880; $i+=30){
             $duration[$i]=$i;
         }
+        $tomorrow = new DateTime();
+        $tomorrow ->modify('+1 day');
         $builder
             ->add('name',TextType::class)
-            ->add('startDate', DateTimeType::class,['html5'=>true, 'widget'=>'single_text'])
-            ->add('registrationDeadline', DateTimeType::class, ['html5'=>true, 'widget'=>'single_text'])
+            ->add('startDate', DateTimeType::class,['html5'=>true,
+                'widget'=>'single_text',
+                'data'=> $tomorrow,
+                'attr'=>['min'=>$tomorrow->format('Y-m-d\TH:i')]
+            ])
+            ->add('registrationDeadline', DateTimeType::class, ['html5'=>true,
+                'widget'=>'single_text',
+            ])
             ->add('maxRegistrations',IntegerType::class)
             ->add('duration', ChoiceType::class,['choices'=>$duration])
             ->add('description', TextareaType::class)
