@@ -16,7 +16,7 @@
             </div>
 
             <div class="my-4">
-                {{ form_label(registrationForm.lastname, 'Last Name | trans', {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_label(registrationForm.lastname, 'Last Name' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
                 {{ form_widget(registrationForm.lastname, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(registrationForm.lastname) }}
             </div>

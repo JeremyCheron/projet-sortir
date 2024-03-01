@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\DTO\EventFilterDTO;
+use App\Entity\User;
 use App\Form\SearchType;
 use App\Repository\EventRepository;
 use App\Services\CustomQueriesService;
@@ -10,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -22,17 +25,37 @@ class MainController extends AbstractController
     }
 
     #[Route('', name: 'home')]
-    public function home(EventService $eventService, Security $security, CustomQueriesService $queriesService): Response
+    public function home(EventService $eventService,
+                         Security $security,
+                         CustomQueriesService $queriesService,
+                        Request $request): Response
     {
         if (!$security->isGranted('ROLE_USER')) {
             return new RedirectResponse($this->generateUrl('app_login'));
         }
 
-        $form = $this->formFactory->create(SearchType::class);
+        $eventService->archiveEvents();
+
+        $filter = new EventFilterDTO();
+        $form = $this->createForm(SearchType::class, $filter);
+
+        $form->handleRequest($request);
+
+        $user = $this->getUser();
+        if ($user instanceof User)
+        {
+            $events = $queriesService->searchEventWithCriterias($filter, $user);
+        }
 
         return $this->render('main/home.html.twig', [
-            'events'=>$queriesService->getAllEventsWithStatusAndOwner(),
+            'events' => $events,
             'form' => $form
         ]);
     }
+
+    #[Route('/search', name: 'search', methods: ['POST'])]
+    public function search()
+    {
+    }
+
 }

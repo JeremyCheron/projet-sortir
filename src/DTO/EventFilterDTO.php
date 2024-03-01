@@ -12,9 +12,11 @@ class EventFilterDTO
     public ?DateTimeInterface $startDateMin;
     public ?DateTimeInterface $startDateMax;
     public ?Campus $campus;
-    public ?Boolean $planner;
-    public ?Boolean $attendant;
-    public ?Boolean $pastEvents;
+    public ?bool $planner;
+    public ?bool $attendant;
+    public ?bool $pastEvents;
+
+    public ?string $statusName;
 
 
 }

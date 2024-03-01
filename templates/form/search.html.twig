@@ -36,13 +36,16 @@
                     'attr': {'class': 'form-input rounded-md shadow-sm'}
                 }) }}
                 {{ form_errors(form) }}
-
+            </div>
+            <div class="m-4">
                 {{ form_row(form.pastEvents, {
                     'label': 'Past Events'  | trans,
                     'label_attr': {'class': 'block text-gray-700 font-bold mb-2'},
                     'attr': {'class': 'form-input rounded-md shadow-sm'}
                 }) }}
                 {{ form_errors(form) }}
+
+                {{ form_widget(form.Search, {'label' : 'Search' , 'attr': {'class': 'w-48 bg-green-600 text-white border rounded-lg'}}) }}
             </div>
 
             {{ form_end(form) }}

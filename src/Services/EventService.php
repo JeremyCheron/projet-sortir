@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\DTO\EventFilterDTO;
 use App\Entity\Event;
 use App\Entity\User;
 use App\Form\EventType;
@@ -17,7 +18,8 @@ class EventService
     public function __construct(private EntityManagerInterface $em,
                                 private EventRepository $eventRepository,
                                 private FormFactoryInterface $formFactory,
-                                private EventStatusService $eventStatusService)
+                                private EventStatusService $eventStatusService,
+                                private CustomQueriesService $queriesService)
     {
     }
 
@@ -113,6 +115,29 @@ class EventService
         $openedEvent = $this->eventStatusService->getStatusByName('open');
         $event->setStatus($openedEvent);
         $this->em->flush();
+    }
+
+    public function archiveEvents()
+    {
+        // Date actuelle moins 1 mois
+        $date = new DateTime();
+        $date = $date->modify("-1 month");
+
+        //Event commencé au plus tard il y a un mois
+        $filter = new EventFilterDTO();
+        $filter->startDateMax = $date;
+        $filter->statusName = 'archived';
+
+        $events = $this->queriesService->searchEventWithCriterias($filter);
+
+        $archivedStatus = $this->eventStatusService->getStatusByName('archived');
+
+        foreach ($events as $event) {
+            $event->setStatus($archivedStatus);
+        }
+
+        $this->em->flush();
+
     }
 
 }
