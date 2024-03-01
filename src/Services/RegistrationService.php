@@ -54,7 +54,7 @@ class RegistrationService
             //le pseudo unique et le prenomnom suivi d'un nombre à 3 chiffres aléatoire
 
             $user->setNickname($nickname);
-
+            $user->setProfilePic('default_user.png');
 
             $this->em->persist($user);
             $this->em->flush();

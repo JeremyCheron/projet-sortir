@@ -54,6 +54,8 @@ class CsvImporter
             $user->setPassword($hashedPassword);
 
             $this->registrationService->sendRegistrationEmail($user);
+            $user->setProfilePic('default_user.png');
+
             $this->em->persist($user);
         }
         $this->em->flush();
