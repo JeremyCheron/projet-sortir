@@ -58,8 +58,10 @@ class RegistrationController extends AbstractController
             $formOrSuccess = $this->registrationService->registerAsAdmin($request);
             if($formOrSuccess === true)
             {
+
                 return $this->redirectToRoute('main_home');
             }
+
 
         return $this->render('registration/register_admin.html.twig', [
             'registrationForm' => $formOrSuccess->createView(),

@@ -6,16 +6,26 @@ use App\Entity\User;
 use App\Form\RegistrationAdminFormType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationService
 {
     public function __construct(private EntityManagerInterface $em,
                                 private FormFactoryInterface $formFactory,
                                 private UserRepository $userRepository,
-                                private UserPasswordHasherInterface $passwordHasher)
+                                private UserPasswordHasherInterface $passwordHasher,
+                                private MailerInterface $mailer,
+                                private TranslatorInterface $translator,
+                                private RouterInterface $router)
     {
     }
 
@@ -44,6 +54,22 @@ class RegistrationService
 
             $this->em->persist($user);
             $this->em->flush();
+
+            //todo: envoyer mail au nouvel inscrit avec les infos de connexion
+
+            $email = (new TemplatedEmail())
+                ->from(new Address('admin@sortir.com', 'Sortir'))
+                ->to($user->getEmail())
+                ->subject($this->translator->trans('Your new account on Sortir.com'))
+                ->htmlTemplate('admin/new_user_email.html.twig')
+                ->context(['user'=>$user, 'url'=>$this->router->generate('app_login',[],UrlGeneratorInterface::ABSOLUTE_URL)])
+                ;
+
+            try {
+                $this->mailer->send($email);
+            } catch (TransportExceptionInterface $e) {
+            }
+
             return true;
         }
 
