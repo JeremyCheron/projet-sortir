@@ -69,6 +69,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Group::class, mappedBy: 'members')]
     private Collection $userGroupMemberships;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $registrationToken = null;
+
     public function __construct()
     {
         $this->events = new ArrayCollection();
@@ -326,5 +329,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
 
+    }
+
+    public function getRegistrationToken(): ?string
+    {
+        return $this->registrationToken;
+    }
+
+    public function setRegistrationToken(?string $registrationToken): static
+    {
+        $this->registrationToken = $registrationToken;
+
+        return $this;
     }
 }

@@ -5,16 +5,22 @@ namespace App\Services;
 use App\Entity\Campus;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class CsvImporter
 {
 
-    public function __construct(private EntityManagerInterface $em, private UserPasswordHasherInterface $passwordHasher)
+    public function __construct(private EntityManagerInterface $em,
+                                private UserPasswordHasherInterface $passwordHasher,
+                                private RegistrationService $registrationService)
     {
     }
 
 
+    /**
+     * @throws TransportExceptionInterface
+     */
     public function importUserCsv($csvFilePath)
     {
        $csv = array_map('str_getcsv', file($csvFilePath));
@@ -47,6 +53,7 @@ class CsvImporter
             $hashedPassword = $this->passwordHasher->hashPassword($user, $password);
             $user->setPassword($hashedPassword);
 
+            $this->registrationService->sendRegistrationEmail($user);
             $this->em->persist($user);
         }
         $this->em->flush();
