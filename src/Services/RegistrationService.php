@@ -15,6 +15,8 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationService
@@ -25,7 +27,8 @@ class RegistrationService
                                 private UserPasswordHasherInterface $passwordHasher,
                                 private MailerInterface $mailer,
                                 private TranslatorInterface $translator,
-                                private RouterInterface $router)
+                                private RouterInterface $router,
+                                private TokenGeneratorInterface $tokenGenerator)
     {
     }
 
@@ -74,6 +77,36 @@ class RegistrationService
         }
 
         return $form;
+
+    }
+
+    /**
+     * @throws TransportExceptionInterface
+     */
+    public function sendRegistrationEmail(User $user)
+    {
+        // Generate unique token
+        $token = $this->tokenGenerator->generateToken();
+
+        // Add token to user
+        $user->setRegistrationToken($token);
+        $this->em->flush();
+
+        // Generate confirmation url with token
+        $confirmationLink = $this->router->generate(
+            'app_register_confirm',
+            ['token' => $token],
+            UrlGeneratorInterface::ABSOLUTE_URL);
+
+        $message = (new TemplatedEmail())
+            ->from('admin@sortir.com')
+            ->to($user->getEmail())
+            ->subject($this->translator->trans('Your new account on Sortir.com'))
+            ->htmlTemplate('user/connectlink.html.twig')
+            ->context(['user' => $user, 'url' => $confirmationLink])
+        ;
+
+        $this->mailer->send($message);
 
     }
 

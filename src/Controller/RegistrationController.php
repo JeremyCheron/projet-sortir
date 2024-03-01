@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\ChangePasswordType;
 use App\Form\RegistrationAdminFormType;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use App\Services\RegistrationService;
 use App\Services\UserService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,7 +19,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
 {
-    public function __construct(private RegistrationService $registrationService)
+    public function __construct(private readonly RegistrationService    $registrationService,
+                                private readonly UserRepository         $userRepository,
+                                private readonly EntityManagerInterface $em,
+                                private readonly UserService $userService)
     {
     }
 
@@ -66,6 +71,43 @@ class RegistrationController extends AbstractController
         return $this->render('registration/register_admin.html.twig', [
             'registrationForm' => $formOrSuccess->createView(),
         ]);
+    }
+
+    #[Route('/first', name: 'app_register_confirm')]
+    public function confirmRegistration(Request $request): Response
+    {
+
+        $token = $request->query->get('token');
+
+        // Find User by Token
+        $user = $this->userRepository->findOneBy(['registrationToken' => $token]);
+
+        if (!$user) {
+            throw $this->createNotFoundException('Invalid Token.');
+        }
+
+        // Form password
+        $passwordForm = $this->createForm(ChangePasswordType::class, $user);
+        $passwordForm->handleRequest($request);
+
+        if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
+            $password = $passwordForm->getData()->getPassword();
+            $this->userService->hashNewPassword($user, $password);
+
+
+            // Delete token
+            $user->setRegistrationToken(null);
+            $this->em->flush();
+
+            return $this->redirectToRoute('user_modify_profile');
+        }
+
+
+
+        return $this->render('user/changepassword.html.twig', ['user' => $user,'passwordForm' => $passwordForm->createView()]);
+
+
+
     }
 
 }
