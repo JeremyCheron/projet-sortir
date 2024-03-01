@@ -52,6 +52,7 @@ class RegistrationService
 
             $user->setNickname($nickname);
 
+
             $this->em->persist($user);
             $this->em->flush();
 

@@ -171,3 +171,15 @@ sentence3: Vous pouvez changer votre email à n'importe quel moment - cliquer su
 Cheers!: A bientôt!
 signaturemail: Les administrateurs de Sortir.com
 Login page: Page de connexion
+
+#contraintes user
+You must enter a last name.: Vous devez renseigner un nom.
+You must enter a first name.: Vous devez renseigner un prénom.
+Not a valid email: Cet email n'est pas valide
+Your phone number must be composed of 10 digits: Le numéro de téléphone doit être composé de 10 chiffres.
+Minimum 2 characters: Minimum 2 caractères
+Maximum 50 characters: Maximum 50 caractères
+Minimum of 6 characters.: Minimum de 6 caractères.
+You must enter a unique nickname.: Champ vide ! Vous devez choisir un pseudo unique.
+Mandatory password: Mot de passe obligatoire
+The password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character ( @, $, !, %, *, \#, ?, &). : Le mot de passe doit contenir au moins une minuscule, une majuscule, un chiffre et un caractère spécial ( @, $, !, %, *, \#, ?, &)

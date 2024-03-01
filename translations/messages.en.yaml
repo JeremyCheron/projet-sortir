@@ -172,3 +172,15 @@ sentence3: You can change your password at anytime on your profile - click "Modi
 Cheers!: Cheers!
 signaturemail: Admins of Sortir.com
 Login page: Login page
+
+#constraints user
+You must enter a last name.: You must enter a last name.
+You must enter a first name.: You must enter a first name.
+Not a valid email: Not a valid email
+Your phone number must be composed of 10 digits: Your phone number must be composed of 10 digits
+Minimum 2 characters: Minimum 2 characters
+Maximum 50 characters: Maximum 50 characters
+Can't be null ! You must enter a unique nickname.: Can't be null ! You must enter a unique nickname.
+Mandatory password: Mandatory password
+Minimum of 6 characters.: Minimum of 6 characters.
+The password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character ( @, $, !, %, *, \#, ?, &). : The password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character ( @, $, !, %, *, \#, ?, &).
