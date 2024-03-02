@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\City;
 use App\Entity\Place;
 use App\Form\PlaceType;
 use App\Repository\PlaceRepository;
@@ -9,6 +10,7 @@ use App\Services\CustomQueriesService;
 use App\Services\PlaceService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -18,8 +20,20 @@ class PlaceController extends AbstractController
 {
 
     public function __construct(private PlaceService $placeService,
-                                private CustomQueriesService $queriesService)
+                                private CustomQueriesService $queriesService,
+                                private PlaceRepository $placeRepository )
     {
+    }
+
+    #[Route('/ByCity/{id}', name: 'app_place_by_city')]
+    public function placesByCity(Request $request, $id)
+    {
+        $places = $this->placeRepository->findBy(['city' => $id]);
+        $placesData = [];
+        foreach ($places as $place) {
+            $placesData[$place->getId()] = $place->getName();
+        }
+        return new JsonResponse($placesData);
     }
 
     #[Route('/', name: 'app_place_index', methods: ['GET'])]

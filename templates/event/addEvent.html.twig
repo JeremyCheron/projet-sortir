@@ -2,8 +2,9 @@
 
 {% block title %}{{ 'Create a new Event' | trans }}{% endblock %}
 {% block javascripts %}
-  {{ parent() }}
-  <script src="{{ asset('javascript/DateManager.js') }}" defer></script>
+    {{ parent() }}
+    <script src="{{ asset('javascript/DateManager.js') }}" defer></script>
+    <script src="{{ asset('javascript/city-places.js') }}" defer></script>
 {% endblock %}
 
 {% block body %}
