@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\This;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
@@ -17,23 +18,29 @@ class Event
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: false)]
+    #[Assert\length(min:10, max:50, minMessage: 'The name of your event must be at least 10 characters long', maxMessage: 'the name of your event cannot be longer than 50 characters')]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\GreaterThan('today')]
+    #[Assert\GreaterThan(propertyPath: 'registrationDeadline')]
     private ?\DateTimeInterface $startDate = null;
 
     #[ORM\Column(nullable: true)]
     private ?int $duration = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\GreaterThan('today')]
     private ?\DateTimeInterface $registrationDeadline = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: false)]
+    #[Assert\NotNull()]
     private ?int $maxRegistrations = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(type: Types::TEXT, nullable: false)]
+    #[Assert\NotNull()]
+    #[Assert\length(min:20, minMessage: 'The name of your event must be at least 10 characters long')]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
@@ -45,6 +52,7 @@ class Event
 
     #[ORM\ManyToOne(inversedBy: 'events')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotNull()]
     private ?Place $place = null;
 
     #[ORM\ManyToOne(inversedBy: 'events')]

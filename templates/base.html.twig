@@ -12,8 +12,8 @@
         {% endblock %}
 
         {% block javascripts %}
+            <script src="{{ asset('javascript/backToTop.js') }}" defer></script>
             <script src="https://kit.fontawesome.com/dfcb81c047.js" crossorigin="anonymous"></script>
-            <script src="{{ asset('javascript/menu.js') }}" defer></script>
             {{ encore_entry_script_tags('app') }}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
@@ -22,8 +22,15 @@
 
         {{ include('includes/header.html.twig') }}
 
-        {% block body %}{% endblock %}
-
+        <div class="main-container">
+            {% block body %}{% endblock %}
+        </div>
+        <div class="w-full flex items-center justify-center my-4 font-bold text-xl">
+            <button onclick="topFunction()" id="backToTop"><i class="fa-solid fa-arrow-up"></i>
+                <br>
+                Back To Top
+            </button>
+        </div>
         <footer class="border-t border-neutral-400 flex items-center justify-center bottom-0 w-full p-1 md:p-2">
             <span class="text-xs md:text-base">
                 &copy; {{ "now" | date('Y') }} | My name is JEF

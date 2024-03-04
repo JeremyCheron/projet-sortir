@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class RegistrationController extends AbstractController
@@ -27,6 +28,7 @@ class RegistrationController extends AbstractController
     }
 
     #[Route('/register', name: 'app_register')]
+    #[IsGranted('ROLE_ADMIN')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
         $user = new User();
@@ -58,6 +60,7 @@ class RegistrationController extends AbstractController
 
     //todo : route accessible uniquement pour les ROLE_ADMIN
     #[Route('/register/admin', name: 'app_register_admin')]
+    #[IsGranted('ROLE_ADMIN')]
     public function registerAdmin(Request $request): Response
     {
             $formOrSuccess = $this->registrationService->registerAsAdmin($request);

@@ -12,11 +12,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/user', name: 'user_')]
 class UserController extends AbstractController
 {
     #[Route('/details/{id}', name: 'details')]
+    #[IsGranted('ROLE_USER')]
     public function user(User $profil): Response
     {
         $activeUser = $this->getUser();
@@ -31,6 +33,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/modify', name: 'modify_profile')]
+    #[IsGranted('ROLE_USER')]
     public function modify(Request $request, EntityManagerInterface $entityManager): Response
     {
 
@@ -61,6 +64,7 @@ class UserController extends AbstractController
 
 
     #[Route('/modify/password', name: 'change_password')]
+    #[IsGranted('ROLE_USER')]
     public function changePassword(Request $request, EntityManagerInterface $entityManager, UserService $userService): Response
     {
         $user = $this->getUser();

@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/city')]
 class CityController extends AbstractController
@@ -21,6 +22,7 @@ class CityController extends AbstractController
     }
 
     #[Route('/', name: 'app_city_index', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function index(): Response
     {
         return $this->render('city/index.html.twig', [
@@ -29,6 +31,7 @@ class CityController extends AbstractController
     }
 
     #[Route('/new', name: 'app_city_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request): Response
     {
         $formOrSuccess = $this->cityService->createCity($request);
@@ -44,6 +47,7 @@ class CityController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_city_show', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function show(City $city): Response
     {
         return $this->render('city/show.html.twig', [
@@ -52,6 +56,7 @@ class CityController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'app_city_edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function edit(Request $request, City $city): Response
     {
         $formOrSuccess = $this->cityService->updateCity($request, $city);
@@ -67,6 +72,7 @@ class CityController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_city_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, City $city): Response
     {
         $token = $request->request->get('_token');

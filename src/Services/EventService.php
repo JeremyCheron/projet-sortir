@@ -11,19 +11,20 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 class EventService
 {
-    public function __construct(private EntityManagerInterface $em,
-                                private EventRepository $eventRepository,
-                                private FormFactoryInterface $formFactory,
-                                private EventStatusService $eventStatusService,
-                                private CustomQueriesService $queriesService)
+    public function __construct(private readonly EntityManagerInterface $em,
+                                private readonly EventRepository        $eventRepository,
+                                private readonly FormFactoryInterface   $formFactory,
+                                private readonly EventStatusService     $eventStatusService,
+                                private readonly CustomQueriesService   $queriesService)
     {
     }
 
-    public function create(Request $request,User $user)
+    public function create(Request $request,User $user): true|FormInterface
     {
         $event = new Event();
         $form = $this->formFactory->create(EventType::class, $event);
@@ -62,7 +63,7 @@ class EventService
         return $this->eventRepository->find($id);
     }
 
-    public function updateEvent(Request $request, Event $event)
+    public function updateEvent(Request $request, Event $event): true|FormInterface
     {
         $form = $this->formFactory->create(EventType::class, $event);
         $form->handleRequest($request);
@@ -80,7 +81,7 @@ class EventService
 
     }
 
-    public function subscribe(Event $event, User $user)
+    public function subscribe(Event $event, User $user): bool
     {
         $dateTime = new DateTime();
         if ($event->getAttendants()->count() < $event->getMaxRegistrations() && $dateTime < $event->getRegistrationDeadline())
@@ -92,7 +93,7 @@ class EventService
         return false;
     }
 
-    public function unsubscribe(Event $event, User $user)
+    public function unsubscribe(Event $event, User $user): bool
     {
         if ($event->getAttendants()->contains($user))
         {
@@ -103,21 +104,21 @@ class EventService
         return false;
     }
 
-    public function cancelEvent (Event $event )
+    public function cancelEvent (Event $event ): void
     {
         $canceledEvent = $this->eventStatusService->getStatusByName('canceled');
         $event->setStatus($canceledEvent);
         $this->em->flush();
     }
 
-    public function openEvent (Event $event )
+    public function openEvent (Event $event ): void
     {
         $openedEvent = $this->eventStatusService->getStatusByName('open');
         $event->setStatus($openedEvent);
         $this->em->flush();
     }
 
-    public function archiveEvents()
+    public function archiveEvents(): void
     {
         // Date actuelle moins 1 mois
         $date = new DateTime();
