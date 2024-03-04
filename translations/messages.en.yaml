@@ -143,6 +143,13 @@ Event's planner: Event's planner
 Actions: Actions
 Edit: Edit
 There are no events planned for now !: There are no events planned for now !
+canceled : Canceled
+created : Created
+open : Open
+ongoing : Ongoing
+closed : Closed
+finished : Finished
+archived : Archived
 
 #manage_user/list.html.twig translation
 

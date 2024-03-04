@@ -143,6 +143,13 @@ Event's planner: Organisateur
 Actions: Actions
 Edit: Modifier
 There are no events planned for now !: Aucune sortie prévue pour le moment !
+canceled : Annulée
+created : En attente de publication
+open : Ouverte
+ongoing : En cours
+closed : Inscriptions terminées
+finished : Finie
+archived : Archivée
 
 #traduction manage_user/list.html.twig
 

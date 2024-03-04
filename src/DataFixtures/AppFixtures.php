@@ -15,6 +15,7 @@ use App\Repository\UserRepository;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AppFixtures extends Fixture
 {
@@ -22,7 +23,9 @@ class AppFixtures extends Fixture
     public function __construct(private EventStatusRepository $eventStatusRepository,
                                 private CampusRepository $campusRepository,
                                 private UserRepository $userRepository,
-                                private PlaceRepository $placeRepository)
+                                private PlaceRepository $placeRepository,
+                                private TranslatorInterface $translator,
+    )
     {
     }
 
@@ -51,7 +54,13 @@ class AppFixtures extends Fixture
         }
         $manager->flush();
 
-        $statuses = ['created', 'open', 'closed', 'ongoing', 'finished', 'archived', 'canceled'];
+        $statuses = [$this->translator->trans('created'),
+            $this->translator->trans('open'),
+            $this->translator->trans('closed'),
+            $this->translator->trans('ongoing'),
+            $this->translator->trans('finished'),
+            $this->translator->trans('archived'),
+            $this->translator->trans('canceled')];
 
         foreach ($statuses as $statusToAdd) {
             $eventStatus = new EventStatus();
