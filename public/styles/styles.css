@@ -10,16 +10,122 @@
     margin-bottom: 0.5rem;
 }
 
-#menu-toggle {
-    background: none;
-    border: none;
+#backToTop {
+    display: none;
+}
+
+header {
+    height: 8vh;
+    background-color: whitesmoke;
+    z-index: 1000;
+}
+
+.nav-logo {
+    display: flex;
+}
+
+.logo {
+    height: 10%;
+    width: 10%;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #FFF;
+}
+
+.top-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    color: #FFF;
+    height: 50px;
+    padding: 1em;
+    position: fixed;
+    width: 100%;
+    z-index: 100;
+}
+
+.menu {
+    display: none; /* Masquer le menu complet par défaut */
+    flex-direction: column; /* Ajustez la direction pour le menu mobile */
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    top: 10vh; /* Ajustez la position verticale pour le menu mobile */
+    background-color: black; /* Ajustez la couleur de fond pour le menu mobile */
+    width: 25%; /* Ajustez la largeur pour le menu mobile */
+    z-index: 99; /* Ajustez le z-index pour empêcher le chevauchement avec le bouton */
+    position: fixed;
+    right: 0;
+    border-radius: 20px;
+}
+
+.menu > li {
+    margin: 0;
+    padding: 1rem;
+    overflow: hidden;
+    border-bottom: 1px solid #fff; /* Ajoutez une bordure entre les éléments du menu */
+    border-radius: 20px;
+}
+
+.menu-button-container {
+    height: 100%;
+    width: 30px;
     cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10%;
 }
 
-#menu {
-    display: none
+#menu-toggle {
+    display: none; /* Vous pouvez ajuster la visibilité de ce bouton si nécessaire */
 }
 
-#menu.active {
+.menu-button,
+.menu-button::before,
+.menu-button::after {
     display: block;
+    background-color: black;
+    position: absolute;
+    height: 4px;
+    width: 30px;
+    transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    border-radius: 2px;
+}
+
+.menu-button::before {
+    content: '';
+    margin-top: -8px;
+}
+
+.menu-button::after {
+    content: '';
+    margin-top: 8px;
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button::before {
+    margin-top: 0px;
+    transform: rotate(405deg);
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button {
+    background: rgba(255, 255, 255, 0);
+}
+
+#menu-toggle:checked + .menu-button-container .menu-button::after {
+    margin-top: 0px;
+    transform: rotate(-405deg);
+}
+
+#menu-toggle:checked ~ .menu {
+    display: flex; /* Afficher le menu mobile lorsque #menu-toggle est coché */
+}
+
+.main-container {
+    margin-top: 8vh;
+    margin-bottom: 8vh;
 }

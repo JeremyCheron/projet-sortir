@@ -52,7 +52,7 @@
 {#                            {{ city.name }}#}
 {#                        </option>#}
 {#                    {% endfor %}#}
-                </select>
+{#                </select>#}
             </div>
             <div class="my-4">
                 {{ form_label(form.place, 'Place' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
@@ -67,22 +67,22 @@
 
                 <label for="street" class="block text-gray-700 font-bold mb-2">{{ 'Street' | trans }}</label>
                 {# TODO : auto-remplissage #}
-                <p> Street </p>
+                <p id="place-street"> Street </p>
             </div>
             <div class="my-4">
                 <label for="zipCode" class="block text-gray-700 font-bold mb-2">{{ 'Zip Code' | trans }}</label>
                 {# TODO : auto-remplissage #}
-                <p> Zip Code </p>
+                <p id="place-zip"> Zip Code </p>
             </div>
             <div class="my-4">
                 <label for="latitude" class="block text-gray-700 font-bold mb-2">{{ 'Latitude' | trans }}</label>
                 {# TODO : auto-remplissage #}
-                <p> Latitude </p>
+                <p id="place-latitude"> Latitude </p>
             </div>
             <div class="my-4">
                 <label for="longitude" class="block text-gray-700 font-bold mb-2">{{ 'Longitude' | trans }}</label>
                 {# TODO : auto-remplissage #}
-                <p> Longitude </p>
+                <p id="place-longitude"> Longitude </p>
             </div>
         </div>
     </div>

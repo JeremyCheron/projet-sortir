@@ -18,9 +18,11 @@ use Composer\XdebugHandler\Status;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/event', name: 'event_')]
 class EventController extends AbstractController
@@ -30,13 +32,16 @@ class EventController extends AbstractController
     {
     }
     #[Route('', name: 'list')]
-    public function list(){
+    #[IsGranted('ROLE_USER')]
+    public function list(): RedirectResponse
+    {
 
        return $this->redirectToRoute('main_home');
 
     }
 
     #[Route('/add', name: 'add')]
+    #[IsGranted('ROLE_USER')]
     public function add(Request $request): Response
     {
         $user = $this->getUser();
@@ -56,6 +61,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'edit', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_USER')]
     public function edit(Request $request, Event $event): Response
     {
         $formOrSuccess = $this->eventService->updateEvent($request, $event);
@@ -74,6 +80,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}/subscribe', name:'subscribe', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function subscribe(Event $event):Response
     {
         $activeUser = $this->getUser();
@@ -88,6 +95,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}/unsubscribe', name:'unsubscribe', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function unsubscribe(Event $event):Response
     {
         $activeUser = $this->getUser();
@@ -101,6 +109,7 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}', name: 'details', methods:['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function showDetails(Event $event, CustomQueriesService $queriesService):Response{
         return $this->render('event/details.html.twig', [
             'event' => $queriesService->getOneEvent($event),
@@ -109,7 +118,15 @@ class EventController extends AbstractController
     }
 
 
-
+    #[Route('/{id}/cancel', name: 'cancel')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function cancel(Event $event, CustomQueriesService $queriesService): Response
+    {
+        $this->eventService->cancelEvent($event);
+        return $this->render('event/details.html.twig', [
+            'event' => $queriesService->getOneEvent($event)
+        ]);
+    }
 
 
 
