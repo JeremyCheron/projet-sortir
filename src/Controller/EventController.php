@@ -117,6 +117,15 @@ class EventController extends AbstractController
 
     }
 
+    #[Route('/{id}/publish', name: 'publish')]
+    #[IsGranted('ROLE_ADMIN')]
+    public function publish(Event $event, CustomQueriesService $queriesService): Response
+    {
+        $this->eventService->openEvent($event);
+        return $this->render('event/details.html.twig', [
+            'event' => $queriesService->getOneEvent($event)
+        ]);
+    }
 
     #[Route('/{id}/cancel', name: 'cancel')]
     #[IsGranted('ROLE_ADMIN')]
