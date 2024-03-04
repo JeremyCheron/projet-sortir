@@ -67,27 +67,15 @@ class UserController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function changePassword(Request $request, EntityManagerInterface $entityManager, UserService $userService): Response
     {
-
         $user = $this->getUser();
 
-        $passwordForm = $this->createForm(ChangePasswordType::class, $user);
-        $passwordForm->handleRequest($request);
-
-        if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
-            if ($user instanceof User)
-            {
-                $password = $passwordForm->getData()->getPassword();
-                $userService->hashNewPassword($user, $password);
-            }
-
-            //on affiche un message à l'utilisateur pour lui indiquer que l'entité a été ajouté
-            $this->addFlash('success', 'Your profile has been modified !');
-
-            //puis on redirige vers la page des idées
+        $formOrSuccess = $userService->modifyPassword($request, $user);
+        if ($formOrSuccess===true)
+        {
             return $this->redirectToRoute('user_modify_profile');
         }
 
-        return $this->render('user/changepassword.html.twig', ['user' => $user,'passwordForm' => $passwordForm->createView()]);
+        return $this->render('user/changepassword.html.twig', ['user' => $user,'passwordForm' => $formOrSuccess->createView()]);
     }
 
 }
