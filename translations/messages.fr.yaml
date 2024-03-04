@@ -141,7 +141,7 @@ Status: Statut
 Participation: Participe
 Event's planner: Organisateur
 Actions: Actions
-Edit: Modifier
+Edit: Éditer
 There are no events planned for now !: Aucune sortie prévue pour le moment !
 canceled : Annulée
 created : En attente de publication
@@ -150,6 +150,7 @@ ongoing : En cours
 closed : Inscriptions terminées
 finished : Finie
 archived : Archivée
+Publish : Publier
 
 #traduction manage_user/list.html.twig
 

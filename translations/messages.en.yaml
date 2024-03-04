@@ -150,6 +150,8 @@ ongoing : Ongoing
 closed : Closed
 finished : Finished
 archived : Archived
+Publish : Publier
+
 
 #manage_user/list.html.twig translation
 
