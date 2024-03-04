@@ -111,7 +111,7 @@
                 <p class="text-2xl font-bold text-red-600 mt-28"> ! {{ 'Too bad... Maximum attendants already reached' | trans  }}  ...  </p>
                 <p class="text-2xl font-bold text-red-600"> {{ 'but keep an eye on the event, someone could change their mind' | trans  }}</p>
 
-            {% elseif event.registrationDeadline > 'now' %}
+            {% elseif event.registrationDeadline < 'now' %}
                  <p class="text-2xl font-bold text-red-600 mt-28"> ! {{ 'Too late... Registrations are closed' | trans  }} !</p>
             {% endif %}
         </div>

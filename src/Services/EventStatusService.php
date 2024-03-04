@@ -21,4 +21,5 @@ class EventStatusService
         return $this->eventStatusRepository->findOneBy(['name'=>$name]);
     }
 
+
 }
