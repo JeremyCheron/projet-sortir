@@ -51,7 +51,7 @@ class PlaceController extends AbstractController
     }
 
     #[Route('/ByCity/{id}', name: 'app_place_by_city')]
-    public function placesByCity(Request $request, $id)
+    public function placesByCity(Request $request, $id): JsonResponse
     {
         $places = $this->placeRepository->findBy(['city' => $id]);
         $placesData = [];

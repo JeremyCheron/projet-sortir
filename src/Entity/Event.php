@@ -19,7 +19,7 @@ class Event
     private ?int $id = null;
 
     #[ORM\Column(length: 255, nullable: false)]
-    #[Assert\length(min:10, max:50, minMessage: 'The name of your event must be at least 10 characters long', maxMessage: 'the name of your event cannot be longer than 50 characters')]
+    #[Assert\Length(min:4, max:50, minMessage: 'The name of your event must be at least 4 characters long', maxMessage: 'the name of your event cannot be longer than 50 characters')]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -40,7 +40,7 @@ class Event
 
     #[ORM\Column(type: Types::TEXT, nullable: false)]
     #[Assert\NotNull()]
-    #[Assert\length(min:20, minMessage: 'The name of your event must be at least 10 characters long')]
+    #[Assert\Length(min:20, minMessage: 'Description must be at least 10 characters long')]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
