@@ -5,7 +5,7 @@
 </div>
 <div>
     {% if events|length != 0 %}
-        <div class="grid grid-cols-2 gap-4 md:hidden text-center">
+        <div class="grid grid-cols-2 gap-4 lg:hidden text-center">
             {% for event in events %}
                 {% if event.status.name !='canceled' or event.eventPlanner == app.user %}
                     {% if event.status.name !='created' or event.eventPlanner == app.user %}
@@ -86,7 +86,7 @@
                 {% endif %}
             {% endfor %}
         </div>
-    <table class="table-auto m-auto hidden md:block">
+    <table class="table-auto m-auto hidden lg:block">
         <thead class="bg-gray-100 ">
         <tr>
             <th class="border-collapse border border-black w-auto px-4 teal">{{ 'Event\'s name' | trans }}</th>
@@ -107,7 +107,7 @@
                         <tr class="h-20 md:h-12 text-center {{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }} {{ loop.index == events|length ? 'border-b border-black' :'' }}">
                             <td class="border-collapse border-x border-black"><a
                                         href="{{ path('event_details', {'id':event.id}) }}"
-                                        class="text-gray-900 hover:text-blue-500">{{ event.name }}</a></td>
+                                        class="text-gray-900 hover:text-blue-500 font-bold">{{ event.name }}</a></td>
                             <td class="border-collapse border-x border-black">{{ event.startDate |date('d/m/Y H:i') }}</td>
                             <td class="border-collapse border-x border-black">{{ event.registrationDeadline |date('d/m/Y') }}</td>
                             <td class="border-collapse border-x border-black">{{ event.attendants.count }}
