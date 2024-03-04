@@ -8,12 +8,12 @@
     <h1 class="text-center text-3xl font-bold text-gray-700">{{ 'My profile' | trans }}</h1>
 
 
-    <div class="grid md:grid-cols-3 w-1/2 mx-auto md:gap-16 justify-center place-content-evenly p-4">
+    <div class="flex flex-col justify-center items-center lg:grid md:grid-cols-3 lg:w-5/6 lg:mx-auto lg:gap-16 lg:justify-center lg:place-content-evenly p-4">
 
-        <div >
+        <div class="w-1/2 lg:w-full">
             <img src="{{ asset('imgs/pp/' ~ app.user.profilePic) }}" alt="{{ 'User image' | trans }}">
             <div class="my-4">
-                <div class="block text-gray-700 font-bold mb-2">{{ 'New Profile Picture' | trans }}:</div>
+                <div class="text-center lg:text-left block text-gray-700 font-bold mb-2">{{ 'New Profile Picture' | trans }}:</div>
                 <a href="{{ path('app_upload') }}">
                     <input type="button" class="btn bg-blue-500 hover:bg-blue-700 text-white
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="{{ 'Download' | trans }}">
@@ -21,24 +21,24 @@
             </div>
         </div>
 
-        <div>
+        <div class="w-5/6">
             <div class="my-4">
-                {{ form_label(userForm.nickname, 'Nickname' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                {{ form_widget(userForm.nickname, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                {{ form_label(userForm.nickname, 'Nickname' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(userForm.nickname, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.nickname) }}
 
             </div>
 
             <div class="my-4">
-                {{ form_label(userForm.firstname, 'First Name' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                {{ form_widget(userForm.firstname, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                {{ form_label(userForm.firstname, 'First Name' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(userForm.firstname, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.firstname) }}
 
             </div>
 
             <div class="my-4">
-                {{ form_label(userForm.lastname, 'First Name' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                {{ form_widget(userForm.lastname, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                {{ form_label(userForm.lastname, 'Last Name' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(userForm.lastname, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.lastname) }}
 
             </div>
@@ -47,23 +47,23 @@
 
 
 
-        <div>
+        <div class="w-5/6">
 
             <div class="my-4">
-                {{ form_label(userForm.email, 'Mail' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                {{ form_widget(userForm.email, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                {{ form_label(userForm.email, 'Mail' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(userForm.email, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.email) }}
 
             </div>
 
             <div class="my-4">
-                {{ form_label(userForm.phoneNumber, 'Phone Number' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
-                {{ form_widget(userForm.phoneNumber, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
+                {{ form_label(userForm.phoneNumber, 'Phone Number' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_widget(userForm.phoneNumber, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.phoneNumber) }}
 
             </div>
 
-            <div  class="my-4">
+            <div  class="my-4 w-full">
                 <a href="{{ path('user_change_password') }}">
                     <input type="button" class="btn bg-blue-500 hover:bg-blue-700 text-white mt-8
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="{{ 'Change your password' | trans  }}">
@@ -76,15 +76,15 @@
 
 
     <div class="md:flex text-center justify-center items-center mx-auto my-1 w-full">
-        <div class="w-1/5 px-3">
-            <button type="submit" class="btn bg-green-600 hover:bg-green-700 text-white my-2
+        <div class="w-full  lg:w-1/4 px-5">
+            <button type="submit" class="w-full btn bg-green-600 hover:bg-green-700 text-white my-2
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 {{ 'Submit' | trans  }}
             </button>
         </div>
-        <div class="w-1/5 px-3">
+        <div class="w-full lg:w-1/4 px-5">
             <a href="{{  path('user_details', {'id':user.id})  }}">
-                <input type="button" class="btn bg-red-700 hover:bg-red-800 text-white my-2
+                <input type="button" class="w-full btn bg-red-700 hover:bg-red-800 text-white my-2
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" value="{{ 'Cancel' | trans  }}">
             </a>
         </div>

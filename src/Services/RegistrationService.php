@@ -39,46 +39,44 @@ class RegistrationService
         $form = $this->formFactory->create(RegistrationAdminFormType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() &&$form->isValid() )
+        {
 
             $user->setActive(true);
             $nickname = $user->getFirstname();
-            $nickname = $nickname . $user->getLastname();
+            $nickname = $nickname . "@" . strtoupper($user->getLastname());
+            $nickname = $nickname . rand(100, 999);
 
-            //le password est le prenomnom (hashé dans la base de données)
+            //le password et le pseudo unique et le prenomNOM suivi d'un nombre à 3 chiffres aléatoire
 
             $hashedPassword = $this->passwordHasher->hashPassword($user, $nickname);
             $user->setPassword($hashedPassword);
-            $nickname = $nickname . rand(100, 999);
-
-            //le pseudo unique et le prenomnom suivi d'un nombre à 3 chiffres aléatoire
-
             $user->setNickname($nickname);
             $user->setProfilePic('default_user.png');
 
             $this->em->persist($user);
             $this->em->flush();
 
-            //todo: envoyer mail au nouvel inscrit avec les infos de connexion
 
             $email = (new TemplatedEmail())
                 ->from(new Address('admin@sortir.com', 'Sortir'))
                 ->to($user->getEmail())
                 ->subject($this->translator->trans('Your new account on Sortir.com'))
                 ->htmlTemplate('admin/new_user_email.html.twig')
-                ->context(['user'=>$user, 'url'=>$this->router->generate('app_login',[],UrlGeneratorInterface::ABSOLUTE_URL)])
-                ;
+                ->context(['nickname'=>$nickname,'user'=>$user, 'url'=>$this->router->generate('app_login',[],UrlGeneratorInterface::ABSOLUTE_URL)])
+            ;
 
-            try {
+            try
+            {
                 $this->mailer->send($email);
-            } catch (TransportExceptionInterface $e) {
             }
+            catch (TransportExceptionInterface $e)
+            {}
 
             return true;
+
         }
-
         return $form;
-
     }
 
     /**
