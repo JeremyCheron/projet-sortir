@@ -141,4 +141,34 @@ class EventService
 
     }
 
+    public function updateEvents(): void
+    {
+        $events = $this->getAllEvents();
+        $now = new DateTime();
+        $archiveDate = new DateTime();
+        $archiveDate->modify('+1 month');
+
+        foreach ($events as $event) {
+            $endDate = $event->getStartDate();
+            $endDate->modify('+'.$event->getDuration().' minute');
+            if ($event->getStatus() == 'open') {
+
+                if ($event->getStartDate() <= $now && $now <= $endDate) {
+
+                    $event->setStatus($this->eventStatusService->getStatusByName('ongoing'));
+
+                } else {
+                    if ($event->getRegistrationDeadline() <= $now && $event->getStartDate() >= $now) {
+                        $event->setStatus($this->eventStatusService->getStatusByName('closed'));
+                    }
+                }
+            }
+            elseif ($event->getStatus() == 'ongoing' && $endDate <= $now) {
+                $event->setStatus($this->eventStatusService->getStatusByName('finished'));
+            } elseif ($event->getStatus() == 'finished' && $archiveDate <= $now) {
+                $event->setStatus($this->eventStatusService->getStatusByName('archived'));
+            }
+        }
+    }
+
 }

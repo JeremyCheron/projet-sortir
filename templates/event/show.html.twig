@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-2xl md:text-4xl text-center mx-auto my-4">{{ event.name }}</h1>
+    <div>
+        <p class="italic text-center mx-auto my-4">{{ event.description }}</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 w-3/4 mx-auto gap-4">
+
+        <div>
+
+            <div>
+                <p class="block text-gray-700 font-bold mb-2">Start date : </p>
+                <p class="w-full text-center">{{ event.startDate | date('d/m/y H:i') }}</p>
+            </div>
+
+            <div>
+                <p class="block text-gray-700 font-bold mb-2">Duration : </p>
+                <p class="w-full text-center">{{ event.duration }} minutes</p>
+            </div>
+
+            <div>
+                <p class="block text-gray-700 font-bold mb-2">Deadline : </p>
+                <p class="w-full text-center">{{ event.registrationDeadline | date('d/m/y H:i') }}</p>
+            </div>
+
+        </div>
+        <div>
+
+            <div>
+                <p class="block text-gray-700 font-bold mb-2">Planned by : </p>
+                <p class="w-full text-center">
+                    {{ event.eventPlanner.nickname }}
+                    <br>
+                    from {{ event.campus.name }}'s Campus
+                </p>
+            </div>
+
+            <div>
+                <p class="block text-gray-700 font-bold mb-2">Place : </p>
+                <p class="w-full text-center">{{ event.place.name }}</p>
+            </div>
+
+            <div>
+                <p class="block text-gray-700 font-bold mb-2">Adress : </p>
+                <p class="w-full text-center">
+                    {{ event.place.street }}
+                    <br>
+                    {{ event.place.city.zipCode }} - {{ event.place.city.name }}
+                </p>
+            </div>
+
+
+        </div>
+        <div class="md:col-span-2">
+            {% if (event.attendants.count == 0) %}
+                <p> {{ 'There are no attendants registrated for that event' | trans }} </p>
+            {% else %}
+                <h3 class="block text-gray-700 font-bold mb-2 text-center md:text-left">
+                    {{ 'Attendants' | trans }} - {{ event.attendants.count }} / {{ event.maxRegistrations }}
+                </h3>
+                {% for attendant in event.attendants %}
+                <div class="container flex-col items-center justify-center relative border rounded-lg border-gray-400 shadow-lg shadow-teal-950/30 my-1 py-1">
+                    <a href="{{ path('user_details', {'id': attendant.id}) }}" class=" flex items-center justify-evenly">
+                        <img src="{{ asset('imgs/pp/' ~ attendant.profilePic) }}" alt="" width="50px" height="50px">
+                        <div class="flex-col items-center justify-center text-center">
+                            <h4>{{ attendant.nickname }}</h4>
+                            <p>{{ attendant.firstname }} {{ attendant.lastname }}</p>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

@@ -108,6 +108,15 @@ class EventController extends AbstractController
         ]);
     }
 
+    #[Route('/{id}/show', name: 'show', methods:['GET'])]
+    #[IsGranted('ROLE_USER')]
+    public function show(Event $event, CustomQueriesService $queriesService):Response{
+        return $this->render('event/show.html.twig', [
+            'event' => $queriesService->getOneEvent($event),
+        ]);
+
+    }
+
     #[Route('/{id}', name: 'details', methods:['GET'])]
     #[IsGranted('ROLE_USER')]
     public function showDetails(Event $event, CustomQueriesService $queriesService):Response{
