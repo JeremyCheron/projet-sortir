@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}{{'Log in!' | trans}}{% endblock %}
 
 {% block body %}
     <div class="flex flex-col items-center justify-center my-8">
@@ -11,23 +11,23 @@
 
             {% if app.user %}
                 <div class="mb-3">
-                    You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+                    {{ 'You are logged in as' | trans }} {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">{{ 'Logout' | trans }}</a>
                 </div>
             {% endif %}
 
-            <h2 class="font-bold text-2xl">Please sign in</h2>
+            <h2 class="font-bold text-2xl">{{ 'Please sign in' | trans }}</h2>
             <div class="my-4">
-                <label for="inputEmail" class="block text-gray-700 font-bold mb-2">Email</label>
+                <label for="inputEmail" class="block text-gray-700 font-bold mb-2">{{ 'Email' | trans }}</label>
                 <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control form-input w-full rounded-md shadow-sm" autocomplete="email" required autofocus>
             </div>
             <div class="my-4">
-                <label for="inputPassword" class="block text-gray-700 font-bold mb-2">Password</label>
+                <label for="inputPassword" class="block text-gray-700 font-bold mb-2">{{ 'Password' | trans }}</label>
                 <input type="password" name="password" id="inputPassword" class="form-control form-input w-full rounded-md shadow-sm" autocomplete="current-password" required>
             </div>
             <div class="my-4">
                 <label>
                     <input type="checkbox" name="_remember_me" checked>
-                    Keep me logged in
+                    {{ 'Keep me logged in' | trans }}
                 </label>
             </div>
             <input type="hidden" name="_csrf_token"
@@ -36,11 +36,11 @@
 
             <button class="btn bg-blue-500 hover:bg-blue-700 text-white
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" type="submit">
-                Sign in
+                {{ 'Sign in' | trans }}
             </button>
         </form>
         <div class="my-4">
-            <a href="{{ path('app_forgot_password_request') }}">Forgot password ?</a>
+            <a href="{{ path('app_forgot_password_request') }}">{{ 'Forgot password ?' | trans }}</a>
         </div>
     </div>
 {% endblock %}
