@@ -5,17 +5,22 @@
 </div>
 <div>
     {% if events|length != 0 %}
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-center">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-center w-full">
             {% for event in events %}
                 {% if event.status.name !='canceled' or event.eventPlanner == app.user %}
                     {% if event.status.name !='created' or event.eventPlanner == app.user %}
                         {% if event.status.name !='archived' %}
                             <div class="container relative border rounded-lg border-gray-400 shadow-lg shadow-teal-950/30 place-content-between
+                                {% if event.status.name == 'canceled' and event.eventPlanner == app.user %}
+                                    bg-red-400/15
+                                {% endif %}
                                 {% for attendant in event.attendants %}
-                                    {{ attendant.id == app.user.id ? 'bg-green-400/15' : '' }}
+                                    {% if attendant.id == app.user.id %}
+                                        bg-green-400/15
+                                    {%  endif %}
                                 {% endfor %}">
                                 <a href="{{ path('event_details', {'id':event.id}) }}">
-                                    <h2 class="text-xl text-blue-950 font-bold italic hover:text-blue-500 py-2 card-title"> {{ event.name |capitalize }} </h2>
+                                    <h2 class="text-xl text-blue-950 font-bold italic hover:text-blue-500 py-2 card-title"> {{ event.name | capitalize }} </h2>
                                 </a>
                                 <div class="hidden lg:block p-1">
                                     <i class="fa-solid fa-location-dot perso-teal"></i>
@@ -35,51 +40,58 @@
                                 <div class="p-1"><i class="fa-solid fa-user-group perso-teal"></i> {{ event.attendants.count }} / {{ event.maxRegistrations  }}</div>
                                 <div class="font-semibold p-1">
                                     {% if event.status.name == 'open' %}
-                                        <i class="fa-solid fa-lock-open perso-teal"></i>  {{ event.status.name }}
+                                        <i class="fa-solid fa-lock-open perso-teal"></i> {{ event.status.name | trans }}
+                                    {% elseif event.status.name == 'closed'%}
+                                        <i class="fa-solid fa-lock perso-teal"></i> {{ event.status.name | trans }}
                                     {% elseif event.status.name == 'created' %}
-                                        <i class="fa-solid fa-spinner perso-teal"></i>  {{ event.status.name }}
+                                        <i class="fa-solid fa-spinner perso-teal"></i> {{ event.status.name | trans }}
+                                    {% elseif event.status.name == 'canceled'%}
+                                         <p class ="text-red-600"> {{ event.status.name | trans | upper }} </p>
+                                         <p class ="text-red-600"> {{ event.cancelJustification }}</p>
+                                    {% elseif event.status.name == 'finished'%}
+                                        <i class="fa-solid fa-flag-checkered perso-teal"></i> {{ event.status.name | trans }}
                                     {% endif %}
                                 </div>
                                 <div class="text-wrap p-1 mb-12"><i class="fa-solid fa-quote-left fa-flip-vertical perso-teal"></i> {{ event.description }} <i class="fa-solid fa-quote-left fa-rotate-180 perso-teal"></i> </div>
                                 <div class="flex items-center w-full justify-evenly p-2 card-buttons">
                                     {% if event | display_show_button (app.user) %}
                                         <div class="font-bold text-center px-2 hover:text-blue-500">
-                                            <a href="{{ path('event_details', {'id':event.id}) }}" title="Show event details">
+                                            <a href="{{ path('event_details', {'id':event.id}) }}" title="{{ 'Show event details' | trans }}">
                                                 <i class="fa-solid fa-eye perso-teal"></i></a>
                                         </div>
                                     {% endif %}
 
                                     {% if event | display_edit_publish_buttons(app.user) %}
                                         <div class="font-bold text-center px-2 hover:text-blue-500">
-                                            <a href="{{ path('event_edit', {'id':event.id}) }}" title="Edit the event">
+                                            <a href="{{ path('event_edit', {'id':event.id}) }}" title="{{ 'Edit the event' | trans }}">
                                                 <i class="fa-solid fa-pen-to-square perso-teal"></i></a>
                                         </div>
                                         {% endif %}
 
                                         {% if event | display_cancel_button(app.user) %}
                                             <div class="font-bold text-center px-2 hover:text-blue-500">
-                                                <a href="{{ path('event_cancel', {'id':event.id}) }}" title="Cancel the event">
+                                                <a href="{{ path('event_cancel', {'id':event.id}) }}" title="{{ 'Cancel the event' | trans }}">
                                                     <i class="fa-solid fa-ban perso-teal"></i></a>
                                             </div>
                                         {% endif %}
 
                                     {% if event | display_edit_publish_buttons(app.user) %}
                                         <div class="font-bold text-center px-2">
-                                            <a href="{{ path('event_publish', {'id':event.id}) }}" title="Publish the event">
+                                            <a href="{{ path('event_publish', {'id':event.id}) }}" title="{{ 'Publish the event' | trans }}">
                                                 <i class="fa-solid fa-share perso-teal"></i></a>
                                         </div>
                                     {% endif %}
 
                                     {% if event | display_unsub_button(app.user) %}
                                         <div class="font-bold text-center px-2 hover:text-blue-500">
-                                            <a href="{{ path('event_unsubscribe', {'id':event.id}) }}" title="Unsubscribe the event">
+                                            <a href="{{ path('event_unsubscribe', {'id':event.id}) }}" title="{{ 'Unsubscribe the event' | trans }}">
                                                 <i class="fa-solid fa-user-minus perso-teal"></i></a>
                                         </div>
                                     {% endif %}
 
                                     {% if event | display_sub_button(app.user) %}
                                         <div class="font-bold text-center px-2 hover:text-blue-500">
-                                            <a href="{{ path('event_subscribe', {'id':event.id}) }}" title="Subscribe the event">
+                                            <a href="{{ path('event_subscribe', {'id':event.id}) }}" title="{{ 'Subscribe the event' | trans }}">
                                                 <i class="fa-solid fa-user-plus perso-teal"></i></a>
                                         </div>
                                     {% endif %}
