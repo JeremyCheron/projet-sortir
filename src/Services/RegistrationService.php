@@ -23,7 +23,6 @@ class RegistrationService
 {
     public function __construct(private EntityManagerInterface $em,
                                 private FormFactoryInterface $formFactory,
-                                private UserRepository $userRepository,
                                 private UserPasswordHasherInterface $passwordHasher,
                                 private MailerInterface $mailer,
                                 private TranslatorInterface $translator,
