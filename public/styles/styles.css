@@ -130,6 +130,7 @@ header {
     margin-bottom: 8vh;
 }
 
-.teal {
-    color: #0a6b58;
+.card-buttons {
+    position: absolute;
+    bottom: 0;
 }

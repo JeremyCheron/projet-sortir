@@ -10,11 +10,13 @@
                 {% if event.status.name !='canceled' or event.eventPlanner == app.user %}
                     {% if event.status.name !='created' or event.eventPlanner == app.user %}
                         {% if event.status.name !='archived' %}
-                            <article class="border rounded-lg border-gray-400 shadow-lg shadow-teal-950/30 p-4
+                            <div class="container relative border rounded-lg border-gray-400 shadow-lg shadow-teal-950/30 place-content-between
                                 {% for attendant in event.attendants %}
-                                {{ attendant.id == app.user.id ? 'bg-green-400/15' : '' }}
+                                    {{ attendant.id == app.user.id ? 'bg-green-400/15' : '' }}
                                 {% endfor %}">
-                                <a href="{{ path('event_details', {'id':event.id}) }}"> <h2 class="text-xl text-blue-950 font-bold hover:text-blue-500 py-2"> {{ event.name }} </h2>  </a>
+                                <a href="{{ path('event_details', {'id':event.id}) }}">
+                                    <h2 class="text-xl text-blue-950 font-bold hover:text-blue-500 py-2"> {{ event.name }} </h2>
+                                </a>
                                 <div class="p-1"><i class="fa-solid fa-person teal"></i>
                                     <a href="{{ path('user_details', {'id':event.eventPlanner.id}) }}" class="hover:text-blue-500">
                                         {{ event.eventPlanner.firstname |capitalize }} {{ event.eventPlanner.lastname | split('')[0] |upper }}
@@ -25,13 +27,12 @@
                                 <div class="p-1"><i class="fa-solid fa-hourglass-end teal" ></i> {{ event.registrationDeadline | date('d/m/y H:i') }}</div>
                                 <div class="p-1"><i class="fa-solid fa-user-group teal"></i> {{ event.attendants.count }} / {{ event.maxRegistrations  }}</div>
                                 <div class="italic p-1"><i class="fa-solid fa-spinner teal"></i>  {{ event.status.name }} </div>
-                                <div class="text-wrap p-1 pb-2"><i class="fa-solid fa-quote-left fa-flip-vertical teal"></i> {{ event.description }} <i class="fa-solid fa-quote-left fa-rotate-180 teal"></i> </div>
-                                <hr class="flex text-center w-full p-1 border-gray-900"  >
-                                <div class="items-center flex w-full justify-around">
+                                <div class="text-wrap p-1 mb-8"><i class="fa-solid fa-quote-left fa-flip-vertical teal"></i> {{ event.description }} <i class="fa-solid fa-quote-left fa-rotate-180 teal"></i> </div>
+                                <div class="flex items-center w-full justify-evenly p-2 card-buttons">
                                     {% if event | display_show_button (app.user) %}
                                         <div class="font-bold text-center px-2 hover:text-blue-500">
                                             <a href="{{ path('event_details', {'id':event.id}) }}">
-                                                <i class="fa-solid fa-eye teal"></i></a>
+                                                <i class="fa-solid fa-eye gray-900"></i></a>
 {#                                            <br>#}
 {#                                            {{ 'Show' | trans }}#}
                                         </div>
@@ -40,14 +41,14 @@
                                     {% if event | display_edit_publish_buttons(app.user) %}
                                         <div class="font-bold text-center px-2 hover:text-blue-500">
                                             <a href="{{ path('event_edit', {'id':event.id}) }}">
-                                                <i class="fa-solid fa-pen-to-square teal"></i></a>
+                                                <i class="fa-solid fa-pen-to-square gray-900"></i></a>
 {#                                            <br>#}
 {#                                            {{ 'Edit' | trans }}#}
                                         </div>
 
                                         <div class="font-bold text-center px-2">
                                             <a href="{{ path('event_publish', {'id':event.id}) }}">
-                                                <i class="fa-solid fa-share teal"></i></a>
+                                                <i class="fa-solid fa-share gray-900"></i></a>
 {#                                            <br>#}
 {#                                            {{ 'Publish' | trans }}#}
                                         </div>
@@ -56,7 +57,7 @@
                                     {% if event | display_cancel_button(app.user) %}
                                         <div class="font-bold text-center px-2 hover:text-blue-500">
                                             <a href="{{ path('event_cancel', {'id':event.id}) }}">
-                                                <i class="fa-solid fa-ban teal"></i></a>
+                                                <i class="fa-solid fa-ban gray-900"></i></a>
 {#                                            <br>#}
 {#                                            {{ 'Cancel' | trans }}#}
                                         </div>
@@ -65,7 +66,7 @@
                                     {% if event | display_unsub_button(app.user) %}
                                         <div class="font-bold text-center px-2 hover:text-blue-500">
                                             <a href="{{ path('event_unsubscribe', {'id':event.id}) }}">
-                                                <i class="fa-solid fa-user-minus teal"></i></a>
+                                                <i class="fa-solid fa-user-minus gray-900"></i></a>
 {#                                            <br>#}
 {#                                            {{ 'Unsubscribe' | trans }}#}
                                         </div>
@@ -74,13 +75,13 @@
                                     {% if event | display_sub_button(app.user) %}
                                         <div class="font-bold text-center px-2 hover:text-blue-500">
                                             <a href="{{ path('event_subscribe', {'id':event.id}) }}">
-                                                <i class="fa-solid fa-user-plus teal"></i></a>
+                                                <i class="fa-solid fa-user-plus gray-900"></i></a>
 {#                                            <br>#}
 {#                                            {{ 'Subscribe' | trans }}#}
                                         </div>
                                     {% endif %}
                                 </div>
-                            </article>
+                            </div>
                         {% endif %}
                     {% endif %}
                 {% endif %}
@@ -133,52 +134,52 @@
                                 <div class="items-center flex w-full justify-around">
 
                                     {% if event | display_show_button (app.user) %}
-                                        <div class="font-bold text-center px-2 hover:text-blue-500 teal">
+                                        <div class="text-sm text-center px-2 hover:text-blue-500">
                                             <a href="{{ path('event_details', {'id':event.id}) }}">
-                                                <i class="fa-solid fa-eye teal"></i></a>
+                                                <i class="fa-solid fa-eye "></i></a>
                                             <br>
                                             {{ 'Show' | trans }}
                                         </div>
                                     {% endif %}
 
                                     {% if event | display_edit_publish_buttons(app.user) %}
-                                        <div class="font-bold text-center px-2 hover:text-blue-500 teal">
+                                        <div class="text-sm text-center px-2 hover:text-blue-500">
                                             <a href="{{ path('event_edit', {'id':event.id}) }}">
-                                                <i class="fa-solid fa-pen-to-square teal"></i></a>
+                                                <i class="fa-solid fa-pen-to-square "></i></a>
                                             <br>
                                             {{ 'Edit' | trans }}
                                         </div>
 
-                                        <div class="font-bold text-center px-2 teal">
+                                        <div class="text-sm text-center px-2hover:text-blue-500">
                                             <a href="{{ path('event_publish', {'id':event.id}) }}">
-                                                <i class="fa-solid fa-share teal"></i></a>
+                                                <i class="fa-solid fa-share "></i></a>
                                             <br>
                                             {{ 'Publish' | trans }}
                                         </div>
                                     {% endif %}
 
                                     {% if event | display_cancel_button(app.user) %}
-                                        <div class="font-bold text-center px-2 hover:text-blue-500 teal">
+                                        <div class="text-sm text-center px-2 hover:text-blue-500">
                                             <a href="{{ path('event_cancel', {'id':event.id}) }}">
-                                                <i class="fa-solid fa-ban teal"></i></a>
+                                                <i class="fa-solid fa-ban "></i></a>
                                             <br>
                                             {{ 'Cancel' | trans }}
                                         </div>
                                     {% endif %}
 
                                     {% if event | display_unsub_button(app.user) %}
-                                        <div class="font-bold text-center px-2 hover:text-blue-500 teal">
+                                        <div class="text-sm text-center px-2 hover:text-blue-500">
                                             <a href="{{ path('event_unsubscribe', {'id':event.id}) }}">
-                                                <i class="fa-solid fa-user-minus teal"></i></a>
+                                                <i class="fa-solid fa-user-minus "></i></a>
                                             <br>
                                             {{ 'Unsubscribe' | trans }}
                                         </div>
                                     {% endif %}
 
                                     {% if event | display_sub_button(app.user) %}
-                                        <div class="font-bold text-center px-2 hover:text-blue-500 teal">
+                                        <div class="text-sm text-center px-2 hover:text-blue-500">
                                             <a href="{{ path('event_subscribe', {'id':event.id}) }}">
-                                                <i class="fa-solid fa-user-plus teal"></i></a>
+                                                <i class="fa-solid fa-user-plus  "></i></a>
                                             <br>
                                             {{ 'Subscribe' | trans }}
                                         </div>
