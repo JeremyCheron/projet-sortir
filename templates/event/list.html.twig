@@ -1,123 +1,203 @@
 {% block body %}
-    <div class="flex items-center justify-center my-8">
-        <a href="{{ path('event_add') }}"><input type="button" value="{{ 'Create an event' | trans }}"
+<div class="flex items-center justify-center my-8">
+    <a href="{{ path('event_add') }}"><input type="button" value="{{ 'Create an event' | trans }}"
                                              class="border-blue-500 bg-blue-500 text-white rounded-lg p-4 mx-10 font-bold text-xl"></a>
-    </div>
-    <div>
-        {% if events|length != 0 %}
-            <table class="table-auto border border-gray-200 m-auto">
-                <thead class="bg-gray-100 ">
-                <tr>
-                    <th class="border-collapse border border-black w-auto px-8">{{ 'Event\'s name' | trans }}</th>
-                    <th class="border-collapse border border-black w-auto px-8">{{ 'Event\'s date' | trans }}</th>
-                    <th class="border-collapse border border-black w-auto px-8">{{ 'Registration deadline' | trans }}</th>
-                    <th class="border-collapse border border-black w-auto px-8">{{ 'Attendants' | trans }}</th>
-                    <th class="border-collapse border border-black w-auto px-8">{{ 'Status' | trans }}</th>
-                    <th class="border-collapse border border-black w-auto px-8">{{ 'Participation' | trans }}</th>
-                    <th class="border-collapse border border-black w-auto px-8">{{ 'Event\'s planner' | trans }}</th>
-                    <th class="border-collapse border border-black w-auto px-8">{{ 'Actions' | trans }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for event in events %}
-                    {% if event.status.name !='canceled' or event.eventPlanner == app.user %}
-                        {% if event.status.name !='created' or event.eventPlanner == app.user %}
-                            {% if event.status.name !='archived' %}
-                                <tr class="h-20 md:h-12 text-center {{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }} {{ loop.index == events|length ? 'border-b border-black' :''  }}">
-                                    <td class="border-collapse border-x border-black"><a
-                                                href="{{ path('event_details', {'id':event.id}) }}"
-                                                class="hover:text-blue-500">{{ event.name }}</a></td>
-                                    <td class="border-collapse border-x border-black">{{ event.startDate |date('d/m/Y') }}</td>
-                                    <td class="border-collapse border-x border-black">{{ event.registrationDeadline |date('d/m/Y') }}</td>
-                                    <td class="border-collapse border-x border-black">{{ event.attendants.count }}
-                                        /{{ event.maxRegistrations }}</td>
-                                    <td class="border-collapse border-x border-black">{{ event.status.name }}</td>
-                                    <td class="border-collapse border-x border-black">
-                                        {% for attendant in event.attendants %}
-                                            {{ (attendant.id == app.user.id) ? '<i class="fa-solid fa-circle-check"></i>' : '' }}
-                                        {% endfor %}
-
-                                    </td>
-
-                                    <td class="border-collapse border-x border-black">
-                                        <a href="{{ path('user_details', {'id':event.eventPlanner.id}) }}"
-                                           class="hover:text-blue-500">
-                                            {{ event.eventPlanner.firstname |capitalize }} {{ event.eventPlanner.lastname | split('')[0] |upper }}
-                                            .
-                                        </a>
-                                    </td>
-
-                                    {# colonne action #}
-                                    <td class="border-collapse border-black border-r flex items-center text-center">
-                                        <div class="items-center flex w-full justify-evenly">
-
-                                        {# Event with status ongoing, finished or user is eventPlanner and event is canceled #}
-                                        {% if event | display_show_button (app.user) %}
-                                            <div class="font-bold text-center px-2 hover:text-blue-500">
-                                                <a href="{{ path('event_details', {'id':event.id}) }}">
-                                                    <i class="fa-solid fa-eye"></i></a>
-                                                <br>
-                                                {{ 'Show' | trans }}
-                                            </div>
-                                        {% endif %}
-
-                                        {% if event | display_edit_publish_buttons(app.user)%}
-                                            <div class="font-bold text-center px-2 hover:text-blue-500">
-                                                <a href="{{ path('event_edit', {'id':event.id}) }}">
-                                                    <i class="fa-solid fa-pen-to-square"></i></a>
-                                                <br>
-                                                {{ 'Edit' | trans }}
-                                            </div>
-
-                                            <div class="font-bold text-center px-2">
-                                                <a href="{{ path('event_publish', {'id':event.id}) }}">
-                                                    <i class="fa-solid fa-share"></i></a>
-                                                <br>
-                                                {{ 'Publish' | trans }}
-                                            </div>
-                                        {% endif%}
-
-                                        {% if event | display_cancel_button(app.user) %}
-                                            <div class="font-bold text-center px-2 hover:text-blue-500">
-                                                <a href="{{ path('event_cancel', {'id':event.id}) }}">
-                                                    <i class="fa-solid fa-ban"></i></a>
-                                                <br>
-                                                {{ 'Cancel' | trans }}
-                                            </div>
-                                        {% endif %}
-
-                                        {% if event | display_unsub_button(app.user)  %}
-                                            <div class="font-bold text-center px-2 hover:text-blue-500">
-                                                <a href="{{ path('event_unsubscribe', {'id':event.id}) }}">
-                                                    <i class="fa-solid fa-user-minus"></i></a>
-                                                <br>
-                                                {{ 'Unsubscribe' | trans }}
-                                            </div>
-                                        {% endif %}
-
-                                        {% if event | display_sub_button(app.user)  %}
-                                            <div class="font-bold text-center px-2 hover:text-blue-500">
-                                                <a href="{{ path('event_subscribe', {'id':event.id}) }}">
-                                                    <i class="fa-solid fa-user-plus"></i></a>
-                                                <br>
-                                                {{ 'Subscribe' | trans }}
-                                            </div>
-                                        {% endif %}
+</div>
+<div>
+    {% if events|length != 0 %}
+        <div class="grid grid-cols-2 gap-4 lg:hidden text-center">
+            {% for event in events %}
+                {% if event.status.name !='canceled' or event.eventPlanner == app.user %}
+                    {% if event.status.name !='created' or event.eventPlanner == app.user %}
+                        {% if event.status.name !='archived' %}
+                            <div class="container relative border rounded-lg border-gray-400 shadow-lg shadow-teal-950/30 place-content-between
+                                {% for attendant in event.attendants %}
+                                    {{ attendant.id == app.user.id ? 'bg-green-400/15' : '' }}
+                                {% endfor %}">
+                                <a href="{{ path('event_details', {'id':event.id}) }}">
+                                    <h2 class="text-xl text-blue-950 font-bold hover:text-blue-500 py-2"> {{ event.name }} </h2>
+                                </a>
+                                <div class="p-1"><i class="fa-solid fa-person teal"></i>
+                                    <a href="{{ path('user_details', {'id':event.eventPlanner.id}) }}" class="hover:text-blue-500">
+                                        {{ event.eventPlanner.firstname |capitalize }} {{ event.eventPlanner.lastname | split('')[0] |upper }}
+                                        .
+                                    </a>
+                                </div>
+                                <div class="p-1"><i class="fa-solid fa-calendar-days teal"></i> {{ event.startDate | date('d/m/y H:i') }}</div>
+                                <div class="p-1"><i class="fa-solid fa-hourglass-end teal" ></i> {{ event.registrationDeadline | date('d/m/y H:i') }}</div>
+                                <div class="p-1"><i class="fa-solid fa-user-group teal"></i> {{ event.attendants.count }} / {{ event.maxRegistrations  }}</div>
+                                <div class="italic p-1"><i class="fa-solid fa-spinner teal"></i>  {{ event.status.name }} </div>
+                                <div class="text-wrap p-1 mb-8"><i class="fa-solid fa-quote-left fa-flip-vertical teal"></i> {{ event.description }} <i class="fa-solid fa-quote-left fa-rotate-180 teal"></i> </div>
+                                <div class="flex items-center w-full justify-evenly p-2 card-buttons">
+                                    {% if event | display_show_button (app.user) %}
+                                        <div class="font-bold text-center px-2 hover:text-blue-500">
+                                            <a href="{{ path('event_details', {'id':event.id}) }}">
+                                                <i class="fa-solid fa-eye gray-900"></i></a>
+{#                                            <br>#}
+{#                                            {{ 'Show' | trans }}#}
                                         </div>
-                                    </td>
-                                </tr>
-                            {% endif %}
+                                    {% endif %}
+
+                                    {% if event | display_edit_publish_buttons(app.user) %}
+                                        <div class="font-bold text-center px-2 hover:text-blue-500">
+                                            <a href="{{ path('event_edit', {'id':event.id}) }}">
+                                                <i class="fa-solid fa-pen-to-square gray-900"></i></a>
+{#                                            <br>#}
+{#                                            {{ 'Edit' | trans }}#}
+                                        </div>
+
+                                        <div class="font-bold text-center px-2">
+                                            <a href="{{ path('event_publish', {'id':event.id}) }}">
+                                                <i class="fa-solid fa-share gray-900"></i></a>
+{#                                            <br>#}
+{#                                            {{ 'Publish' | trans }}#}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if event | display_cancel_button(app.user) %}
+                                        <div class="font-bold text-center px-2 hover:text-blue-500">
+                                            <a href="{{ path('event_cancel', {'id':event.id}) }}">
+                                                <i class="fa-solid fa-ban gray-900"></i></a>
+{#                                            <br>#}
+{#                                            {{ 'Cancel' | trans }}#}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if event | display_unsub_button(app.user) %}
+                                        <div class="font-bold text-center px-2 hover:text-blue-500">
+                                            <a href="{{ path('event_unsubscribe', {'id':event.id}) }}">
+                                                <i class="fa-solid fa-user-minus gray-900"></i></a>
+{#                                            <br>#}
+{#                                            {{ 'Unsubscribe' | trans }}#}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if event | display_sub_button(app.user) %}
+                                        <div class="font-bold text-center px-2 hover:text-blue-500">
+                                            <a href="{{ path('event_subscribe', {'id':event.id}) }}">
+                                                <i class="fa-solid fa-user-plus gray-900"></i></a>
+{#                                            <br>#}
+{#                                            {{ 'Subscribe' | trans }}#}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
                         {% endif %}
                     {% endif %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    <table class="table-auto m-auto hidden lg:block">
+        <thead class="bg-gray-100 ">
+        <tr>
+            <th class="border-collapse border border-black w-auto px-4 teal">{{ 'Event\'s name' | trans }}</th>
+            <th class="border-collapse border border-black w-auto px-4 teal">{{ 'Event\'s date' | trans }}</th>
+            <th class="border-collapse border border-black w-auto px-4 teal">{{ 'Registration deadline' | trans }}</th>
+            <th class="border-collapse border border-black w-auto px-4 teal">{{ 'Attendants' | trans }}</th>
+            <th class="border-collapse border border-black w-auto px-4 teal">{{ 'Status' | trans }}</th>
+            <th class="border-collapse border border-black w-auto px-4 teal">{{ 'Participation' | trans }}</th>
+            <th class="border-collapse border border-black w-auto px-4 teal">{{ 'Event\'s planner' | trans }}</th>
+            <th class="border-collapse border border-black w-96 px-4 teal">{{ 'Actions' | trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            {% if event.status.name !='canceled' or event.eventPlanner == app.user %}
+                {% if event.status.name !='created' or event.eventPlanner == app.user %}
+                    {% if event.status.name !='archived' %}
+                        <tr class="h-20 md:h-12 text-center {{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }} {{ loop.index == events|length ? 'border-b border-black' :'' }}">
+                            <td class="border-collapse border-x border-black"><a
+                                        href="{{ path('event_details', {'id':event.id}) }}"
+                                        class="text-gray-900 hover:text-blue-500 font-bold">{{ event.name }}</a></td>
+                            <td class="border-collapse border-x border-black">{{ event.startDate |date('d/m/Y H:i') }}</td>
+                            <td class="border-collapse border-x border-black">{{ event.registrationDeadline |date('d/m/Y') }}</td>
+                            <td class="border-collapse border-x border-black">{{ event.attendants.count }}
+                                / {{ event.maxRegistrations }}</td>
+                            <td class="border-collapse border-x border-black">{{ event.status.name }}</td>
+                            <td class="border-collapse border-x border-black">
+                                {% for attendant in event.attendants %}
+                                    {{ attendant.id == app.user.id ? '<i class="fa-solid fa-circle-check teal"></i>' : '' }}
+                                {% endfor %}
 
+                            </td>
 
-                {% endfor %}
-                </tbody>
-            </table>
-        {% else %}
-            {{ 'There are no events planned for now !' | trans }}
-        {% endif %}
-    </div>
+                            <td class="border-collapse border-x border-black">
+                                <a href="{{ path('user_details', {'id':event.eventPlanner.id}) }}"
+                                   class="hover:text-blue-500">
+                                    {{ event.eventPlanner.firstname |capitalize }} {{ event.eventPlanner.lastname | split('')[0] |upper }}
+                                    .
+                                </a>
+                            </td>
+
+                            {# colonne action #}
+                            <td class="border-collapse border-black border-r flex items-center text-center">
+                                <div class="items-center flex w-full justify-around">
+
+                                    {% if event | display_show_button (app.user) %}
+                                        <div class="text-sm text-center px-2 hover:text-blue-500">
+                                            <a href="{{ path('event_details', {'id':event.id}) }}">
+                                                <i class="fa-solid fa-eye "></i></a>
+                                            <br>
+                                            {{ 'Show' | trans }}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if event | display_edit_publish_buttons(app.user) %}
+                                        <div class="text-sm text-center px-2 hover:text-blue-500">
+                                            <a href="{{ path('event_edit', {'id':event.id}) }}">
+                                                <i class="fa-solid fa-pen-to-square "></i></a>
+                                            <br>
+                                            {{ 'Edit' | trans }}
+                                        </div>
+
+                                        <div class="text-sm text-center px-2hover:text-blue-500">
+                                            <a href="{{ path('event_publish', {'id':event.id}) }}">
+                                                <i class="fa-solid fa-share "></i></a>
+                                            <br>
+                                            {{ 'Publish' | trans }}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if event | display_cancel_button(app.user) %}
+                                        <div class="text-sm text-center px-2 hover:text-blue-500">
+                                            <a href="{{ path('event_cancel', {'id':event.id}) }}">
+                                                <i class="fa-solid fa-ban "></i></a>
+                                            <br>
+                                            {{ 'Cancel' | trans }}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if event | display_unsub_button(app.user) %}
+                                        <div class="text-sm text-center px-2 hover:text-blue-500">
+                                            <a href="{{ path('event_unsubscribe', {'id':event.id}) }}">
+                                                <i class="fa-solid fa-user-minus "></i></a>
+                                            <br>
+                                            {{ 'Unsubscribe' | trans }}
+                                        </div>
+                                    {% endif %}
+
+                                    {% if event | display_sub_button(app.user) %}
+                                        <div class="text-sm text-center px-2 hover:text-blue-500">
+                                            <a href="{{ path('event_subscribe', {'id':event.id}) }}">
+                                                <i class="fa-solid fa-user-plus  "></i></a>
+                                            <br>
+                                            {{ 'Subscribe' | trans }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endif %}
+            {% endif %}
+
+        {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        {{ 'There are no events planned for now !' | trans }}
+    {% endif %}
+</div>
 {% endblock %}
 
 
