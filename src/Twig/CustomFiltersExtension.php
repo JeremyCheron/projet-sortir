@@ -40,8 +40,7 @@ class CustomFiltersExtension extends AbstractExtension
 
     public function displayUnsubButton(Event $event, User $user)
     {
-        return ($event->getEventPlanner() !== $user
-            && $event->getStatus()->getName()=='open'
+        return ($event->getStatus()->getName()=='open'
             && $event->getAttendants()->contains($user));
     }
 

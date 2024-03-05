@@ -11,18 +11,64 @@
         <div class='menu-button'></div>
     </label>
     <ul class="menu">
-        <li><a href="{{ path('main_home') }}">{{ 'Home' | trans }}</a></li>
-        <li><a href="{{ path('event_list') }}">{{ 'Events' | trans }}</a></li>
+        <li>
+                    <a href="{{ path('main_home') }}" class="flex items-center justify-between text-center">
+                        <i class="fa-solid fa-house"></i>
+                        <div class="w-full">{{ 'Home' | trans }}</div>
+                    </a>
+        </li>
         {% if app.user %}
+            <li>
+                <a href="{{ path('event_list') }}" class="flex items-center justify-between text-center">
+                    <i class="fa-solid fa-person-walking-arrow-right"></i>
+                    <div class="w-full">{{ 'Events' | trans }}</div>
+                </a>
+            </li>
             {% if app.user.isAdmin %}
-                <li><a href="{{ path('admin_manage_users') }}">{{ 'Manage Users' | trans }}</a></li>
-                <li><a href="{{ path('app_place_index') }}">{{ 'Places' | trans }}</a></li>
-                <li><a href="{{ path('app_city_index') }}">{{ 'Cities' | trans }}</a></li>
+                <li>
+                    <a href="{{ path('admin_manage_users') }}" class="flex items-center justify-between text-center">
+                        <i class="fa-solid fa-users"></i>
+                        <div class="w-full">{{ 'Manage Users' | trans }}</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('app_place_index') }}" class="flex items-center justify-between text-center">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <div class="w-full">{{ 'Places' | trans }}</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('app_city_index') }}" class="flex items-center justify-between text-center">
+                        <i class="fa-solid fa-city"></i>
+                        <div class="w-full">{{ 'Cities' | trans }}</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('app_city_index') }}" class="flex items-center justify-between text-center">
+                        <i class="fa-solid fa-building-columns"></i>
+                        <div class="w-full">Campus</div>
+                    </a>
+                </li>
             {% endif %}
-            <li><a href="{{ path('user_details', {'id': app.user.id }) }}">{{ app.user.nickname }}</a></li>
-            <li><a href="{{ path('app_logout') }}">{{ 'Logout' | trans }}</a></li>
+            <li>
+                <a href="{{ path('user_details', {'id': app.user.id }) }}" class="flex items-center justify-between text-center">
+                    <i class="fa-solid fa-user"></i>
+                    <div class="w-full">{{ app.user.nickname }}</div>
+                </a>
+            </li>
+            <li>
+                <a href="{{ path('app_logout') }}" class="flex items-center justify-between text-center">
+                    <i class="fa-solid fa-plug-circle-xmark"></i>
+                    <div class="w-full">{{ 'Logout' | trans }}</div>
+                </a>
+            </li>
         {% else %}
-            <li><a href="{{ path('app_login') }}">{{ 'Login' | trans }}</a></li>
+            <li>
+                <a href="{{ path('app_login') }}" class="flex items-center justify-between text-center">
+                    <i class="fa-solid fa-plug"></i>
+                    <div class="w-full">{{ 'Login' | trans }}</div>
+                </a>
+            </li>
         {% endif %}
     </ul>
 </section>

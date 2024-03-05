@@ -7,8 +7,13 @@ use App\Repository\CampusRepository;
 class CampusService
 {
 
-    public function __construct(private CampusRepository $campusRepository)
+    public function __construct(private readonly CampusRepository $campusRepository)
     {
+    }
+
+    public function getCampuses()
+    {
+        return $this->campusRepository->findAll();
     }
 
     public function getCampusById(int $id)
