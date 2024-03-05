@@ -28,6 +28,7 @@ class Event
     private ?\DateTimeInterface $startDate = null;
 
     #[ORM\Column(nullable: true)]
+    #[Assert\GreaterThan(0)]
     private ?int $duration = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
@@ -36,6 +37,7 @@ class Event
 
     #[ORM\Column(nullable: false)]
     #[Assert\NotNull()]
+    #[Assert\GreaterThan(0)]
     private ?int $maxRegistrations = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: false)]

@@ -151,6 +151,11 @@ closed : Inscriptions terminées
 finished : Finie
 archived : Archivée
 Publish : Publier
+Show event details : Voir les détails de la sortie
+Edit the event : Modifier la sortie
+Cancel the event : Annuler la sortie
+Unsubscribe the event : Se désinscrire
+Subscribe the event : S'inscrire
 
 #traduction manage_user/list.html.twig
 

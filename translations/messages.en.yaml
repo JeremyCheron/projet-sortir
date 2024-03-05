@@ -150,7 +150,12 @@ ongoing : Ongoing
 closed : Closed
 finished : Finished
 archived : Archived
-Publish : Publier
+Publish : Publish
+Show event details : Show event details
+Edit the event : Edit the event
+Cancel the event : Cancel the event
+Unsubscribe the event : Unsubscribe the event
+Subscribe the event : Subscribe the event
 
 
 #manage_user/list.html.twig translation
