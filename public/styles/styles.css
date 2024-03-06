@@ -204,3 +204,30 @@ footer {
 
 .whitesmoke{
     background-color: whitesmoke;
+}
+
+
+
+    .bgblue
+    {
+       background-color: #e5f2ff;
+    }
+
+    .btnblue{background-color: #3897c5;}
+    .btnblue:hover{background-color:#1E80AD;}
+
+    .bgdarkgrey{background-color: #3f3d56;}
+
+
+    .darkgrey{color:#2e587a;}
+    .white{color:#FFFFFF;}
+    .grey{color: #566675;}
+    .black{color:#212e40;}
+
+    .btngreen{background-color: #2a915e;}
+    .btngreen:hover{background-color: #1a7348;}
+
+
+    .btnred{background-color: #b00b3b;}
+    .btnred:hover{background-color:#8a082f;}
+
