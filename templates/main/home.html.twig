@@ -2,11 +2,15 @@
 
 
 {% block body %}
-    <div class="w-auto p-10">
+    <div class="p-10 mb-10">
         {% set h = 'now'|date('H') %}
-        <div class="flex justify-around m-auto">
-            <div class="w-3/4">
+        <div class="flex justify-between m-auto">
+            <div class="">
                 {{ include('form/search.html.twig') }}
+                <div class="flex items-center justify-center my-8">
+                    <a href="{{ path('event_add') }}"><input type="button" value="{{ 'Create an event' | trans }}"
+                                                             class="border-blue-500 bg-blue-500 text-white rounded-lg p-4 mx-10 font-bold text-xl"></a>
+                </div>
             </div>
 
             <div class="font-bold text-right w-auto hidden lg:block">
@@ -24,7 +28,7 @@
             </div>
         </div>
 
-        <div class="flex-col items-center justify-evenly m-auto">
+        <div class="flex-col items-center justify-evenly">
             {{ include('event/list.html.twig') }}
         </div>
     </div>
