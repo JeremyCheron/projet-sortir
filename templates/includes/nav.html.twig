@@ -2,12 +2,12 @@
 <section class="top-nav w-full h-full">
     <a href="{{ path('main_home') }}">
         <div class="nav-logo flex items-center justify-center">
-                <img class="logo hidden md:block invert" src="{{ asset('imgs/logos/logo.png') }}" alt="Logo">
-                <h1 class="text-xl md:text-2xl font-bold white">{{ "Welcome to Sortir.com" | trans }} </h1>
+                <img class="logo hidden md:block" src="{{ asset('imgs/logos/logo.png') }}" alt="Logo">
+                <h1 class="text-xl md:text-2xl text-black font-bold">{{ "Welcome to Sortir.com" | trans }} </h1>
         </div>
     </a>
     <input id="menu-toggle" type="checkbox" />
-    <label class='menu-button-container flex items-center justify-center invert' for="menu-toggle">
+    <label class='menu-button-container flex items-center justify-center' for="menu-toggle">
         <div class='menu-button'></div>
     </label>
     <ul class="menu">

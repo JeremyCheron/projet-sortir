@@ -2,19 +2,25 @@
 <div>
     {% if events|length != 0 %}
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-center w-full">
+            <div class="col-span-2">
+                {{ include('form/search.html.twig') }}
+                <div class="flex items-center justify-center my-8">
+                    <a href="{{ path('event_add') }}"><input type="button" value="{{ 'Create an event' | trans }}"
+                                                             class="border-blue-500 btnblue white rounded-lg p-4 mx-10 font-bold text-xl"></a>
+                </div>
+            </div>
             {% for event in events %}
                 {% if event.status.name !='canceled' or event.eventPlanner == app.user %}
                     {% if event.status.name !='created' or event.eventPlanner == app.user %}
                         {% if event.status.name !='archived' %}
-                            <div class="container relative border rounded-lg border-gray-400 shadow-lg shadow-teal-950/30 place-content-between
+                            <div class="container relative rounded-lg shadow-lg shadow-teal-950/30 place-content-between
                                 {% if event.status.name == 'canceled' and event.eventPlanner == app.user %}
-                                    bg-red-400/15
-                                {% endif %}
-                                {% for attendant in event.attendants %}
-                                    {% if attendant.id == app.user.id %}
-                                        bg-green-400/15
-                                    {%  endif %}
-                                {% endfor %}">
+                                    bg-red-400/70
+                                {% elseif app.user in event.attendants %}
+                                    bg-green-400/70
+                                {% else %}
+                                    bg-white/70
+                                {%  endif %}}">
                                 <a href="{{ path('event_details', {'id':event.id}) }}">
                                     <h2 class="text-xl text-blue-950 font-bold italic hover:text-blue-500 py-2 card-title"> {{ event.name | capitalize }} </h2>
                                 </a>

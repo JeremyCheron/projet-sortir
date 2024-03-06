@@ -18,15 +18,24 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
+    {% block bg %}
+        <style>
+            body {
+                background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("{{ asset('imgs/back.jpg') }}") no-repeat fixed;
+                background-size: cover;
+            }
+        </style>
+    {% endblock %}
     <body class="bgblue">
 
         {{ include('includes/header.html.twig') }}
 
-        <div class="main-container grow">
+        <div class="main-container grow p-10">
             {% block body %}{% endblock %}
         </div>
         <div class="w-full flex items-center justify-center my-4 font-bold text-xl">
-            <button onclick="topFunction()" id="backToTop"><i class="fa-solid fa-arrow-up"></i>
+            <button onclick="topFunction()" id="backToTop" class="text-white">
+                <i class="fa-solid fa-arrow-up"></i>
                 <br>
                 Back To Top
             </button>
