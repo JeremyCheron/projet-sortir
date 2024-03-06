@@ -24,6 +24,12 @@
                     <div class="w-full">{{ 'Events' | trans }}</div>
                 </a>
             </li>
+            <li>
+                <a href="{{ path('event_list') }}" class="flex items-center justify-between text-center">
+                    <i class="fa-solid fa-people-roof"></i>
+                    <div class="w-full">{{ 'Private Groups' | trans }}</div>
+                </a>
+            </li>
             {% if app.user.isAdmin %}
                 <li>
                     <a href="{{ path('admin_manage_users') }}" class="flex items-center justify-between text-center">
