@@ -5,15 +5,15 @@
     {{ form_start(userForm) }}
 
 
-    <h1 class="text-center text-3xl font-bold darkgrey">{{ 'My profile' | trans }}</h1>
+    <h1 class="text-center text-3xl font-bold blue">{{ 'My profile' | trans }}</h1>
 
 
     <div class="flex flex-col justify-center items-center lg:grid md:grid-cols-3 lg:w-5/6 lg:mx-auto lg:gap-16 lg:justify-center lg:place-content-evenly p-4">
 
         <div class="w-1/2 lg:w-full">
-            <img src="{{ asset('imgs/pp/' ~ app.user.profilePic) }}" alt="{{ 'User image' | trans }}">
+            <img class="rounded-2xl" src="{{ asset('imgs/pp/' ~ app.user.profilePic) }}" alt="{{ 'User image' | trans }}">
             <div class="my-4">
-                <div class="text-center lg:text-left block grey font-bold mb-2">{{ 'New Profile Picture' | trans }}</div>
+                <div class="text-center lg:text-left block black font-bold mb-2">{{ 'New Profile Picture' | trans }}</div>
                 <a href="{{ path('app_upload') }}">
                     <input type="button" class="btn btnblue white
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="{{ 'Download' | trans }}">
@@ -21,23 +21,23 @@
             </div>
         </div>
 
-        <div class="w-5/6">
+        <div class="w-5/6 bg-white/30 rounded-2xl md:w-full p-2 mt-1">
             <div class="my-4">
-                {{ form_label(userForm.nickname, 'Nickname' | trans, {'label_attr': {'class': 'text-center lg:text-left block darkgrey font-bold mb-2'}}) }}
+                {{ form_label(userForm.nickname, 'Nickname' | trans, {'label_attr': {'class': 'text-center lg:text-left block blue font-bold mb-2'}}) }}
                 {{ form_widget(userForm.nickname, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.nickname) }}
 
             </div>
 
             <div class="my-4">
-                {{ form_label(userForm.firstname, 'First Name' | trans, {'label_attr': {'class': 'text-center lg:text-left block darkgrey font-bold mb-2'}}) }}
+                {{ form_label(userForm.firstname, 'First Name' | trans, {'label_attr': {'class': 'text-center lg:text-left block blue font-bold mb-2'}}) }}
                 {{ form_widget(userForm.firstname, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.firstname) }}
 
             </div>
 
             <div class="my-4">
-                {{ form_label(userForm.lastname, 'Last Name' | trans, {'label_attr': {'class': 'text-center lg:text-left block darkgrey font-bold mb-2'}}) }}
+                {{ form_label(userForm.lastname, 'Last Name' | trans, {'label_attr': {'class': 'text-center lg:text-left block blue font-bold mb-2'}}) }}
                 {{ form_widget(userForm.lastname, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.lastname) }}
 
@@ -47,17 +47,17 @@
 
 
 
-        <div class="w-5/6">
+        <div class="w-5/6  bg-white/30 rounded-2xl md:w-full p-2 mt-1">
 
             <div class="my-4">
-                {{ form_label(userForm.email, 'Mail' | trans, {'label_attr': {'class': 'text-center lg:text-left block darkgrey font-bold mb-2'}}) }}
+                {{ form_label(userForm.email, 'Mail' | trans, {'label_attr': {'class': 'text-center lg:text-left block blue font-bold mb-2'}}) }}
                 {{ form_widget(userForm.email, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.email) }}
 
             </div>
 
             <div class="my-4">
-                {{ form_label(userForm.phoneNumber, 'Phone Number' | trans, {'label_attr': {'class': 'text-center lg:text-left block darkgrey font-bold mb-2'}}) }}
+                {{ form_label(userForm.phoneNumber, 'Phone Number' | trans, {'label_attr': {'class': 'text-center lg:text-left block blue font-bold mb-2'}}) }}
                 {{ form_widget(userForm.phoneNumber, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.phoneNumber) }}
 

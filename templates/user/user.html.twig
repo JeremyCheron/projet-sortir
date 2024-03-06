@@ -1,36 +1,36 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1 class="text-center text-3xl font-bold  darkgrey">{{ user.nickname }}</h1>
+    <h1 class="text-center text-3xl font-bold  blue">{{ user.nickname }}</h1>
 
 
-    <div class="grid md:grid-cols-3 lg:grid-cols-2 w-1/2 mx-auto md:gap-16 justify-center place-content-evenly p-4">
+    <div class="grid md:grid-cols-3 lg:grid-cols-2 w-3/4 mx-auto md:gap-16 justify-center place-content-evenly p-4">
 
-        <div class="md:col-span-2 lg:col-span-1">
-            <img class="md:object-contain" src="{{ asset('imgs/pp/' ~ user.profilePic) }}" alt="{{ 'User image' | trans }}">
+        <div class="md:col-span-2 lg:col-span-1 ">
+            <img class="md:object-contain rounded-2xl" src="{{ asset('imgs/pp/' ~ user.profilePic) }}" alt="{{ 'User image' | trans }}">
         </div>
 
-        <div>
-            <div class="my-4">
-                <div class="text-center md:text-left block  darkgrey font-bold mb-2">{{ 'Name' | trans }}:</div>
-                <div class="text-center md:text-left block grey mb-2" > {{ user.firstname }} {{ user.lastname }}</div>
+        <div class="">
+            <div class="my-4 bg-white/30 rounded-2xl md:w-auto p-2">
+                <div class="text-center md:text-left block blue font-bold mb-2">{{ 'Name' | trans }}:</div>
+                <div class="text-center md:text-left block card-title font-semibold mb-2" > {{ user.firstname }} {{ user.lastname }}</div>
             </div>
-            <div class="my-4">
-                <div class="text-center md:text-left block  darkgrey font-bold mb-2">{{ 'Phone' | trans }}:</div>
+            <div class="my-4  bg-white/30 rounded-2xl md:w-auto p-2">
+                <div class="text-center md:text-left block  blue font-bold mb-2">{{ 'Phone' | trans }}:</div>
                 {% if user.phoneNumber %}
-                    <div class="text-center md:text-left block grey mb-2" >{{ user.phoneNumber }}</div>
+                    <div class="text-center md:text-left block card-title font-semibold mb-2" >{{ user.phoneNumber }}</div>
                 {%  else %}
-                    <div class="text-center md:text-left block grey mb-2" >{{ 'Phone Number not provided' | trans }}</div>
+                    <div class="text-center md:text-left block card-title font-semibold mb-2" >{{ 'Phone Number not provided' | trans }}</div>
                 {%  endif %}
 
             </div>
-            <div class="my-4">
-                <div class="text-center md:text-left block darkgrey font-bold mb-2">{{ 'Mail' | trans }}:</div>
-                <div class="text-center md:text-left block grey mb-2" > {{ user.email }} </div>
+            <div class="my-4  bg-white/30 rounded-2xl md:w-auto p-2">
+                <div class="text-center md:text-left block blue font-bold mb-2">{{ 'Mail' | trans }}:</div>
+                <div class="text-center md:text-left block font-semibold card-title mb-2" > {{ user.email }} </div>
             </div>
-            <div class="my-4">
-                <div class="text-center md:text-left block darkgrey font-bold mb-2">{{ 'Campus' | trans }}:</div>
-                <div class="text-center md:text-left block grey mb-2" > {{ user.campus.name }} </div>
+            <div class="my-4  bg-white/30 rounded-2xl md:w-auto p-2">
+                <div class="text-center md:text-left block blue font-bold mb-2">{{ 'Campus' | trans }}:</div>
+                <div class="text-center md:text-left block card-title font-semibold mb-2" > {{ user.campus.name }} </div>
             </div>
         </div>
 
@@ -40,7 +40,7 @@
     <div class="flex justify-center items-center w-full">
         {% if  user.id == app.user.id %}
             <a href="{{ path('user_modify_profile') }}">
-                <input type="button" class="text-center btn btnblue text-white my-8
+                <input type="button" class="text-center btn btnblue white my-8
                     font-bold py-2 px-4 md:text-sm lg:text-base rounded focus:outline-none focus:shadow-outline w-full" value="{{ 'Modify my profile' | trans }}">
             </a>
         {% endif %}

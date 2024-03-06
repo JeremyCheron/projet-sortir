@@ -2,44 +2,44 @@
 
 {% block body %}
 
-    <h1 class="text-center text-3xl font-bold text-gray-700">{{ 'Manage the users' | trans }}</h1>
+    <h1 class="text-center text-3xl font-bold black">{{ 'Manage the users' | trans }}</h1>
 
     <div class="flex justify-center">
         <a href="{{  path('app_register_admin')  }}">
-            <input type="button" class="btn bg-blue-600 hover:bg-blue-700 text-white text-center my-6
+            <input type="button" class="btn btnblue white text-center my-6
                             font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="{{ 'Create a new User' | trans }}">
         </a>
     </div>
 
 
         {% for user in users %}
-            <div class="grid md:grid-cols-3 w-3/4 mx-auto my-3 border-2 p-2 rounded-md">
-                <div class="text-gray-700 font-bold my-2 mx-1 py-4 ">
+            <div class="grid md:grid-cols-3 w-3/4 mx-auto my-3  p-2 rounded-md bg-white/30">
+                <div class="white font-bold my-2 mx-1 py-4 ">
 
                     <a href="{{  path('user_details', {'id':user.id})  }}">
-                        <input type="button" class="btn text-gray-700 hover:bg-amber-50 my-2
+                        <input type="button" class="btn card-title bg-white/30 hover:bg-teal-700/10 my-2
                             font-bold py-1.5 px-4 rounded border-2  w-full focus:shadow-outline" value="{{ user.firstname}} {{ user.lastname }} {{ user.active == 1 ? '- ' ~ 'active'|trans : '- ' ~ 'inactive'|trans}}">
                     </a>
                 </div>
-                <div class="text-gray-700 font-bold my-auto mx-1 py-4 ">
+                <div class="white font-bold my-auto mx-1 py-4 ">
 
                     {% if user.active %}
                         <a href="{{  path('admin_switch_active', {'id':user.id})  }}">
-                            <input type="button" class="btn bg-orange-400 hover:bg-orange-500 text-white text-center my-2
+                            <input type="button" class="btn bg-orange-400 hover:bg-orange-500 white text-center my-2
                                 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  w-full" value="{{ 'Make inactive' | trans }}">
                         </a>
                     {% else %}
                         <a href="{{  path('admin_switch_active', {'id':user.id})  }}">
-                            <input type="button" class="btn bg-green-500 hover:bg-green-600 text-white text-center my-2
+                            <input type="button" class="btn btngreen white text-center my-2
                             font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline  w-full" value="{{ 'Go back to active' | trans }}">
                         </a>
                     {% endif %}
 
                 </div>
-                <div class="text-gray-700 font-bold my-auto mx-1 py-4 ">
+                <div class="white font-bold my-auto mx-1 py-4 ">
 
                     <a href="{{  path('admin_delete_user', {'id':user.id})  }}">
-                        <input type="button" class="btn bg-red-600 hover:bg-red-700 text-white text-center my-2
+                        <input type="button" class="btn btnred white text-center my-2
                             font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="{{ 'Delete' | trans }}">
                     </a>
 
