@@ -13,9 +13,9 @@
         <div class="w-1/2 lg:w-full">
             <img src="{{ asset('imgs/pp/' ~ app.user.profilePic) }}" alt="{{ 'User image' | trans }}">
             <div class="my-4">
-                <div class="text-center lg:text-left block text-gray-700 font-bold mb-2">{{ 'New Profile Picture' | trans }}:</div>
+                <div class="text-center lg:text-left block text-gray-700 font-bold mb-2">{{ 'New Profile Picture' | trans }}</div>
                 <a href="{{ path('app_upload') }}">
-                    <input type="button" class="btn bg-blue-500 hover:bg-blue-700 text-white
+                    <input type="button" class="btn bg-blue hover:bg-darkblue text-white
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="{{ 'Download' | trans }}">
                 </a>
             </div>
@@ -23,21 +23,21 @@
 
         <div class="w-5/6">
             <div class="my-4">
-                {{ form_label(userForm.nickname, 'Nickname' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_label(userForm.nickname, 'Nickname' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-black font-bold mb-2'}}) }}
                 {{ form_widget(userForm.nickname, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.nickname) }}
 
             </div>
 
             <div class="my-4">
-                {{ form_label(userForm.firstname, 'First Name' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_label(userForm.firstname, 'First Name' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-black font-bold mb-2'}}) }}
                 {{ form_widget(userForm.firstname, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.firstname) }}
 
             </div>
 
             <div class="my-4">
-                {{ form_label(userForm.lastname, 'Last Name' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_label(userForm.lastname, 'Last Name' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-black font-bold mb-2'}}) }}
                 {{ form_widget(userForm.lastname, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.lastname) }}
 
@@ -50,14 +50,14 @@
         <div class="w-5/6">
 
             <div class="my-4">
-                {{ form_label(userForm.email, 'Mail' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_label(userForm.email, 'Mail' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-black font-bold mb-2'}}) }}
                 {{ form_widget(userForm.email, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.email) }}
 
             </div>
 
             <div class="my-4">
-                {{ form_label(userForm.phoneNumber, 'Phone Number' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-gray-700 font-bold mb-2'}}) }}
+                {{ form_label(userForm.phoneNumber, 'Phone Number' | trans, {'label_attr': {'class': 'text-center lg:text-left block text-black font-bold mb-2'}}) }}
                 {{ form_widget(userForm.phoneNumber, {'attr': {'class': 'w-full form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(userForm.phoneNumber) }}
 
@@ -65,7 +65,7 @@
 
             <div  class="my-4 w-full">
                 <a href="{{ path('user_change_password') }}">
-                    <input type="button" class="btn bg-blue-500 hover:bg-blue-700 text-white mt-8
+                    <input type="button" class="btn bg-blue hover:bg-darkblue text-white mt-8
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full" value="{{ 'Change your password' | trans  }}">
                 </a>
             </div>
@@ -77,14 +77,14 @@
 
     <div class="md:flex text-center justify-center items-center mx-auto my-1 w-full">
         <div class="w-full  lg:w-1/4 px-5">
-            <button type="submit" class="w-full btn bg-green-600 hover:bg-green-700 text-white my-2
+            <button type="submit" class="w-full btn bg-green hover:bg-darkgreen text-white my-2
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
                 {{ 'Submit' | trans  }}
             </button>
         </div>
         <div class="w-full lg:w-1/4 px-5">
             <a href="{{  path('user_details', {'id':user.id})  }}">
-                <input type="button" class="w-full btn bg-red-700 hover:bg-red-800 text-white my-2
+                <input type="button" class="w-full btn bg-red hover:bg-darkred text-white my-2
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" value="{{ 'Cancel' | trans  }}">
             </a>
         </div>
