@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'Place index' | trans }}{% endblock %}
+
+{% block body %}
+    <div class="flex flex-col items-center justify-center my-8 w-3/4 mx-auto">
+    <h2 class="text-2xl font-bold">{{ 'Place index' | trans }}</h2>
+
+        <section class="wrapper">
+            <main class="row title">
+                <ul>
+                    <li>Name</li>
+                    <li>City</li>
+                </ul>
+            </main>
+            {% for place in places %}
+            <article class="row place">
+                <ul>
+                    <li><a href="{{ path('app_place_show', {'id': place.id}) }}">{{ place.name }}</a></li>
+                    <li>{{ place.city.name }}</li>
+                </ul>
+                <ul class="more-content">
+                    {{ place.street }} - {{ place.city.zipCode }} {{ place.city.name }}
+                </ul>
+            </article>
+            {%  endfor %}
+        </section>
+
+    </div>
+
+{% endblock %}

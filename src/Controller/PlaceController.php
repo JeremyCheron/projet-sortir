@@ -70,7 +70,7 @@ class PlaceController extends AbstractController
     #[IsGranted('ROLE_USER')]
     public function index(): Response
     {
-        return $this->render('place/index.html.twig', [
+        return $this->render('place/list.html.twig', [
             'places' => $this->queriesService->getAllPlaces(),
         ]);
     }

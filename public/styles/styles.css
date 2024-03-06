@@ -131,7 +131,7 @@ header {
 }
 
 .perso-teal{
-    color : #369C90;
+    color : #206159;
 }
 
 .card-title{
@@ -207,25 +207,95 @@ footer {
     background-color: whitesmoke;
 }
 
+.btnblue{background-color: #3897c5;}
+.btnblue:hover{background-color:#1E80AD;}
+
+.bgdarkgrey{background-color: #3f3d56;}
+
+
+.darkgrey{color:#2e587a;}
+.white{color:#FFFFFF;}
+.grey{color: #566675;}
+.black{color:#212e40;}
+
+.btngreen{background-color: #2a915e;}
+.btngreen:hover{background-color: #1a7348;}
+
+
+.btnred{background-color: #b00b3b;}
+.btnred:hover{background-color:#8a082f;}
+
+.place a {
+    text-decoration: none;
+    transition: color 0.2s ease-out;
+    color: rgba(79, 192, 210, 1);
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 1000px;
+    padding: 0;
+    background: rgba(255, 2555, 255, 0.1);
+    color: rgba(255, 255, 255, 0.9);
+    position: relative;
+}
+
+.row ul {
+    margin: 0;
+    padding: 0;
+}
+
+.row ul li {
+    margin: 0;
+    font-size: 16px;
+    font-weight: normal;
+    list-style: none;
+    display: inline-block;
+    width: 45%;
+    box-sizing: border-box;
+}
 
 
 
+.row {
+    height: 30px;
+    font-size: 0;
+    position: relative;
+    transition: all 0.2s ease-out;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+}
 
-    .btnblue{background-color: #3897c5;}
-    .btnblue:hover{background-color:#1E80AD;}
+.row:hover {
+    background-color: rgba(0,0,0,0.9);
+    height: 65px;
+}
 
-    .bgdarkgrey{background-color: #3f3d56;}
+.title {
+    padding: 10px 0 5px 0;
+    height: 45px;
+    font-size: 0;
+    background-color: rgba(255, 2555, 255, 0.1);
+    border-top: 1px solid black;
+    border-left: 3px solid black;
+    border-right: 1px solid black;
+}
 
+.title:hover {
+    height: 45px;
+    background-color: rgba(255, 2555, 255, 0.1);
+    border-left: 3px solid black;
+}
 
-    .darkgrey{color:#2e587a;}
-    .white{color:#FFFFFF;}
-    .grey{color: #566675;}
-    .black{color:#212e40;}
+.place {
+    border-left: 3px solid rgba(79, 192, 210, 1)
+}
 
-    .btngreen{background-color: #2a915e;}
-    .btngreen:hover{background-color: #1a7348;}
-
-
-    .btnred{background-color: #b00b3b;}
-    .btnred:hover{background-color:#8a082f;}
-
+ul.more-content li {
+    position: relative;
+    font-size: 13px;
+    margin: 0;
+    display: block;
+    width: 100%;
+    color: white;
+}
