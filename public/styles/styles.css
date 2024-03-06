@@ -139,6 +139,7 @@ header {
 }
 
 
+
 .show-button:hover::before,
 .cancel-button:hover::before,
 .sub-button:hover::before,
@@ -200,4 +201,6 @@ body {
 footer {
     background-color: whitesmoke;
     z-index: 1000;
-}
+
+.whitesmoke{
+    background-color: whitesmoke;

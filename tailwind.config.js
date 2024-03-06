@@ -13,6 +13,7 @@ module.exports = {
       '2xl': '1536px',
     },
     extend: {},
+
   },
   plugins: [
     require('@tailwindcss/forms'),
