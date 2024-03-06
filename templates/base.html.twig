@@ -22,7 +22,7 @@
 
         {{ include('includes/header.html.twig') }}
 
-        <div class="main-container">
+        <div class="main-container grow">
             {% block body %}{% endblock %}
         </div>
         <div class="w-full flex items-center justify-center my-4 font-bold text-xl">
@@ -31,7 +31,7 @@
                 Back To Top
             </button>
         </div>
-        <footer class="border-t border-neutral-400 flex items-center justify-center bottom-0 w-full p-1 md:p-2">
+        <footer class="border-t border-neutral-400 flex items-center text-black justify-center bottom-0 w-full p-1 md:p-2">
             <span class="text-xs md:text-base">
                 &copy; {{ "now" | date('Y') }} | My name is JEF
             </span>
