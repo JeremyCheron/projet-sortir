@@ -125,9 +125,9 @@ Filter Events: Filtrer les sorties
 City Name: Ville
 Between: Entre le
 And: Et le
-Events I'm planning: Les sorties que j'organise
-Events I'm attending: Les sorties auquelles je suis inscrit·e
-Past Events: Les sorties passées
+Events I'm planning: Sorties que j'organise
+Events I'm attending: Sorties auxquelles je participe
+Past Events: Sorties passées
 Search : Rechercher
 
 #traduction event/list.html.twig
