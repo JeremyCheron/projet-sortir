@@ -105,6 +105,7 @@
             {% endfor %}
         </div>
     {% else %}
+        {{ include('form/search.html.twig') }}
         {{ 'There are no events planned for now !' | trans }}
     {% endif %}
 </div>
