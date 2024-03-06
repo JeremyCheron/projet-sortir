@@ -4,12 +4,12 @@
 {% block body %}
     <div class="w-auto p-10">
         {% set h = 'now'|date('H') %}
-        <div class="flex items-center justify-evenly m-auto">
+        <div class="flex justify-around m-auto">
             <div class="w-3/4">
                 {{ include('form/search.html.twig') }}
             </div>
 
-            <div class="font-bold text-right w-1/4">
+            <div class="font-bold text-right w-auto hidden lg:block">
                 <p>{{ 'Date of the day' | trans }} : {{ "now" | date('d/m/Y') }}</p>
                 <p>
                     {% if h >= 6 and h < 12 %}
