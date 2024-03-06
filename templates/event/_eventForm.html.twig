@@ -3,46 +3,46 @@
     {{ form_start(form) }}
     <div class="grid md:grid-cols-2 w-3/4 mx-auto md:gap-16 justify-center place-content-evenly p-4">
         <div class="">
-            <div class="my-4">
-                {{ form_label(form.name,'Name of the event'| trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            <div class="my-4 ml-40">
+                {{ form_label(form.name,'Name of the event'| trans, {'label_attr': {'class': 'block font-bold mb-2'}}) }}
                 {{ form_widget(form.name, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(form.name) }}
             </div>
-            <div class="my-4">
-                {{ form_label(form.startDate, 'Date and time of the event' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            <div class="my-4 ml-40">
+                {{ form_label(form.startDate, 'Date and time of the event' | trans, {'label_attr': {'class': 'block font-bold mb-2'}}) }}
                 {{ form_widget(form.startDate, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(form.startDate) }}
             </div>
-            <div class="my-4">
-                {{ form_label(form.registrationDeadline, 'Registration deadline' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            <div class="my-4 ml-40">
+                {{ form_label(form.registrationDeadline, 'Registration deadline' | trans, {'label_attr': {'class': 'block font-bold mb-2'}}) }}
                 {{ form_widget(form.registrationDeadline, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(form.registrationDeadline) }}
             </div>
-            <div class="my-4">
-                {{ form_label(form.maxRegistrations, 'Maximum number of attendants' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            <div class="my-4 ml-40">
+                {{ form_label(form.maxRegistrations, 'Maximum number of attendants' | trans, {'label_attr': {'class': 'block font-bold mb-2'}}) }}
                 {{ form_widget(form.maxRegistrations, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(form.maxRegistrations) }}
             </div>
-            <div class="my-4">
-                {{ form_label(form.duration, 'Duration' |trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            <div class="my-4 ml-40">
+                {{ form_label(form.duration, 'Duration' |trans, {'label_attr': {'class': 'block font-bold mb-2'}}) }}
                 {{ form_widget(form.duration, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
                 minutes
                 {{ form_errors(form.duration) }}
             </div>
-            <div class="my-4">
-                {{ form_label(form.description, 'Description' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            <div class="my-4 ml-40">
+                {{ form_label(form.description, 'Description' | trans, {'label_attr': {'class': 'block font-bold mb-2'}}) }}
                 {{ form_widget(form.description, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}
                 {{ form_errors(form.description) }}
             </div>
         </div>
         <div class="">
-            <div class="my-4">
-                <label for="city" class="block text-gray-700 font-bold mb-2">{{ 'Campus' | trans }}</label>
+            <div class="my-4 ml-40">
+                <label for="city" class="block font-bold mb-2">{{ 'Campus' | trans }}</label>
                 <p>{{ app.user.campus.name }}</p>
                 {#                    <p>{{ user.campus.name }}</p> #}
             </div>
-            <div class="my-4">
-                {{ form_label(form.city, 'City' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            <div class="my-4 ml-40">
+                {{ form_label(form.city, 'City' | trans, {'label_attr': {'class': 'block font-bold mb-2'}}) }}
                 {{ form_widget(form.city, {'attr': {'class': 'form-input rounded-md shadow-sm city-select'}}) }}
                 {{ form_errors(form.city) }}
 {#                <label for="city" class="block text-gray-700 font-bold mb-2"> {{ 'City' | trans }}</label>#}
@@ -54,8 +54,8 @@
 {#                    {% endfor %}#}
 {#                </select>#}
             </div>
-            <div class="my-4">
-                {{ form_label(form.place, 'Place' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            <div class="my-4 ml-40">
+                {{ form_label(form.place, 'Place' | trans, {'label_attr': {'class': 'block font-bold mb-2'}}) }}
                 {{ form_widget(form.place, {'attr': {'class': 'form-input rounded-md shadow-sm place-select'}}) }}
                 {{ form_errors(form.place) }}{#                {{ form_label(form.place, 'Place' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}#}
 {#                {{ form_widget(form.place, {'attr': {'class': 'form-input rounded-md shadow-sm'}}) }}#}
@@ -63,39 +63,33 @@
 {#                <a href="{{ path('app_place_new') }}"><i#}
 {#                            class="fa-solid fa-plus bg-blue-500 border border-blue-500 rounded-full p-1 text-white font-bold mx-2"></i></a>#}
             </div>
-            <div class="my-4">
+            <div class="my-4 ml-40">
 
-                <label for="street" class="block text-gray-700 font-bold mb-2">{{ 'Street' | trans }}</label>
-                {# TODO : auto-remplissage #}
+                <label for="street" class="block font-bold mb-2">{{ 'Street' | trans }}</label>
                 <p id="place-street"> Street </p>
             </div>
-            <div class="my-4">
-                <label for="zipCode" class="block text-gray-700 font-bold mb-2">{{ 'Zip Code' | trans }}</label>
-                {# TODO : auto-remplissage #}
+            <div class="my-4 ml-40">
+                <label for="zipCode" class="block font-bold mb-2">{{ 'Zip Code' | trans }}</label>
                 <p id="place-zip"> Zip Code </p>
             </div>
-            <div class="my-4">
-                <label for="latitude" class="block text-gray-700 font-bold mb-2">{{ 'Latitude' | trans }}</label>
-                {# TODO : auto-remplissage #}
+            <div class="my-4 ml-40">
+                <label for="latitude" class="block font-bold mb-2">{{ 'Latitude' | trans }}</label>
                 <p id="place-latitude"> Latitude </p>
             </div>
-            <div class="my-4">
-                <label for="longitude" class="block text-gray-700 font-bold mb-2">{{ 'Longitude' | trans }}</label>
-                {# TODO : auto-remplissage #}
+            <div class="my-4 ml-40">
+                <label for="longitude" class="block font-bold mb-2">{{ 'Longitude' | trans }}</label>
                 <p id="place-longitude"> Longitude </p>
             </div>
         </div>
     </div>
 
-
-    <div class="flex items-center justify-center">
-
-        {{ form_widget(form.save, {'label':'Save'|trans, 'attr': {'class': 'w-48 bg-green-600 text-white border rounded-lg'}}) }}
+    <div class="flex items-center justify-center m-2">
+            {{ form_widget(form.save, {'label':'Save'|trans, 'attr': {'class': 'w-48 btngreen text-white rounded-lg p-2 m-2'}}) }}
+            {{ form_widget(form.saveAndPublish, {'label':'Publish the event'|trans, 'attr': {'class': 'w-48 text-white rounded-lg btnblue p-2 m-2'}}) }}
+            <a href="{{ path('main_home') }}">
+                <input type="button" class="w-48 btnred text-white rounded-lg p-2 m-2" value="{{ 'Cancel' | trans }}">
+            </a>
     </div>
-    <div class="flex items-center justify-center">
-        {{ form_widget(form.saveAndPublish, {'label':'Publish the event'|trans, 'attr': {'class': 'w-48 bg-blue-500 text-white border rounded-lg'}}) }}
-    </div>
-
     {{ form_end(form) }}
 
 
