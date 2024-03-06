@@ -21,7 +21,7 @@
     {% block bg %}
         <style>
             body {
-                background: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("{{ asset('imgs/back.jpg') }}") no-repeat fixed;
+                background: linear-gradient(rgba(230, 230, 230, 0.9), rgba(206, 205, 205, 0.7)), url("{{ asset('imgs/back.jpg') }}") no-repeat fixed;
                 background-size: cover;
             }
         </style>
@@ -34,7 +34,7 @@
             {% block body %}{% endblock %}
         </div>
         <div class="w-full flex items-center justify-center my-4 font-bold text-xl">
-            <button onclick="topFunction()" id="backToTop" class="text-white">
+            <button onclick="topFunction()" id="backToTop">
                 <i class="fa-solid fa-arrow-up"></i>
                 <br>
                 Back To Top

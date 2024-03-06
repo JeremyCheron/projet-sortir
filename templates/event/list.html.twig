@@ -15,32 +15,32 @@
                         {% if event.status.name !='archived' %}
                             <div class="container relative rounded-lg shadow-lg shadow-teal-950/30 place-content-between
                                 {% if event.status.name == 'canceled' and event.eventPlanner == app.user %}
-                                    bg-red-400/70
+                                    bg-red-400/60
                                 {% elseif app.user in event.attendants %}
-                                    bg-green-400/70
+                                    bg-green-400/60
                                 {% else %}
-                                    bg-white/70
+                                    bg-white/60
                                 {%  endif %}}">
                                 <a href="{{ path('event_details', {'id':event.id}) }}">
-                                    <h2 class="text-xl text-blue-950 font-bold italic hover:text-blue-500 py-2 card-title"> {{ event.name | capitalize }} </h2>
+                                    <h2 class="text-xl text-blue-950 font-extrabold italic hover:text-blue-500 py-2 card-title"> {{ event.name | capitalize }} </h2>
                                 </a>
-                                <div class="hidden lg:block p-1">
+                                <div class="hidden lg:block p-1 font-semibold">
                                     <i class="fa-solid fa-location-dot perso-teal"></i>
                                     <div> {{ event.place.name}} </div>
                                     <div> {{ event.place.street}} </div>
                                     <div>{{ event.place.city.zipCode}}
                                     {{ event.place.city.name}} </div>
                                 </div>
-                                <div class="p-1"><i class="fa-solid fa-person perso-teal"></i>
+                                <div class="p-1 font-semibold"><i class="fa-solid fa-person perso-teal"></i>
                                     <a href="{{ path('user_details', {'id':event.eventPlanner.id}) }}" class="hover:text-blue-500">
                                         {{ event.eventPlanner.firstname |capitalize }} {{ event.eventPlanner.lastname | split('')[0] |upper }}
                                         .
                                     </a>
                                 </div>
-                                <div class="p-1"><i class="fa-solid fa-calendar-days perso-teal"></i> {{ event.startDate | date('d/m/y H:i') }}</div>
-                                <div class="p-1"><i class="fa-solid fa-hourglass-end perso-teal" ></i> {{ event.registrationDeadline | date('d/m/y H:i') }}</div>
-                                <div class="p-1"><i class="fa-solid fa-user-group perso-teal"></i> {{ event.attendants.count }} / {{ event.maxRegistrations  }}</div>
-                                <div class="font-semibold p-1">
+                                <div class="p-1 font-semibold"><i class="fa-solid fa-calendar-days perso-teal"></i> {{ event.startDate | date('d/m/y H:i') }}</div>
+                                <div class="p-1 font-semibold"><i class="fa-solid fa-hourglass-end perso-teal" ></i> {{ event.registrationDeadline | date('d/m/y H:i') }}</div>
+                                <div class="p-1 font-semibold"><i class="fa-solid fa-user-group perso-teal"></i> {{ event.attendants.count }} / {{ event.maxRegistrations  }}</div>
+                                <div class="font-bold p-1">
                                     {% if event.status.name == 'open' %}
                                         <i class="fa-solid fa-lock-open perso-teal"></i> {{ event.status.name | trans }}
                                     {% elseif event.status.name == 'closed'%}
@@ -54,7 +54,7 @@
                                         <i class="fa-solid fa-flag-checkered perso-teal"></i> {{ event.status.name | trans }}
                                     {% endif %}
                                 </div>
-                                <div class="text-wrap p-1 mb-12"><i class="fa-solid fa-quote-left fa-flip-vertical perso-teal"></i> {{ event.description }} <i class="fa-solid fa-quote-left fa-rotate-180 perso-teal"></i> </div>
+                                <div class="text-wrap p-1 mb-12 font-semibold"><i class="fa-solid fa-quote-left fa-flip-vertical perso-teal"></i> {{ event.description }} <i class="fa-solid fa-quote-left fa-rotate-180 perso-teal"></i> </div>
                                 <div class="flex items-center w-full justify-evenly p-2 card-buttons">
                                     {% if event | display_show_button (app.user) %}
                                         <div class="font-bold text-center px-2 hover:text-blue-500">
