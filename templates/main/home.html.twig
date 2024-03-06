@@ -4,27 +4,45 @@
 {% block body %}
     <div class="p-10 mb-10">
         {% set h = 'now'|date('H') %}
-        <div class="flex justify-between m-auto">
+        <div class="flex justify-between ">
             <div class="">
                 {{ include('form/search.html.twig') }}
                 <div class="flex items-center justify-center my-8">
                     <a href="{{ path('event_add') }}"><input type="button" value="{{ 'Create an event' | trans }}"
-                                                             class="border-blue-500 bg-blue-500 text-white rounded-lg p-4 mx-10 font-bold text-xl"></a>
+                                                             class="border-blue-500 btnblue white rounded-lg p-4 mx-10 font-bold text-xl"></a>
                 </div>
             </div>
 
             <div class="font-bold text-right w-auto hidden lg:block">
-                <p>{{ 'Date of the day' | trans }} : {{ "now" | date('d/m/Y') }}</p>
-                <p>
-                    {% if h >= 6 and h < 12 %}
-                        {{ 'Good Morning' | trans }} {{ app.user.firstname | capitalize }} !
-                    {% elseif h >= 12 and h < 18 %}
-                        {{ 'Good Afternoon' | trans }} {{ app.user.firstname | capitalize }} !
-                    {% elseif h >= 18 %}
-                        {{ 'Good Evening' | trans }} {{ app.user.firstname | capitalize }} !
-                    {% else %}
-                        {{ 'Night night' | trans }} {{ app.user.firstname | capitalize }} !
-                    {% endif %}
+
+                <div class="flex-col ">
+
+                    <div class="w-3/4 m-auto">
+
+                        <img src="{{ asset('imgs/logos/undraw_having_fun_re_vj4h.svg') }}" alt="image goint out">
+
+                    </div>
+
+                    <div class="text-center">
+
+                        <p>{{ 'Date of the day' | trans }} : {{ "now" | date('d/m/Y') }}</p>
+                        <p>
+                            {% if h >= 6 and h < 12 %}
+                                {{ 'Good Morning' | trans }} {{ app.user.firstname | capitalize }} !
+                            {% elseif h >= 12 and h < 18 %}
+                                {{ 'Good Afternoon' | trans }} {{ app.user.firstname | capitalize }} !
+                            {% elseif h >= 18 %}
+                                {{ 'Good Evening' | trans }} {{ app.user.firstname | capitalize }} !
+                            {% else %}
+                                {{ 'Night night' | trans }} {{ app.user.firstname | capitalize }} !
+                            {% endif %}
+                        </p>
+
+                    </div>
+
+
+                </div>
+
             </div>
         </div>
 
