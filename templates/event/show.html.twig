@@ -5,8 +5,7 @@
 
 
 {% block body %}
-
-    <h1 class="text-2xl md:text-4xl text-center mx-auto my-4">{{ event.name }}</h1>
+    <h1 class="text-2xl md:text-4xl text-center mx-auto">{{ event.name }}</h1>
     {% if (event.status.name == 'canceled') %}
         <p class="text-xl font-bold text-center text-red-500">Event Canceled</p>
     {% endif %}
@@ -82,7 +81,7 @@
 
 
         </div>
-        <div class="md:col-span-4 w-full">
+        <div class="md:col-span-4 w-full mt-10">
             {% if (event.attendants.count == 0) %}
                 <p> {{ 'There are no attendants registrated for that event' | trans }} </p>
             {% else %}
@@ -104,11 +103,10 @@
         </div>
 
     </div>
-
 <style>
     body {
-        background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("{{ asset('imgs/event/' ~ event.image) }}");
-        color: white;
+        background-image: linear-gradient(rgba(230, 230, 230, 0.9), rgba(206, 205, 205, 0.7)), url("{{ asset('imgs/event/' ~ event.image) }}");
+        /*color: white;*/
     }
     .card-attendant {
         background-color: whitesmoke;
