@@ -1,5 +1,5 @@
 
-    <div class="flex flex-col items-center justify-center border border-gray-400 shadow-lg shadow-teal-950/30 rounded-lg">
+    <div class="flex flex-col items-center border border-gray-400 shadow-lg shadow-teal-950/30 rounded-lg">
         <h2 class="flex items-center font-bold text-2xl m-4">{{ 'Filter Events' | trans }}</h2>
             {{ form_errors(form) }}
 
@@ -7,47 +7,47 @@
         <div class="grid grid-cols-1 md:grid-cols-2 w-full">
 
             <div class="m-4">
-                {{ form_label(form.campus, 'Campus' | trans , {'label_attr': {'class': 'block text-gray-700 font-bold'}}) }}
+                {{ form_label(form.campus, 'Campus' | trans , {'label_attr': {'class': 'block font-bold'}}) }}
                 {{ form_widget(form.campus, {'attr': {'class': 'form-input w-full rounded-md shadow-sm mb-2'}}) }}
                 {{ form_errors(form.campus) }}
-                {{ form_label(form.name, 'City Name'  | trans, {'label_attr': {'class': 'block text-gray-700 font-bold'}}) }}
+                {{ form_label(form.name, 'City Name'  | trans, {'label_attr': {'class': 'block font-bold'}}) }}
                 {{ form_widget(form.name, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
                 {{ form_errors(form.name) }}
             </div>
 
             <div class="m-4">
-                {{ form_label(form.startDateMin, 'Between'  | trans, {'label_attr': {'class': 'block text-gray-700 font-bold'}}) }}
+                {{ form_label(form.startDateMin, 'Between'  | trans, {'label_attr': {'class': 'block font-bold'}}) }}
                 {{ form_widget(form.startDateMin, {'attr': {'class': 'form-input w-full rounded-md shadow-sm  mb-2'}}) }}
                 {{ form_errors(form.startDateMin) }}
-                {{ form_label(form.startDateMax, 'And'  | trans, {'label_attr': {'class': 'block text-gray-700 font-bold'}}) }}
+                {{ form_label(form.startDateMax, 'And'  | trans, {'label_attr': {'class': 'block font-bold'}}) }}
                 {{ form_widget(form.startDateMax, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
                 {{ form_errors(form.startDateMax) }}
             </div>
 
-            <div class="m-4">
+            <div class="mb-2 px-4 text-start">
                 {{ form_row(form.planner, {
                     'label': 'Events I\'m planning'  | trans,
-                    'label_attr': {'class': 'text-gray-700 font-bold'},
-                    'attr': {'class': 'form-input text-center rounded-md shadow-sm m-2'}
+                    'label_attr': {'class': 'font-bold'},
+                    'attr': {'class': 'form-input rounded-md shadow-sm m-2'}
                 }) }}
                 {{ form_errors(form) }}
 
                 {{ form_row(form.attendant, {
                     'label': 'Events I\'m attending'  | trans,
-                    'label_attr': {'class': 'text-gray-700 font-bold'},
-                    'attr': {'class': 'form-input text-center rounded-md shadow-sm m-2'}
+                    'label_attr': {'class': 'font-bold'},
+                    'attr': {'class': 'form-input rounded-md shadow-sm m-2'}
                 }) }}
                 {{ form_errors(form) }}
 
                 {{ form_row(form.pastEvents, {
                     'label': 'Past Events'  | trans,
-                    'label_attr': {'class': 'text-gray-700 font-bold'},
-                    'attr': {'class': 'form-input text-center rounded-md shadow-sm m-2'}
+                    'label_attr': {'class': 'font-bold'},
+                    'attr': {'class': 'form-input rounded-md shadow-sm m-2'}
                 }) }}
                 {{ form_errors(form) }}
             </div>
             <div class="m-4 flex text-center justify-center items-center">
-                    {{ form_widget(form.Search, {'label' : 'Search' , 'attr': {'class': 'w-48 bg-green-600 text-white border rounded-lg'}}) }}
+                    {{ form_widget(form.Search, {'label' : 'Search' , 'attr': {'class': 'w-48 bg-green-600 text-white rounded-lg'}}) }}
             </div>
 
             {{ form_end(form) }}
