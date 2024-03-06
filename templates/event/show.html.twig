@@ -89,7 +89,7 @@
                     {{ 'Attendants' | trans }} - {{ event.attendants.count }} / {{ event.maxRegistrations }}
                 </h3>
                 {% for attendant in event.attendants %}
-                <div class="container flex-col items-center justify-center relative border rounded-lg border-gray-400 shadow-lg shadow-teal-950/30 my-1 py-1 lg:w-1/2 mx-auto card-attendant">
+                <div class="container flex-col items-center justify-center relative border rounded-lg border-gray-400 shadow-lg shadow-teal-950/30 my-1 py-1 lg:w-1/2 mx-auto whitesmoke text-black">
                     <a href="{{ path('user_details', {'id': attendant.id}) }}" class=" flex items-center justify-evenly">
                         <img src="{{ asset('imgs/pp/' ~ attendant.profilePic) }}" alt="" width="50px" height="50px">
                         <div class="flex-col items-center justify-center text-center">
@@ -103,15 +103,5 @@
         </div>
 
     </div>
-<style>
-    body {
-        background-image: linear-gradient(rgba(230, 230, 230, 0.9), rgba(206, 205, 205, 0.7)), url("{{ asset('imgs/event/' ~ event.image) }}");
-        /*color: white;*/
-    }
-    .card-attendant {
-        background-color: whitesmoke;
-        color: black;
-    }
-</style>
 
 {% endblock %}
