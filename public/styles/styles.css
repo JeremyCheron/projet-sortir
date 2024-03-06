@@ -138,54 +138,6 @@ header {
     color: #2B3352;
 }
 
-
-.show-button:hover::before,
-.cancel-button:hover::before,
-.sub-button:hover::before,
-.unsub-button:hover::before,
-.edit-button:hover::before,
-.publish-button:hover::before{
-    font-size: 0.75rem;
-    position: absolute;
-    background-color: #2B3352;
-    color: white;
-    padding: 10px;
-    border-radius: 5px;
-    bottom: -105%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-.show-button:hover::before{
-    content: "Show event details";
-    left: 25%;
-}
-
-.cancel-button:hover::before{
-    content: "Cancel event";
-}
-
-.sub-button:hover::before{
-    content: "Subscribe event";
-}
-
-.unsub-button:hover::before{
-    content: "Unsubscribe the event";
-}
-
-.edit-button:hover::before{
-    content: "Edit the event";
-}
-
-.publish-button:hover::before{
-    content: "Publish the event";
-}
-
-.show-button:hover::before,
-.cancel-button:hover::before,
-.sub-button:hover::before,
-.unsub-button:hover::before,
-.edit-button:hover::before,
-.publish-button:hover::before{
-    opacity: 1;
+.whitesmoke{
+    background-color: whitesmoke;
 }
