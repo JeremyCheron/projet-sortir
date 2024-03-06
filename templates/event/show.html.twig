@@ -3,68 +3,94 @@
 
 {% endblock %}
 
+
 {% block body %}
 
     <h1 class="text-2xl md:text-4xl text-center mx-auto my-4">{{ event.name }}</h1>
-    <div>
-        <p class="italic text-center mx-auto my-4">{{ event.description }}</p>
+    {% if (event.status.name == 'canceled') %}
+        <p class="text-xl font-bold text-center text-red-500">Event Canceled</p>
+    {% endif %}
+    <div class="flex items-center justify-center my-4 w-1/2 mx-auto">
+        <div class="w-2/3">
+            <p class="italic text-center mx-auto my-4">{{ event.description }}</p>
+        </div>
+        <div class="text-center w-1/3">
+
+            {% if event | display_sub_button(app.user) %}
+                <a href="{{ path('event_subscribe', {'id': event.id}) }}" title="subscribe" class="font-bold text-green-500">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <br>
+                    Subscribe
+                </a>
+            {% elseif event | display_unsub_button(app.user) %}
+                <a href="{{ path('event_subscribe', {'id': event.id}) }}" title="subscribe" class="font-bold text-red-500">
+                    <i class="fa-solid fa-user-minus"></i>
+                    <br>
+                    Unsubscribe
+                </a>
+            {% endif %}
+        </div>
+
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 w-3/4 mx-auto gap-4">
+    <div class="grid grid-cols-1 lg:grid-cols-4 w-2/3 mx-auto gap-4 event-infos">
 
-        <div>
+        <div class="lg:col-start-2 flex-col justify-end">
 
-            <div>
-                <p class="block text-gray-700 font-bold mb-2">Start date : </p>
-                <p class="w-full text-center">{{ event.startDate | date('d/m/y H:i') }}</p>
+            <div class="flex place-content-end justify-between my-2">
+                <p class="font-bold w-1/2">Start date : </p>
+                <p class="text-center">{{ event.startDate | date('d/m/y H:i') }}</p>
             </div>
 
-            <div>
-                <p class="block text-gray-700 font-bold mb-2">Duration : </p>
-                <p class="w-full text-center">{{ event.duration }} minutes</p>
+            <div class="flex place-content-end justify-between my-2">
+                <p class="font-bold w-1/2">Duration : </p>
+                <p class="text-center">{{ event.duration }} minutes</p>
             </div>
 
-            <div>
-                <p class="block text-gray-700 font-bold mb-2">Deadline : </p>
-                <p class="w-full text-center">{{ event.registrationDeadline | date('d/m/y H:i') }}</p>
+            <div class="flex place-content-end justify-between my-2">
+                <p class="font-bold w-1/2">Deadline : </p>
+                <p class="text-center">{{ event.registrationDeadline | date('d/m/y H:i') }}</p>
             </div>
 
         </div>
-        <div>
+        <div class="flex-col justify-end">
 
-            <div>
-                <p class="block text-gray-700 font-bold mb-2">Planned by : </p>
-                <p class="w-full text-center">
+            <div class="flex place-content-end items-center justify-between my-2">
+                <p class="font-bold">Planned by : </p>
+                <p class="text-center">
                     {{ event.eventPlanner.nickname }}
-                    <br>
-                    from {{ event.campus.name }}'s Campus
                 </p>
             </div>
 
-            <div>
-                <p class="block text-gray-700 font-bold mb-2">Place : </p>
-                <p class="w-full text-center">{{ event.place.name }}</p>
+            <div class="flex place-content-end items-center justify-between my-2">
+                <p class="font-bold">Place : </p>
+                <p class="text-center">{{ event.place.name }}</p>
             </div>
 
-            <div>
-                <p class="block text-gray-700 font-bold mb-2">Adress : </p>
-                <p class="w-full text-center">
+            <div class="flex place-content-end items-center justify-between my-2">
+                <p class="font-bold">Adress : </p>
+                <p class="text-right">
                     {{ event.place.street }}
-                    <br>
+                </p>
+            </div>
+
+            <div class="flex place-content-end items-center justify-between my-2">
+                <p class="font-bold">City : </p>
+                <p class="text-right">
                     {{ event.place.city.zipCode }} - {{ event.place.city.name }}
                 </p>
             </div>
 
 
         </div>
-        <div class="md:col-span-2">
+        <div class="md:col-span-4 w-full">
             {% if (event.attendants.count == 0) %}
                 <p> {{ 'There are no attendants registrated for that event' | trans }} </p>
             {% else %}
-                <h3 class="block text-gray-700 font-bold mb-2 text-center md:text-left">
+                <h3 class="block font-bold mb-2 text-center mx-auto">
                     {{ 'Attendants' | trans }} - {{ event.attendants.count }} / {{ event.maxRegistrations }}
                 </h3>
                 {% for attendant in event.attendants %}
-                <div class="container flex-col items-center justify-center relative border rounded-lg border-gray-400 shadow-lg shadow-teal-950/30 my-1 py-1">
+                <div class="container flex-col items-center justify-center relative border rounded-lg border-gray-400 shadow-lg shadow-teal-950/30 my-1 py-1 lg:w-1/2 mx-auto card-attendant">
                     <a href="{{ path('user_details', {'id': attendant.id}) }}" class=" flex items-center justify-evenly">
                         <img src="{{ asset('imgs/pp/' ~ attendant.profilePic) }}" alt="" width="50px" height="50px">
                         <div class="flex-col items-center justify-center text-center">
@@ -79,6 +105,15 @@
 
     </div>
 
-
+<style>
+    body {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.7)), url("{{ asset('imgs/event/' ~ event.image) }}");
+        color: white;
+    }
+    .card-attendant {
+        background-color: whitesmoke;
+        color: black;
+    }
+</style>
 
 {% endblock %}

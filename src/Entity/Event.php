@@ -68,6 +68,9 @@ class Event
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'events')]
     private Collection $attendants;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $image = null;
+
     public function __construct()
     {
         $this->attendants = new ArrayCollection();
@@ -230,6 +233,18 @@ class Event
     public function removeAttendant(User $attendant): static
     {
         $this->attendants->removeElement($attendant);
+
+        return $this;
+    }
+
+    public function getImage(): ?string
+    {
+        return $this->image;
+    }
+
+    public function setImage(?string $image): static
+    {
+        $this->image = $image;
 
         return $this;
     }
