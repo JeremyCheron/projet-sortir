@@ -26,7 +26,6 @@ class MainController extends AbstractController
     }
 
     #[Route('', name: 'home')]
-    #[IsGranted('ROLE_USER')]
     public function home(EventService $eventService,
                          Security $security,
                          CustomQueriesService $queriesService,

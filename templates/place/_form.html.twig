@@ -1,37 +1,37 @@
 <div class="flex flex-col items-center justify-center my-8">
 
-    <h2 class="font-bold text-2xl">{{ 'Place' | trans }}</h2>
+    <h2 class="font-bold text-2xl pb-10">{{ 'New Place' | trans }}</h2>
     <div>
         {{ form_errors(form) }}
 
         {{ form_start(form) }}
 
         <div class="my-4">
-            {{ form_label(form.name, 'Place Name' | trans , {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            {{ form_label(form.name, 'Place Name' | trans , {'label_attr': {'class': 'block font-bold mb-2'}}) }}
             {{ form_widget(form.name, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
             {{ form_errors(form.name) }}
         </div>
         <div class="my-4">
-            {{ form_label(form.city, 'City' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            {{ form_label(form.city, 'City' | trans, {'label_attr': {'class': 'block font-bold mb-2'}}) }}
             {{ form_widget(form.city, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
             {{ form_errors(form.city) }}
         </div>
         <div class="my-4">
-            {{ form_label(form.street, 'Street' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            {{ form_label(form.street, 'Street' | trans, {'label_attr': {'class': 'block font-bold mb-2'}}) }}
             {{ form_widget(form.street, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
             {{ form_errors(form.street) }}
         </div>
         <div class="my-4">
-            {{ form_label(form.latitude, 'Latitude' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            {{ form_label(form.latitude, 'Latitude' | trans, {'label_attr': {'class': 'block font-bold mb-2'}}) }}
             {{ form_widget(form.latitude, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
             {{ form_errors(form.latitude) }}
         </div>
         <div class="my-4">
-            {{ form_label(form.longitude, 'Longitude' | trans, {'label_attr': {'class': 'block text-gray-700 font-bold mb-2'}}) }}
+            {{ form_label(form.longitude, 'Longitude' | trans, {'label_attr': {'class': 'block font-bold mb-2'}}) }}
             {{ form_widget(form.longitude, {'attr': {'class': 'form-input w-full rounded-md shadow-sm'}}) }}
             {{ form_errors(form.longitude) }}
         </div>
-        <button class="btn bg-blue-500 hover:bg-blue-700 text-white my-8
+        <button class="btn btnblue text-white my-8
                     font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">{{ button_label|default('Save'| trans) }}</button>
         {{ form_end(form) }}
     </div>
