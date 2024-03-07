@@ -29,7 +29,7 @@ class MainController extends AbstractController
     public function home(EventService $eventService,
                          Security $security,
                          CustomQueriesService $queriesService,
-                        Request $request): Response
+                         Request $request): Response
     {
         if (!$security->isGranted('ROLE_USER')) {
             return new RedirectResponse($this->generateUrl('app_login'));

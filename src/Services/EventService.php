@@ -20,7 +20,8 @@ class EventService
                                 private readonly EventRepository        $eventRepository,
                                 private readonly FormFactoryInterface   $formFactory,
                                 private readonly EventStatusService     $eventStatusService,
-                                private readonly CustomQueriesService   $queriesService)
+                                private readonly CustomQueriesService   $queriesService,
+                                private  readonly MailerService $mailerService)
     {
     }
 
@@ -104,10 +105,11 @@ class EventService
         return false;
     }
 
-    public function cancelEvent (Event $event ): void
+    public function cancelEvent (Event $event): void
     {
         $canceledEvent = $this->eventStatusService->getStatusByName('canceled');
         $event->setStatus($canceledEvent);
+        $this->mailerService->cancelEmail($event);
         $this->em->flush();
     }
 
