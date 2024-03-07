@@ -240,3 +240,6 @@ flashmessage:
   updateevent: Évènement modifié avec succès
   publish: Évènement publié avec succès
   cancel: Évènement annulé avec succès
+  addcampus: Campus créé avec succès
+  editcampus: Campus modifié avec succès
+  deletecampus: Campus supprimé avec succès

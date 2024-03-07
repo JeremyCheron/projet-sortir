@@ -238,3 +238,6 @@ flashmessage:
   updateevent: Event updated successfully
   publish: Event published successfully
   cancel: Event canceled successfully
+  addcampus: Campus created successfully
+  editcampus: Campus edited successfully
+  deletecampus: Campus deleted successfully

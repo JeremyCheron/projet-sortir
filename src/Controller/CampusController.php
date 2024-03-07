@@ -11,10 +11,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/campus')]
 class CampusController extends AbstractController
 {
+    public function __construct(private TranslatorInterface $translator)
+    {
+    }
+
     #[Route('/', name: 'app_campus_index', methods: ['GET'])]
     #[IsGranted('ROLE_USER')]
     public function index(CampusRepository $campusRepository): Response
@@ -35,6 +40,10 @@ class CampusController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($campus);
             $entityManager->flush();
+            $this->addFlash('success',
+            $this->translator->trans(
+                'flashmessage.addcampus'
+            ));
 
             return $this->redirectToRoute('app_campus_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -63,6 +72,11 @@ class CampusController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
+            $this->addFlash('success',
+            $this->translator->trans(
+                'flashmessage.editcampus'
+            ));
+
 
             return $this->redirectToRoute('app_campus_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -80,6 +94,10 @@ class CampusController extends AbstractController
         if ($this->isCsrfTokenValid('delete'.$campus->getId(), $request->request->get('_token'))) {
             $entityManager->remove($campus);
             $entityManager->flush();
+            $this->addFlash('success',
+            $this->translator->trans(
+                'flashmessage.deletecampus'
+            ));
         }
 
         return $this->redirectToRoute('app_campus_index', [], Response::HTTP_SEE_OTHER);
