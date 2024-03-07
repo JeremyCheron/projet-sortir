@@ -26,7 +26,8 @@ class PlaceController extends AbstractController
     {
     }
 
-    #[Route('/ajax/{id}', name: 'app_get_place_details')]
+    #[Route('/ajax/{id}', name: 'app_get_place_details', methods: ['GET'])]
+    #[IsGranted('ROLE_USER')]
     public function getPlaceDetails($id): JsonResponse
     {
         $place = $this->placeRepository->find($id);
@@ -51,6 +52,7 @@ class PlaceController extends AbstractController
     }
 
     #[Route('/ByCity/{id}', name: 'app_place_by_city')]
+    #[IsGranted('ROLE_USER')]
     public function placesByCity(Request $request, $id): JsonResponse
     {
         $places = $this->placeRepository->findBy(['city' => $id]);

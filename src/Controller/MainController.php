@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/', name: 'main_')]
 class MainController extends AbstractController
@@ -25,6 +26,7 @@ class MainController extends AbstractController
     }
 
     #[Route('', name: 'home')]
+    #[IsGranted('ROLE_USER')]
     public function home(EventService $eventService,
                          Security $security,
                          CustomQueriesService $queriesService,
@@ -54,6 +56,7 @@ class MainController extends AbstractController
     }
 
     #[Route('/search', name: 'search', methods: ['POST'])]
+    #[IsGranted('ROLE_USER')]
     public function search()
     {
     }
