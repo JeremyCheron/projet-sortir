@@ -25,6 +25,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{ path('app_place_index') }}" class="flex items-center justify-between text-center">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <div class="w-full">{{ 'Places' | trans }}</div>
+                </a>
+            </li>
+            <li>
                 <a href="{{ path('app_group_index') }}" class="flex items-center justify-between text-center">
                     <i class="fa-solid fa-people-roof"></i>
                     <div class="w-full">{{ 'Private Groups' | trans }}</div>
@@ -35,12 +41,6 @@
                     <a href="{{ path('admin_manage_users') }}" class="flex items-center justify-between text-center">
                         <i class="fa-solid fa-users"></i>
                         <div class="w-full">{{ 'Manage Users' | trans }}</div>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('app_place_index') }}" class="flex items-center justify-between text-center">
-                        <i class="fa-solid fa-location-dot"></i>
-                        <div class="w-full">{{ 'Places' | trans }}</div>
                     </a>
                 </li>
                 <li>

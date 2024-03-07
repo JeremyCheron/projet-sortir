@@ -13,6 +13,8 @@ Latitude : Latitude
 Longitude : Longitude
 Save: Save
 Publish the event : Publish the event
+Add a new place : Add a new place
+
 
 #AddEvent twig
 Create a new Event : Create a new Event
@@ -157,7 +159,6 @@ Cancel the event : Cancel the event
 Unsubscribe the event : Unsubscribe the event
 Subscribe the event : Subscribe the event
 
-
 #manage_user/list.html.twig translation
 
 Manage the users: Manage the users
@@ -169,7 +170,6 @@ Go back to active: Go back to active
 Delete: Delete
 
 #register_admin/list.html.twig translation
-
 Add a new user: Add a new user
 Is Admin: Is Admin
 Admin Registration: Admin Registration
@@ -216,7 +216,6 @@ Forgot password ?: Forgot password ?
 
 #campus
 Edit Campus: Edit Campus
-
 events organized by students of this campus: event(s) organized by students of this campus
 
 

@@ -26,7 +26,7 @@
                     Subscribe
                 </a>
             {% elseif event | display_unsub_button(app.user) %}
-                <a href="{{ path('event_subscribe', {'id': event.id}) }}" title="subscribe" class="font-bold text-red-500">
+                <a href="{{ path('event_unsubscribe', {'id': event.id}) }}" title="unsubscribe" class="font-bold text-red-500">
                     <i class="fa-solid fa-user-minus"></i>
                     <br>
                     Unsubscribe
