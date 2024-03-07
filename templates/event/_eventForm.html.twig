@@ -39,8 +39,8 @@
             <div class="my-4 ml-40">
                 <label for="city" class="block font-bold mb-2">{{ 'Campus' | trans }}</label>
                 <p>{{ app.user.campus.name }}</p>
-                {#                    <p>{{ user.campus.name }}</p> #}
             </div>
+
             <div class="my-4 ml-40">
                 {{ form_label(form.city, 'City' | trans, {'label_attr': {'class': 'block font-bold mb-2'}}) }}
                 {{ form_widget(form.city, {'attr': {'class': 'form-input rounded-md shadow-sm city-select'}}) }}
@@ -51,8 +51,6 @@
                 {{ form_label(form.place, 'Place' | trans, {'label_attr': {'class': 'block font-bold mb-2'}}) }}
                 {{ form_widget(form.place, {'attr': {'class': 'form-input rounded-md shadow-sm place-select'}}) }}
                 {{ form_errors(form.place) }}
-                <a href="{{ path('app_place_new') }}"><i
-                            class="fa-solid fa-plus btnblue border border-blue-500 rounded-full p-1 text-white font-bold mx-2"></i></a>
             </div>
             <div class="my-4 ml-40">
 

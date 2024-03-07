@@ -13,6 +13,8 @@ Latitude : Latitude
 Longitude : Longitude
 Save: Enregistrer
 Publish the event : Publier la sortie
+Add a new place : Ajouter un nouveau lieu
+
 
 #AddEvent twig
 Create a new Event: Créer une sortie
