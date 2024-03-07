@@ -228,7 +228,7 @@ footer {
 .place a {
     text-decoration: none;
     transition: color 0.2s ease-out;
-    color: rgba(79, 192, 210, 1);
+    color: #3897c5;
 }
 
 .wrapper {
@@ -236,7 +236,6 @@ footer {
     max-width: 1000px;
     margin: 20px auto 100px auto;
     padding: 0;
-    background: rgba(255, 2555, 255, 0.1);
     color: rgba(255, 255, 255, 0.9);
     overflow: hidden;
     position: relative;
@@ -267,21 +266,23 @@ footer {
     transition: all 0.2s ease-out;
     border-bottom: 1px solid black;
     border-right: 1px solid black;
+    background: rgba(255, 2555, 255, 0.3);
 }
 
 .row:hover {
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(0,0,0,0.7);
     height: 65px;
 }
 
 .title {
-    padding: 10px 0 5px 0;
+    padding: 10px 0 5px 10px;
     height: 45px;
     font-size: 0;
-    background-color: rgba(255, 2555, 255, 0.1);
+    background-color: rgba(255, 2555, 255, 0.5);
     border-top: 1px solid black;
-    border-left: 3px solid black;
+    border-left: 6px solid black;
     border-right: 1px solid black;
+
 }
 
 .title:hover {
@@ -290,7 +291,11 @@ footer {
     border-left: 3px solid black;
 }
 
-.place {border-left: 3px solid rgba(79, 192, 210, 1)}
+.place {
+    padding-left: 10px;
+    border-left: 6px solid #3897c5}
+
+
 
 ul.more-content li {
     position: relative;
@@ -299,4 +304,5 @@ ul.more-content li {
     display: block;
     width: 100%;
     color: white;
+    font-weight: bold;
 }

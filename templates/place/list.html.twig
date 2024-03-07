@@ -3,21 +3,21 @@
 {% block title %}{{ 'Place index' | trans }}{% endblock %}
 
 {% block body %}
-    <div class="flex flex-col items-center justify-center my-8 w-3/4 mx-auto">
-    <h2 class="text-2xl font-bold">{{ 'Place index' | trans }}</h2>
+    <div class="flex flex-col items-center justify-center my-8 w-3/4 lg:w-1/2 mx-auto">
+    <h2 class="text-2xl font-bold mb-8">{{ 'Place index' | trans }}</h2>
 
-        <section class="wrapper">
-            <main class="row title">
+        <section class="wrapper hidden md:block">
+            <main class="row title rounded-2xl ">
                 <ul>
-                    <li>Name</li>
-                    <li>City</li>
+                    <li><p class="font-semibold card-title">{{ 'Name' | trans }}</p></li>
+                    <li><p class="font-semibold darkgrey">{{ 'City' | trans }}</p></li>
                 </ul>
             </main>
             {% for place in places %}
-            <article class="row place">
+            <article class="row place rounded-2xl">
                 <ul>
-                    <li><a href="{{ path('app_place_show', {'id': place.id}) }}">{{ place.name }}</a></li>
-                    <li>{{ place.city.name }}</li>
+                    <li><a class="font-semibold" href="{{ path('app_place_show', {'id': place.id}) }}">{{ place.name }}</a></li>
+                    <li><div class="grey">{{ place.city.name }}</div></li>
                 </ul>
                 <ul class="more-content">
                     <li>{{ place.street }} - {{ place.city.zipCode }} {{ place.city.name }}</li>
@@ -25,6 +25,34 @@
             </article>
             {%  endfor %}
         </section>
+
+        <table class="table-auto border border-gray-200 my-8 md:hidden bg-white/30">
+            <thead class="bg-gray-100">
+            <tr>
+                <th class="w-48">{{ 'Name' | trans }}</th>
+                <th class="w-32">{{ 'City'| trans }}</th>
+                <th class="w-64">{{ 'Street'| trans }}</th>
+                <th class="w-32">{{ 'Actions' | trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for place in places %}
+                <tr class="h-20 md:h-12 text-center {{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }}">
+                    <td>{{ place.name }}</td>
+                    <td>{{ place.city.name }}</td>
+                    <td>{{ place.street }}</td>
+                    <td>
+                        <a href="{{ path('app_place_show', {'id': place.id}) }}"><i class="fa-solid fa-eye"></i></a>
+                        <a href="{{ path('app_place_edit', {'id': place.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">{{ 'no records found' | trans }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
 
     </div>
 
