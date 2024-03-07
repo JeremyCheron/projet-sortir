@@ -3,9 +3,23 @@
 {% block title %}New Campus{% endblock %}
 
 {% block body %}
-    <h1>Create new Campus</h1>
 
-    {{ include('campus/_form.html.twig') }}
+    <h1 class="text-3xl text-center font-semibold" >Create new Campus</h1>
 
-    <a href="{{ path('app_campus_index') }}">back to list</a>
+    <div class="flex justify-center font-semibold my-2">
+        {{ include('campus/_form.html.twig') }}
+    </div>
+
+
+    <div class="flex items-center justify-evenly text-center my-2 font-bold">
+
+        <a href="{{ path('app_campus_index') }}" class="mx-12">
+            <i class="fa-solid fa-list"></i>
+            <br>
+            {{ 'Back' | trans }}
+        </a>
+    </div>
+
+
+
 {% endblock %}

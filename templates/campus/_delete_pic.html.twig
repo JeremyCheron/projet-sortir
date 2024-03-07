@@ -2,5 +2,5 @@
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ campus.id) }}">
     <button class="btn"><i class="fa-solid fa-trash"></i></button>
     <br>
-    {{ 'Delete' | trans }}
+    <div class="hidden md:block">{{ 'Delete' | trans }}</div>
 </form>
