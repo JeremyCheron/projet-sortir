@@ -23,12 +23,15 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\Translation\TranslatableMessage;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/event', name: 'event_')]
 class EventController extends AbstractController
 {
     public function __construct(private EventService $eventService,
-                                private CityService $cityService)
+                                private CityService $cityService,
+                                private  TranslatorInterface $translator)
     {
     }
     #[Route('', name: 'list')]
@@ -50,8 +53,14 @@ class EventController extends AbstractController
         $formOrSuccess = $this->eventService->create($request, $user);
         $cities = $this->cityService->getAllCities();
         }
-        if ($formOrSuccess === true) {
-            return $this->redirectToRoute('event_list');
+        if ($formOrSuccess instanceof Event) {
+            $this->addFlash('success',
+            $this->translator->trans(
+                'flashmessage.addevent'
+            ));
+            return $this->redirectToRoute('event_details', [
+                'id' => $formOrSuccess->getId()
+            ]);
         }
 
         return $this->render('event/addEvent.html.twig', [
@@ -68,8 +77,14 @@ class EventController extends AbstractController
         $cities = $this->cityService->getAllCities();
 
 
-        if ($formOrSuccess === true) {
-            return $this->redirectToRoute('main_home');
+        if ($formOrSuccess instanceof Event) {
+            $this->addFlash('success',
+                $this->translator->trans(
+                    'flashmessage.updateevent'
+                ));
+            return $this->redirectToRoute('event_details', [
+                'id' => $formOrSuccess->getId()
+            ]);
         }
 
         return $this->render('event/edit.html.twig', [
@@ -86,7 +101,13 @@ class EventController extends AbstractController
         $activeUser = $this->getUser();
         if($activeUser instanceof User)
         {
-        $this->eventService->subscribe($event, $activeUser);
+            $this->eventService->subscribe($event, $activeUser);
+            $this->addFlash('success',
+
+                $this->translator->trans(
+                    'flashmessage.sub',
+                    ['%event%' => $event->getName()]
+                ));
         }
 
         return $this->redirectToRoute('event_details', [
@@ -102,6 +123,7 @@ class EventController extends AbstractController
         if($activeUser instanceof User)
         {
             $this->eventService->unsubscribe($event, $activeUser);
+            $this->addFlash('success','Vous êtes bien désinscrit à l\'évènement ' . $event->getName());
         }
         return $this->redirectToRoute('event_details', [
             'id' => $event->getId()
@@ -118,11 +140,20 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}/publish', name: 'publish')]
-    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_USER')]
     public function publish(Event $event, CustomQueriesService $queriesService): Response
     {
+        if ($event->getEventPlanner() !== $this->getUser())
+        {
+            $this->addFlash('error', 'Ce n\'est pas votre évènement !');
+            $this->redirectToRoute('event_list');
+        }
         $this->eventService->openEvent($event);
-        return $this->render('event/details.html.twig', [
+        $this->addFlash('success',
+            $this->translator->trans(
+                'flashmessage.publish'
+            ));
+        return $this->render('event/show.html.twig', [
             'event' => $queriesService->getOneEvent($event)
         ]);
     }
@@ -132,6 +163,10 @@ class EventController extends AbstractController
     public function cancel(Event $event, CustomQueriesService $queriesService): Response
     {
         $this->eventService->cancelEvent($event);
+        $this->addFlash('success',
+            $this->translator->trans(
+                'flashmessage.cancel'
+            ));
         return $this->render('event/details.html.twig', [
             'event' => $queriesService->getOneEvent($event)
         ]);

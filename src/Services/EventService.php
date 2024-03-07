@@ -24,7 +24,7 @@ class EventService
     {
     }
 
-    public function create(Request $request,User $user): true|FormInterface
+    public function create(Request $request,User $user): Event|FormInterface
     {
         $event = new Event();
         $form = $this->formFactory->create(EventType::class, $event);
@@ -43,7 +43,7 @@ class EventService
             $this->em->persist($event);
             $this->em->flush();
 
-            return true;
+            return $event;
 
         }
 
@@ -63,7 +63,7 @@ class EventService
         return $this->eventRepository->find($id);
     }
 
-    public function updateEvent(Request $request, Event $event): true|FormInterface
+    public function updateEvent(Request $request, Event $event): Event|FormInterface
     {
         $form = $this->formFactory->create(EventType::class, $event);
         $form->handleRequest($request);
@@ -74,7 +74,7 @@ class EventService
                 $event->setStatus($this->eventStatusService->getStatusByName('open'));
             }
             $this->em->flush();
-            return true;
+            return $event;
         }
 
         return $form;

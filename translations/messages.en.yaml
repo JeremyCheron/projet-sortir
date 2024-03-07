@@ -230,3 +230,12 @@ Members: Members
 Create new group: Create new group
 Full Name: Full Name
 Group: Group
+
+#alerts
+flashmessage:
+  sub: You're sub to %event%
+  unsub: unsubbed to %event%
+  addevent: Event added successfully
+  updateevent: Event updated successfully
+  publish: Event published successfully
+  cancel: Event canceled successfully

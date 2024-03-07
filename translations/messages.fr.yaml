@@ -229,3 +229,12 @@ Members: Membres
 Create new group: Créer un groupe
 Full Name: Nom complet
 Group: Groupe
+
+#alerts
+flashmessage:
+  sub: Vous êtes bien inscrit à l'évènement %event%
+  unsub: Vous êtes bien désinscrit de l'évènement %event%
+  addevent: Évènement créé avec succès
+  updateevent: Évènement modifié avec succès
+  publish: Évènement publié avec succès
+  cancel: Évènement annulé avec succès
