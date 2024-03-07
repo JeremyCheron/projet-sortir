@@ -179,7 +179,7 @@ Admin Registration: Admin Registration
 Hi!: Hi!
 Your new account on Sortir.com: Your new account on Sortir.com
 sentence1: An admin has created an account for you on Sortir.com
-sentence2: With the link above, you can login using your mail and your default password.
+sentence2: Please create your new password using the link above.
 Your email is: Your email is
 Your password is: Your password is
 sentence3: You can change your password at anytime on your profile - click "Modify my profile" to update your infos.
@@ -238,3 +238,9 @@ flashmessage:
   updateevent: Event updated successfully
   publish: Event published successfully
   cancel: Event canceled successfully
+  modifyprofile: Your profile has been modified !
+  modifypassword: Your password has been modified !
+  deleteprofile: Profile deleted
+  uploadpp: Profile picture updated
+  modifyprofileerror: These modifications are not valid
+  newprofile: New profile created

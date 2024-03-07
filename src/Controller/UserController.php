@@ -13,10 +13,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/user', name: 'user_')]
 class UserController extends AbstractController
 {
+
+    public function __construct(private  TranslatorInterface $translator)
+    {
+    }
+
     #[Route('/details/{id}', name: 'details')]
     #[IsGranted('ROLE_USER')]
     public function user(User $profil): Response
@@ -44,17 +50,32 @@ class UserController extends AbstractController
 
             if($user instanceof User)
             {
-
-                if ($userForm->isSubmitted() && $userForm->isValid())
+                if ($userForm->isSubmitted())
                 {
+                    if($userForm->isValid())
+                    {
+                        $entityManager->flush();
 
-                    $entityManager->flush();
+                        //on affiche un message à l'utilisateur pour lui indiquer que l'entité a été ajouté
 
-                    //on affiche un message à l'utilisateur pour lui indiquer que l'entité a été ajouté
-                    $this->addFlash('success', 'Your profile has been modified !');
+                        $this->addFlash('success',
+                            $this->translator->trans(
+                                'flashmessage.modifyprofile'
+                            ));
+                        //puis on redirige vers la page des idées
+                        return $this->redirectToRoute('user_details',['id'=>$user->getId()]);
+                    }
+                    else
+                    {
+                        $this->addFlash('error',
+                            $this->translator->trans(
+                                'flashmessage.modifyprofileerror'
+                            ));
+                        //puis on redirige vers la page des idées
+                        return $this->redirectToRoute('user_modify_profile');
+                    }
 
-                    //puis on redirige vers la page des idées
-                    return $this->redirectToRoute('user_details',['id'=>$user->getId()]);
+
                 }
 
 
@@ -72,6 +93,10 @@ class UserController extends AbstractController
         $formOrSuccess = $userService->modifyPassword($request, $user);
         if ($formOrSuccess===true)
         {
+            $this->addFlash('success',
+                $this->translator->trans(
+                    'flashmessage.modifypassword'
+                ));
             return $this->redirectToRoute('user_modify_profile');
         }
 

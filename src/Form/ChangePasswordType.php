@@ -43,8 +43,9 @@ class ChangePasswordType extends AbstractType
                                 'message' => 'The password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character ( @, $, !, %, *, \#, ?, &). :'
                             ]
                         ) ]
-                    ]
-                ])
+                    ],
+                    'constraints' => [new NotBlank()], 'validation_groups' => ['registration']
+                ] )
         ;
     }
 
