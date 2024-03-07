@@ -58,7 +58,6 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    //todo : route accessible uniquement pour les ROLE_ADMIN
     #[Route('/register/admin', name: 'app_register_admin')]
     #[IsGranted('ROLE_ADMIN')]
     public function registerAdmin(Request $request): Response
@@ -105,11 +104,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('user_modify_profile');
         }
 
-
-
         return $this->render('user/changepassword.html.twig', ['user' => $user,'passwordForm' => $passwordForm->createView()]);
-
-
 
     }
 
