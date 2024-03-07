@@ -37,13 +37,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Assert\NotNull(message:"Mandatory password")]
+    #[Assert\NotNull(message:"Mandatory password", groups: ["registration"])]
     #[Assert\Regex(pattern:'/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/',
         message:"The password must contain at least one lowercase letter, one uppercase letter, one digit, and one special character ( @, $, !, %, *, \#, ?, &). :"
-    )]
+    ,groups: ["registration"])]
     #[Assert\Length(
         min:6,
-        minMessage:"Minimum of 6 characters.",
+        minMessage:"Minimum of 6 characters.", groups: ["registration"]
             )]
     private ?string $password = null;
 
@@ -68,8 +68,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $firstname = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Assert\Regex(pattern: 'this == null or value matches "/^[0-9]{10}$/"',
-        message:"Your phone number must be composed of 10 digits"
+    #[Assert\Regex(
+        pattern: '/^$|^\d{10}$/',
+        message: "Your phone number must be composed of 10 digits"
     )]
     private ?string $phoneNumber = null;
 

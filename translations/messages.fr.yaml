@@ -179,7 +179,7 @@ Admin Registration: Inscription Administrateur
 Hi!: Bonjour!
 Your new account on Sortir.com: Votre nouveau compte sur Sortir.com
 sentence1: Un administrateur a créé votre compte sur Sortir.com
-sentence2: Avec le lien ci-dessus, vous pouvez vous connecter en utilisant votre email et votre mot de passe par défaut
+sentence2: Veuillez créer le mot de passe de votre compte en cliquant sur le lien ci-dessus.
 Your email is: Votre email est
 Your password is: Votre mot de passe est
 sentence3: Vous pouvez changer votre email à n'importe quel moment - cliquer sur "Modifier mon profil" pour mettre vos informations à jour.
@@ -240,6 +240,13 @@ flashmessage:
   updateevent: Évènement modifié avec succès
   publish: Évènement publié avec succès
   cancel: Évènement annulé avec succès
+  modifyprofile: Votre profil a été modifié !
+  modifypassword: Votre mot de passe a été modifié !
+  deleteprofile: Profil supprimé
+  uploadpp: Photo de profil mise à jour
+  modifyprofileerror: Modification non valide du profil
+  newprofile: Nouveau profil créé avec succès !
   addcampus: Campus créé avec succès
   editcampus: Campus modifié avec succès
   deletecampus: Campus supprimé avec succès
+

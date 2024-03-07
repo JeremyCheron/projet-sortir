@@ -23,13 +23,15 @@ class RegistrationController extends AbstractController
     public function __construct(private readonly RegistrationService    $registrationService,
                                 private readonly UserRepository         $userRepository,
                                 private readonly EntityManagerInterface $em,
-                                private readonly UserService $userService)
+                                private readonly UserService $userService,
+                                private  TranslatorInterface $translator)
     {
     }
 
     #[Route('/register', name: 'app_register')]
     #[IsGranted('ROLE_ADMIN')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher,
+                             EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -65,8 +67,11 @@ class RegistrationController extends AbstractController
             $formOrSuccess = $this->registrationService->registerAsAdmin($request);
             if($formOrSuccess === true)
             {
-
-                return $this->redirectToRoute('main_home');
+                $this->addFlash('success',
+                    $this->translator->trans(
+                        'flashmessage.newprofile'
+                    ));
+                return $this->redirectToRoute('admin_manage_users');
             }
 
 

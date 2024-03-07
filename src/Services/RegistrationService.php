@@ -57,20 +57,10 @@ class RegistrationService
             $this->em->flush();
 
 
-            $email = (new TemplatedEmail())
-                ->from(new Address('admin@sortir.com', 'Sortir'))
-                ->to($user->getEmail())
-                ->subject($this->translator->trans('Your new account on Sortir.com'))
-                ->htmlTemplate('admin/new_user_email.html.twig')
-                ->context(['nickname'=>$nickname,'user'=>$user, 'url'=>$this->router->generate('app_login',[],UrlGeneratorInterface::ABSOLUTE_URL)])
-            ;
-
-            try
-            {
-                $this->mailer->send($email);
+            try {
+                $this->sendRegistrationEmail($user);
+            } catch (TransportExceptionInterface $e) {
             }
-            catch (TransportExceptionInterface $e)
-            {}
 
             return true;
 

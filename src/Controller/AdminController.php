@@ -8,11 +8,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 #[Route('/admin' , name: 'admin_')]
 class AdminController extends AbstractController
 {
-    public function __construct(private UserService $userService)
+    public function __construct(private UserService $userService,
+                                private  TranslatorInterface $translator)
     {
     }
 
@@ -31,6 +33,10 @@ class AdminController extends AbstractController
     public function deleteUser(User $user): Response
     {
         $this->userService->deleteUser($user);
+        $this->addFlash('success',
+            $this->translator->trans(
+                'flashmessage.deleteprofile'
+            ));
         return $this->redirectToRoute('admin_manage_users');
     }
 
