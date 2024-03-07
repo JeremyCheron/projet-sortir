@@ -12,11 +12,11 @@
     <table class="table-auto border border-gray-200 my-8">
         <thead class="bg-gray-100">
             <tr>
-                <th class="w-48">Nickname</th>
-                <th class="w-48">Full Name</th>
-                <th class="w-48">Email</th>
-                <th class="w-48">Phone</th>
-                <th class="w-48">actions</th>
+                <th class="w-48">{{ 'Nickname' | trans }}</th>
+                <th class="w-48">{{ 'Full Name' | trans }}</th>
+                <th class="w-48">{{ 'Email' | trans }}</th>
+                <th class="w-48">{{ 'Phone' | trans }}</th>
+                <th class="w-48">{{ 'Actions' | trans }}</th>
             </tr>
         </thead>
 
@@ -41,9 +41,9 @@
 
     </table>
 
-    <a href="{{ path('app_group_index') }}">back to list</a>
+    <a href="{{ path('app_group_index') }}">{{ 'Back to list' | trans }}</a>
 
-    <a href="{{ path('app_group_edit', {'id': group.id}) }}">edit</a>
+    <a href="{{ path('app_group_edit', {'id': group.id}) }}">{{ 'Edit' | trans }}</a>
 
     {{ include('group/_delete_form.html.twig') }}
 

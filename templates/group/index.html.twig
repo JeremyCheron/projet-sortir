@@ -4,15 +4,15 @@
 
 {% block body %}
 <div class="flex flex-col items-center justify-center my-8 w-3/4 mx-auto">
-    <h2 class="text-2xl font-bold pb-10">Group index</h2>
+    <h2 class="text-2xl font-bold pb-10">{{ 'Group index' | trans }}</h2>
     {% if groups|length != 0 %}
         <table class="table-auto border border-gray-200 my-8">
             <thead class="bg-gray-100">
             <tr>
-                <th class="w-48">Name</th>
-                <th class="w-48">Owner</th>
-                <th class="w-48">Members</th>
-                <th class="w-48">actions</th>
+                <th class="w-48">{{ 'Name' | trans }}</th>
+                <th class="w-48">{{ 'Owner' | trans }}</th>
+                <th class="w-48">{{ 'Members' | trans }}</th>
+                <th class="w-48">{{ 'Actions' | trans }}</th>
             </tr>
             </thead>
             <tbody>
@@ -32,7 +32,7 @@
                         <a href="{{ path('app_group_edit', {'id': group.id}) }}"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
                         <br>
-                        Edit
+                        {{ 'Edit' | trans }}
                     </div>
                     <div class="font-bold text-center">
                         {{ include('group/_delete_form.html.twig') }}
@@ -49,7 +49,7 @@
     <div>
         <button class="btn btnblue text-white
                             font-bold mt-10 py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full">
-            <a href="{{ path('app_group_new') }}">Create new</a>
+            <a href="{{ path('app_group_new') }}">{{ 'Create new group' | trans }}</a>
         </button>
     </div>
 </div>
