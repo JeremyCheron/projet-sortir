@@ -246,3 +246,7 @@ flashmessage:
   uploadpp: Photo de profil mise à jour
   modifyprofileerror: Modification non valide du profil
   newprofile: Nouveau profil créé avec succès !
+  addcampus: Campus créé avec succès
+  editcampus: Campus modifié avec succès
+  deletecampus: Campus supprimé avec succès
+

@@ -244,3 +244,7 @@ flashmessage:
   uploadpp: Profile picture updated
   modifyprofileerror: These modifications are not valid
   newprofile: New profile created
+  addcampus: Campus created successfully
+  editcampus: Campus edited successfully
+  deletecampus: Campus deleted successfully
+

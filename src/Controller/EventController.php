@@ -31,7 +31,7 @@ class EventController extends AbstractController
 {
     public function __construct(private EventService $eventService,
                                 private CityService $cityService,
-                                private  TranslatorInterface $translator)
+                                private TranslatorInterface $translator)
     {
     }
     #[Route('', name: 'list')]
@@ -159,15 +159,19 @@ class EventController extends AbstractController
     }
 
     #[Route('/{id}/cancel', name: 'cancel')]
-    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_USER')]
     public function cancel(Event $event, CustomQueriesService $queriesService): Response
     {
+        $user = $this->getUser();
+        if( $event->getEventPlanner() === $user || $user->isAdmin() == true)
+        {
         $this->eventService->cancelEvent($event);
         $this->addFlash('success',
             $this->translator->trans(
                 'flashmessage.cancel'
             ));
-        return $this->render('event/details.html.twig', [
+        }
+        return $this->render('event/show.html.twig', [
             'event' => $queriesService->getOneEvent($event)
         ]);
     }
