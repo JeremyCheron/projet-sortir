@@ -4,9 +4,9 @@
     <h1 class="text-center text-3xl font-bold  blue">{{ user.nickname }}</h1>
 
 
-    <div class="grid md:grid-cols-3 lg:grid-cols-2 w-3/4 mx-auto md:gap-16 justify-center place-content-evenly p-4">
+    <div class="grid lg:grid-cols-2 w-3/4 mx-auto md:gap-16 justify-center place-content-evenly p-4">
 
-        <div class="md:col-span-2 lg:col-span-1 ">
+        <div class="lg:col-span-1 ">
             <img class="md:object-contain rounded-2xl" src="{{ asset('imgs/pp/' ~ user.profilePic) }}" alt="{{ 'User image' | trans }}">
         </div>
 

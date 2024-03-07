@@ -200,6 +200,8 @@ The password must contain at least one lowercase letter, one uppercase letter, o
 #misc
 Welcome to Sortir.com: Bienvenue sur Sortir.com
 Campus index: Liste des Campus
+Private Groups: Groupes privés
+places in this city: lieu(x) dans cette ville
 
 
 #page de login
@@ -210,3 +212,6 @@ Email: Email
 Keep me logged in: Rester connecté·e
 Sign in: Se connecter
 Forgot password ?: Mot de passe oublié ?
+
+#campus
+Edit Campus: Modifier le campus

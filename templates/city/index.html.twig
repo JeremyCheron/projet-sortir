@@ -6,12 +6,34 @@
 <div class="flex flex-col items-center justify-center my-8 w-3/4 mx-auto">
     <h2 class="text-2xl font-bold">{{ 'City index' | trans }}</h2>
 
-    <table class="table-auto border border-gray-200 my-8">
+
+    <section class="wrapper hidden md:block">
+        <main class="row title rounded-2xl ">
+            <ul>
+                <li><p class="font-semibold card-title">{{ 'City' | trans }}</p></li>
+                <li><p class="font-semibold darkgrey">{{ 'Zip Code' | trans }}</p></li>
+            </ul>
+        </main>
+        {% for city in cities %}
+            <article class="row place rounded-2xl">
+                <ul>
+                    <li><a class="font-semibold" href="{{ path('app_city_show', {'id': city.id}) }}">{{ city.name }}</a></li>
+                    <li><div class="grey">{{ city.zipCode }}</div></li>
+                </ul>
+                <ul class="more-content">
+                    <li>{{ city.places.count }} {{ 'places in this city' | trans}}</li>
+                </ul>
+            </article>
+        {%  endfor %}
+    </section>
+
+
+    <table class="table-auto border border-gray-200 my-8 md:hidden  w-full">
         <thead class="bg-gray-100">
             <tr>
-                <th class="w-48">{{ 'Name' | trans }}</th>
-                <th class="w-48">{{ 'Zip Code' | trans }}</th>
-                <th class="w-48">{{ 'Actions' | trans }}</th>
+                <th class="px-5" >{{ 'Name' | trans }}</th>
+                <th class="px-5">{{ 'Zip Code' | trans }}</th>
+                <th class="px-5">{{ 'Actions' | trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -19,20 +41,16 @@
             <tr class="h-20 md:h-12 text-center {{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }}">
                 <td>{{ city.name }}</td>
                 <td>{{ city.zipCode }}</td>
-                <td class="flex items-center justify-evenly h-full">
-                    <div class="font-bold text-center">
-                        <a href="{{ path('app_city_show', {'id': city.id}) }}"><i class="fa-solid fa-eye"></i></a>
-                        <br>
-                        {{ 'Show' | trans }}
+                <td class="h-full">
+                    <div class="flex justify-evenly">
+                        <div class="font-bold text-center">
+                            <a href="{{ path('app_city_edit', {'id': city.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                        <div class="font-bold text-center">
+                            {{ include('city/_delete_pic.html.twig') }}
+                        </div>
                     </div>
-                    <div class="font-bold text-center">
-                        <a href="{{ path('app_city_edit', {'id': city.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <br>
-                        {{ 'Edit' | trans }}
-                    </div>
-                    <div class="font-bold text-center">
-                        {{ include('city/_delete_pic.html.twig') }}
-                    </div>
+
 
                 </td>
             </tr>
