@@ -3,11 +3,25 @@
 {% block title %}Edit Campus{% endblock %}
 
 {% block body %}
-    <h1>Edit Campus</h1>
+    <div class="flex justify-center">
+        <div class="flex-col items-center justify-center font-bold my-8">
+            <div class="flex justify-center">
+                {{ include('campus/_form.html.twig', {'button_label': 'Update' | trans}) }}
+            </div>
+            <div class="flex justify-center ml-5">
+                {{ include('campus/_delete_form.html.twig') }}
 
-    {{ include('campus/_form.html.twig', {'button_label': 'Update'}) }}
+                <div class="ml-5">
+                    <a href="{{ path('app_campus_index') }}">
+                        <i class="fa-solid fa-list"></i>
+                        <br>
+                        {{ 'Back' | trans}}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('app_campus_index') }}">back to list</a>
 
-    {{ include('campus/_delete_form.html.twig') }}
+
 {% endblock %}

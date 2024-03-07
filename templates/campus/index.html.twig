@@ -6,7 +6,27 @@
 <div class="flex flex-col items-center justify-center my-8 w-3/4 mx-auto">
     <h2 class="text-2xl font-bold">{{ 'Campus index' | trans }}</h2>
 
-    <table class="table-auto border border-gray-200 my-8">
+
+    <section class="wrapper hidden md:block">
+        <main class="row title rounded-2xl ">
+            <ul  class="flex items-center justify-center">
+                <li><p class="font-semibold card-title flex justify-center">{{ 'Campus' | trans }}</p></li>
+            </ul>
+        </main>
+        {% for campus in campuses %}
+            <article class="row place rounded-2xl">
+                <ul class="flex items-center justify-center">
+                    <li><a class="font-semibold flex justify-center" href="{{ path('app_campus_show', {'id': campus.id}) }}">{{ campus.name }}</a></li>
+                </ul>
+                <ul class="more-content flex items-center justify-center">
+                    <li><div  class="font-semibold flex justify-center">{{ campus.events.count}} {{ 'events organized by students of this campus' | trans }}</div></li>
+                </ul>
+            </article>
+        {%  endfor %}
+    </section>
+
+
+    <table class="table-auto border border-gray-200 bg-white/30 my-8 md:hidden">
         <thead class="bg-gray-100">
             <tr>
                 <th class="w-48">{{ 'Name' | trans }}</th>
@@ -17,15 +37,16 @@
         {% for campus in campuses %}
             <tr class="h-20 md:h-12 text-center {{ loop.index % 2 == 0 ? 'bg-gray-100' : '' }}">
                 <td>{{ campus.name }}</td>
-                <td class="flex items-center justify-evenly h-full">
-                    <div class="font-bold text-center">
-                        <a href="{{ path('app_campus_edit', {'id': campus.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
-                        <br>
-                        {{ 'Edit' | trans }}
+                <td class="h-full">
+                    <div class="flex justify-evenly">
+                        <div class="font-bold text-center">
+                            <a href="{{ path('app_campus_edit', {'id': campus.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                        </div>
+                        <div class="font-bold text-center">
+                            {{ include('campus/_delete_pic.html.twig') }}
+                        </div>
                     </div>
-                    <div class="font-bold text-center">
-                        {{ include('campus/_delete_pic.html.twig') }}
-                    </div>
+
                 </td>
             </tr>
         {% else %}
