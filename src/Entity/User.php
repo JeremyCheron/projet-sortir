@@ -50,20 +50,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     #[Assert\NotNull(message:"You must enter a last name.")]
     #[Assert\Length(
-        min:2,
-        minMessage:"Minimum 2 characters",
-        max:50,
-        maxMessage:"Maximum 50 characters"
+        min: 2,
+        max: 50,
+        minMessage: "Minimum 2 characters",
+        maxMessage: "Maximum 50 characters"
     )]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotNull(message:"You must enter a first name.")]
     #[Assert\Length(
-        min:2,
-        minMessage:"Minimum 2 characters",
-        max:50,
-        maxMessage:"Maximum 50 characters"
+        min: 2,
+        max: 50,
+        minMessage: "Minimum 2 characters",
+        maxMessage: "Maximum 50 characters"
     )]
     private ?string $firstname = null;
 
